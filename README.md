@@ -1,2 +1,2 @@
-# DH-Software-Engineerin-II
+# DH-Software-Engineering-II
 Finance manager
