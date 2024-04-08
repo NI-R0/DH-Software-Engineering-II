@@ -1,0 +1,12 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {chapter}{Inhaltsverzeichnis}{I}{section*.1}%
+\contentsline {chapter}{\numberline {1}Domain Driven Design}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Clean Architecture}{2}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Programming Principles}{3}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Unit Tests}{4}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Refactoring}{5}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Entwurfsmuster}{6}{chapter.6}%
+\contentsline {chapter}{Abkürzungsverzeichnis}{II}{chapter*.2}%
+\contentsline {chapter}{Abbildungsverzeichnis}{III}{section*.3}%
+\contentsline {chapter}{Liste der Quellcodes}{IV}{section*.4}%
+\contentsline {chapter}{Literaturverzeichnis}{V}{section*.4}%

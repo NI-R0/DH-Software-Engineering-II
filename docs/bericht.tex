@@ -1,0 +1,162 @@
+\documentclass[
+  ngerman
+  ,12pt
+  ,pdftex
+]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{bericht}
+\usepackage{framed}
+\usepackage{graphicx}
+\usepackage{blindtext}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{cleveref}
+\usepackage[printonlyused]{acronym}
+\usepackage[center]{caption}
+\usepackage{tocbibind}
+\usepackage{titlesec}
+\usepackage{tocloft}                                              
+\renewcommand\cftbeforetoctitleskip{-2cm}        % -> To fit TOC on one page
+
+\input{languages.tex}
+
+
+
+\newcommand{\Autor}{Niklas Rodenbüsch}
+\newcommand{\MatrikelNummer}{6130555}
+\newcommand{\Kursbezeichnung}{TINF21B4}
+
+\newcommand{\FirmenName}{SICK AG}
+\newcommand{\FirmenStadt}{Waldkirch}
+% Falls es kein Firmenlogo gibt:
+\newcommand{\FirmenLogoDeckblatt}{\includegraphics[width=3cm]{images/SICK_Logo.jpg}}
+
+\newcommand{\BetreuerFirma}{Tobias Weckerle, MBA}
+\newcommand{\BetreuerDHBW}{Mirko Dostmann}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Was}{Finanzmanager}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Titel}{Technische Dokumentation}
+\newcommand{\AbgabeDatum}{10.05.2024}
+
+\newcommand{\Dauer}{2 Semester}
+
+\newcommand{\Abschluss}{Bachelor of Science}
+
+\newcommand{\Studiengang}{Informatik / Angewandte Informatik}
+
+\def\figureautorefname{\acs{abb}}
+\renewcommand{\lstlistingname}{Quellcode}
+\renewcommand{\lstlistlistingname}{Liste der Quellcodes}
+
+\begin{document}
+
+\newcommand{\q}[1]{{\glqq #1\grqq{}}}
+\newcommand{\cf}[1]{\cite[vgl.][]{#1}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\rightmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{-2cm}
+        \FirmenLogoDeckblatt\hfill\includegraphics[width=4cm]{images/dhbw-logo}\\[2cm]
+        {\Huge \Titel}\\[1cm]
+        {\Huge\scshape \Was}\\[1cm]
+        {\large für die Prüfung zum}\\[0.5cm]
+        {\Large \Abschluss}\\[0.5cm]
+        {\large des Studienganges \Studiengang}\\[0.5cm]
+        {\large an der}\\[0.5cm]
+        {\large Dualen Hochschule Baden-Württemberg Karlsruhe}\\[0.5cm]
+        {\large von}\\[0.5cm]
+        {\large\bfseries \Autor}\\[1cm]
+        % {\large Abgabedatum \AbgabeDatum}
+        \vfill
+    \end{center}
+    \begin{tabular}{l@{\hspace{2cm}}l}
+        Bearbeitungszeitraum          & \Dauer           \\
+        Matrikelnummer                & \MatrikelNummer  \\
+        Kurs                          & \Kursbezeichnung \\
+        Gutachter der Studienakademie & \BetreuerDHBW    \\
+    \end{tabular}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{onehalfspace}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \newpage
+    \pagenumbering{Roman}
+    \tableofcontents
+
+    \newpage
+    \newcounter{savepage}
+    \setcounter{savepage}{\value{page}}
+    \pagenumbering{arabic}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    % Jetzt kommt der "eigentliche" Text
+    \chapter{Domain Driven Design}
+    \include{chapters/ddd}
+
+    \chapter{Clean Architecture}
+    \include{chapters/clean_architecture}
+
+    \chapter{Programming Principles}
+    \include{chapters/principles}
+
+    \chapter{Unit Tests}
+    \include{chapters/unittests}
+
+    \chapter{Refactoring}
+    \include{chapters/refactoring}
+
+    \chapter{Entwurfsmuster}
+    \include{chapters/entwurfsmuster}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \newpage
+    \pagenumbering{Roman}
+    \setcounter{page}{\value{savepage}}
+
+
+    \chapter*{Abkürzungsverzeichnis}
+    \addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+    \input{includes/acronyms.tex}
+    \newpage
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \listoffigures
+    \newpage
+
+    \lstlistoflistings
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \newpage
+    \def\refname{Literaturverzeichnis}        % -- Einträge in test_bib.bib
+    \nocite{*}
+    \addcontentsline{toc}{chapter}{Literaturverzeichnis}
+    \printbibliography
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{onehalfspace}
+\end{document}

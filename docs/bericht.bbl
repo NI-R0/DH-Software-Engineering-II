@@ -1,0 +1,781 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nty/global//global/global}
+  \entry{lars}{online}{}
+    \name{author}{1}{}{%
+      {{hash=AL}{%
+         family={Albrecht},
+         familyi={A\bibinitperiod},
+         given={Lars},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AL1}
+    \strng{fullhash}{AL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{note}{[Online; accessed 20. Sept. 2022]}
+    \field{title}{Die Entstehung des smartDAT oder die Frage: Was wird smart am
+  DAT?}
+    \verb{url}
+    \verb https://mosaicplus.sick.com/display/wsSMRTDT/smartDAT+-+The+smart+Dia
+    \verb gnostic+and+Analysis+Tool
+    \endverb
+    \field{year}{2018}
+  \endentry
+
+  \entry{startup}{online}{}
+    \name{author}{1}{}{%
+      {{hash=sc}{%
+         prefix={startup},
+         prefixi={s\bibinitperiod},
+         family={creator},
+         familyi={c\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{cs1}
+    \strng{fullhash}{cs1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{note}{[Online; accessed 21. Sept. 2022]}
+    \field{title}{Website vs Web App - Was eignet sich für ihre Idee?}
+    \verb{url}
+    \verb https://startup-creator.com/web-entwicklung/website-vs-web-app/#:~:te
+    \verb xt=Abh%C3%A4ngig%20vom%20Umfang%20der%20Funktionen,mit%20einigen%20Mo
+    \verb naten%20gerechnet%20werden.
+    \endverb
+    \field{year}{2021}
+  \endentry
+
+  \entry{challenges}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=E}{%
+         family={{Eventura}},
+         familyi={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{E1}
+    \strng{fullhash}{E1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+    \field{note}{[accessed 15. Sept. 2023]}
+    \field{title}{Top 11 Challenges Facing Businesses in 2023}
+    \verb{url}
+    \verb https://eventura.com/business-advice/top-11-challenges-facing-busines
+    \verb ses-in-2023/
+    \endverb
+    \field{year}{2023}
+  \endentry
+
+  \entry{fireship}{online}{}
+    \name{author}{1}{}{%
+      {{hash=F}{%
+         family={Fireship},
+         familyi={F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{F1}
+    \strng{fullhash}{F1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \field{note}{[Online; accessed 21. Sept. 2022]}
+    \field{title}{CSharp in 100 Seconds}
+    \verb{url}
+    \verb https://www.youtube.com/watch?v=ravLFzIguCM&t=42s
+    \endverb
+    \field{year}{2021}
+  \endentry
+
+  \entry{nordsieck}{book}{}
+    \name{author}{1}{}{%
+      {{hash=F}{%
+         family={{Fritz Nordsieck}},
+         familyi={F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{F2}
+    \strng{fullhash}{F2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \field{note}{[p. 76]}
+    \field{title}{Grundlagen der Organisationslehre}
+    \field{year}{1934}
+  \endentry
+
+  \entry{bpm_2}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=g}{%
+         family={{gbtec.com}},
+         familyi={g\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{g1}
+    \strng{fullhash}{g1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{note}{[accessed 11. Sept. 2023]}
+    \field{title}{An Introduction to Business Process Management (BPM)}
+    \verb{url}
+    \verb https://www.gbtec.com/resources/bpm-business-process-management/
+    \endverb
+    \field{year}{n.d.}
+  \endentry
+
+  \entry{geeks1}{online}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={GeeksforGeeks},
+         familyi={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{G1}
+    \strng{fullhash}{G1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{note}{[Online; accessed 21. Sept. 2022]}
+    \field{title}{Difference Between Web application and Website}
+    \verb{url}
+    \verb https://www.geeksforgeeks.org/difference-between-web-application-and-
+    \verb website/
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{bpoffshoring}{book}{}
+    \name{author}{1}{}{%
+      {{hash=H}{%
+         family={{Houssem Jemili}},
+         familyi={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{H1}
+    \strng{fullhash}{H1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{note}{[p. 14]}
+    \field{title}{Business Process Offshoring}
+    \field{year}{2011}
+  \endentry
+
+  \entry{intrexx}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=I}{%
+         family={{Intrexx}},
+         familyi={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{I1}
+    \strng{fullhash}{I1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{I}
+    \field{sortinithash}{I}
+    \field{note}{[accessed 11. Sept. 2023]}
+    \field{title}{Über Intrexx}
+    \verb{url}
+    \verb https://www.intrexx.com/
+    \endverb
+    \field{year}{n.d.}
+  \endentry
+
+  \entry{json.de}{online}{}
+    \name{author}{1}{}{%
+      {{hash=j}{%
+         family={{json.org}},
+         familyi={j\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{j1}
+    \strng{fullhash}{j1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{J}
+    \field{sortinithash}{J}
+    \field{note}{[Online; accessed 25. Sept. 2022]}
+    \field{title}{Einführung in JSON}
+    \verb{url}
+    \verb https://www.json.org/json-de.html
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{vorteile_bpm}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=J}{%
+         family={{Julie Wayaffe}},
+         familyi={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{J1}
+    \strng{fullhash}{J1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{J}
+    \field{sortinithash}{J}
+    \field{note}{[accessed 11. Sept. 2023]}
+    \field{title}{10 Vorteile von Business Process Management (BPM) für
+  Unternehmen und Organisationen}
+    \verb{url}
+    \verb https://insights.mgm-tp.com/de/10-vorteile-business-process-managemen
+    \verb t/
+    \endverb
+    \field{year}{2023}
+  \endentry
+
+  \entry{grundlagen_bpm}{book}{}
+    \name{author}{1}{}{%
+      {{hash=M}{%
+         family={{Marlon Dumas; Marcello La Rosa; Jan Mendling; Hajo A.
+  Reijers}},
+         familyi={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{M1}
+    \strng{fullhash}{M1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{note}{[German Edition, p. 4]}
+    \field{title}{Grundlagen des Geschäftsprozessmanagements}
+    \field{year}{2023}
+  \endentry
+
+  \entry{grundlagen_bpm_2}{book}{}
+    \name{author}{1}{}{%
+      {{hash=M}{%
+         family={{Marlon Dumas; Marcello La Rosa; Jan Mendling; Hajo A.
+  Reijers}},
+         familyi={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{M1}
+    \strng{fullhash}{M1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{note}{[German Edition, p. 7]}
+    \field{title}{Grundlagen des Geschäftsprozessmanagements}
+    \field{year}{2023}
+  \endentry
+
+  \entry{havey}{book}{}
+    \name{author}{1}{}{%
+      {{hash=M}{%
+         family={{Michael Havey}},
+         familyi={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{M2}
+    \strng{fullhash}{M2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{title}{Essential Business Process Modeling}
+    \field{year}{2005}
+  \endentry
+
+  \entry{microsoft-asp}{online}{}
+    \name{author}{1}{}{%
+      {{hash=M}{%
+         family={Microsoft},
+         familyi={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{M3}
+    \strng{fullhash}{M3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{note}{[Online; accessed 21. Sept. 2022]}
+    \field{title}{ASP.NET}
+    \verb{url}
+    \verb https://dotnet.microsoft.com/en-us/apps/aspnet
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{microsoft-razor}{online}{}
+    \name{author}{1}{}{%
+      {{hash=M}{%
+         family={Microsoft},
+         familyi={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{M3}
+    \strng{fullhash}{M3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{note}{[Online; accessed 21. Sept. 2022]}
+    \field{title}{ASP.NET Web Apps}
+    \verb{url}
+    \verb https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{mpa}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=M}{%
+         family={{Microsoft}},
+         familyi={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{M4}
+    \strng{fullhash}{M4}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{note}{[accessed 11. Sept. 2023]}
+    \field{title}{Erledigen Sie das Wichtigste. Automatisieren Sie den Rest.}
+    \verb{url}
+    \verb https://powerautomate.microsoft.com/de-de/
+    \endverb
+    \field{year}{n.d.}
+  \endentry
+
+  \entry{bpm_1}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=M}{%
+         family={{Milad Safar}},
+         familyi={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{M5}
+    \strng{fullhash}{M5}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{note}{[accessed 11. Sept. 2023]}
+    \field{title}{Geschäftsprozessmanagement als wichtiger Erfolgsbaustein in
+  Unternehmen}
+    \verb{url}
+    \verb https://weissenberg-group.de/geschaeftsprozessmanagement-als-wichtige
+    \verb r-erfolgsbaustein-in-unternehmen/
+    \endverb
+    \field{year}{n.d.}
+  \endentry
+
+  \entry{penberthy}{book}{}
+    \name{author}{1}{}{%
+      {{hash=PW}{%
+         family={Penberthy},
+         familyi={P\bibinitperiod},
+         given={William},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Wiley}%
+    }
+    \strng{namehash}{PW1}
+    \strng{fullhash}{PW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{title}{Beginning ASP.NET for Visual Studio 2015}
+    \field{year}{2016}
+  \endentry
+
+  \entry{low-code}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{Scheer | Pas}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S1}
+    \strng{fullhash}{S1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{note}{[accessed 11. Sept. 2023]}
+    \field{title}{Low-Code Applikationsentwicklung}
+    \verb{url}
+    \verb https://www.scheer-pas.com/low-code-applikationsentwicklung/
+    \endverb
+    \field{year}{n.d.}
+  \endentry
+
+  \entry{dashboardPre}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{DAT Dashboard}
+    \verb{url}
+    \verb http://csxsmartdat.sickcn.net/Dashboard
+    \endverb
+    \field{year}{2021}
+  \endentry
+
+  \entry{sdat-konzept}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{note}{[Online; accessed 20. Sept. 2022]}
+    \field{title}{DAT2.0 Next Generation}
+    \verb{url}
+    \verb https://mosaicplus.sick.com/display/wsSMRTDT/smartDAT+-+The+smart+Dia
+    \verb gnostic+and+Analysis+Tool
+    \endverb
+    \field{year}{2020}
+  \endentry
+
+  \entry{gbc02}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{GBC02 Präsentation}
+    \verb{url}
+    \verb https://mosaicplus.sick.com/pages/viewpage.action?pageId=58878707#tab
+    \verb -Research+%26+Development
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{HQ}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{Hauptsitz der SICK AG in Waldkirch}
+    \verb{url}
+    \verb https://brand.sick.com/document/29/en/show/eyJpZCI6NDc2NSwidGltZXN0YW
+    \verb 1wIjoiMTY2MTg2MzM2NCJ9:sick:iiAbosXX-Yux5R-F0QvscxQ1_IRI6DR0rQvLcOxLC
+    \verb fM
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{dat_pruefbare_geraete}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{Prüfbare Geräte und Testsysteme}
+    \verb{url}
+    \verb https://mosaicplus.sick.com/pages/viewpage.action?pageId=128230140
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{dat1.0}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{Return Delivery Diagnostics Tool (DAT)}
+    \verb{url}
+    \verb https://mosaicplus.sick.com/pages/viewpage.action?pageId=95272927#tab
+    \verb -Overview
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{umsatz}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{SICK auf einen Blick: Die Kennzahlen des SICK-Konzerns nach
+  IFRS}
+    \verb{url}
+    \verb https://www.sick.com/de/de/investor-relations-der-sick-ag/die-kennzah
+    \verb len-des-sick-konzerns-nach-ifrs/w/key/
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{smartDat-presentation-1}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{smartDAT}
+    \verb{url}
+    \verb https://mosaicplus.sick.com/download/attachments/762583434/202112_sma
+    \verb rtDAT_Introduction%20%283%29%20%281%29%20%281%29%20%281%29.pptx?versi
+    \verb on=1&modificationDate=1649677640165&api=v2
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{smartDat-presentation-2}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{note}{[Online; accessed 20. Sept. 2022]}
+    \field{title}{smartDat Introduction Presentation}
+    \verb{url}
+    \verb https://mosaicplus.sick.com/display/SDATSC/smartDAT+Introduction
+    \endverb
+    \field{year}{2020}
+  \endentry
+
+  \entry{tsdRep}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{TSD Reporting}
+    \verb{url}
+    \verb http://deagxcuewebp02.sickcn.net/TSD-Reporting/Reporting_Controls/Sea
+    \verb rchParams.aspx
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{organigramm}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{Unternehmenspräsentation}
+    \verb{url}
+    \verb https://mosaicplus.sick.com/pages/viewpage.action?pageId=150319132#ex
+    \verb pand-Unternehmenswebsite
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{sick_organigramm}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{note}{[accessed 10. Sept. 2023]}
+    \field{title}{Unternehmenspräsentation}
+    \verb{url}
+    \verb https://mosaicplus.sick.com/pages/viewpage.action?pageId=150319132#ex
+    \verb pand-Unternehmensprsentation
+    \endverb
+    \field{year}{2023}
+  \endentry
+
+  \entry{orga}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{Wie ist SICK organisiert? Wie arbeiten wir zusammen?}
+    \verb{url}
+    \verb https://mosaicplus.sick.com/pages/viewpage.action?pageId=98412937#exp
+    \verb and-WieistSICKorganisiertWiearbeitenwirzusammen
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{sick_orga}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{note}{[accessed 10. Sept. 2023]}
+    \field{title}{Wie ist SICK organisiert? Wie arbeiten wir zusammen?}
+    \verb{url}
+    \verb https://mosaicplus.sick.com/pages/viewpage.action?pageId=98412937#exp
+    \verb and-WieistSICKorganisiertWiearbeitenwirzusammen
+    \endverb
+    \field{year}{2023}
+  \endentry
+
+  \entry{sick_infos}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SICK AG}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S2}
+    \strng{fullhash}{S2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{note}{[accessed 10. Sept. 2023]}
+    \field{title}{Über SICK}
+    \verb{url}
+    \verb https://www.sick.com/de/de/ueber-sick/w/about-sick/
+    \endverb
+    \field{year}{2023}
+  \endentry
+
+  \entry{bpm_lifecycle}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=y}{%
+         family={{yworks}},
+         familyi={y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{y1}
+    \strng{fullhash}{y1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{Y}
+    \field{sortinithash}{Y}
+    \field{note}{[accessed 15. Sept. 2023]}
+    \field{title}{Diagramming for Business Process Management}
+    \verb{url}
+    \verb https://www.yworks.com/solutions/business-process-management
+    \endverb
+    \field{year}{2023}
+  \endentry
+\enddatalist
+\endinput

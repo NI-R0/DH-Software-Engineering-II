@@ -1,0 +1,221 @@
+\definecolor{corange}       {rgb}{1.0,  0.52,   0.0}
+\definecolor{clightblue}    {rgb}{0.0,  0.65,   1.0}
+\definecolor{cpurple}       {rgb}{214,  0.37,   1.0}
+\definecolor{cgreen}        {rgb}{0.0,  0.6,    0.08}
+\definecolor{cdarkblue}     {rgb}{0.0,  0.29,   0.8}
+\definecolor{cpink}         {rgb}{1.0,  0.0,    0.68}
+\definecolor{clightgreen}   {rgb}{0.0,  1.0,    0.54}
+\definecolor{cred}          {rgb}{0.8,  0.0,    0.0}
+\definecolor{cyellow}       {rgb}{0.91, 0.89,   0.0}
+
+\definecolor{arduinoGreen}    {rgb} {0.17, 0.43, 0.01}
+\definecolor{arduinoGrey}     {rgb} {0.47, 0.47, 0.33}
+\definecolor{arduinoOrange}   {rgb} {0.8 , 0.4 , 0   }
+\definecolor{arduinoBlue}     {rgb} {0.01, 0.61, 0.98}
+\definecolor{arduinoDarkBlue} {rgb} {0.0 , 0.2 , 0.5 }
+
+
+\lstdefinelanguage{CSHARP}{
+    language=[Sharp]C,
+    %
+    keywordstyle=\color{cdarkblue},     %%% Wörter der Sprache
+    deletekeywords={Program, args, Console},
+    morekeywords={class, string, @page, @model},
+    %
+    keywordstyle=[2]\color{cred},    %%% Namen, Namespaces
+    keywords=[2]{Console, OnGetWeek, DateCheck, RedirectToPage},
+    %
+    keywordstyle=[3]\color{black},    %%% Standardwörter
+    keywords=[3]{System},
+    %
+    keywordstyle=[4]\color{cgreen},  %%% Methoden, Funktionen
+    keywords=[4]{Main, WriteLine, *ModelName*},
+    %
+    keywordstyle=[5]\color{clightblue},  %%% Variablennamen
+    keywords=[5]{args, Program, console.log, DateTime},
+    %
+    stringstyle=\color{corange},
+    commentstyle=\color{gray},
+    %
+    numbers=left,
+    %
+    breaklines=true,
+    backgroundcolor=\color{gray!12!white},
+    %
+    showstringspaces=false,
+    basicstyle=\ttfamily\small,
+    captionpos=b,
+    tabsize=2,
+}
+\lstdefinestyle{CSharp}{
+    language=CSHARP,
+    numbers=left,
+    frame=single,
+    xleftmargin=10pt,
+}
+\lstdefinestyle{CSharpBetween}{
+    language=CSHARP,
+    numbers=none,
+    nolol,
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinelanguage{HypertextML}{
+    language=html,
+    %
+    keywordstyle=\color{blue},     %%% Wörter der Sprache
+    deletekeywords={class, id, value, href, html, charset, src, lang, rel, onclick},
+    % otherkeywords={<, >, </},
+    morekeywords={p, a, h1, h2, h3, h4, h5, body, head, div, canvas, span},
+    %
+    keywordstyle=[2]\color{black},    %%% Namen, Namespaces
+    keywords=[2]{},
+    %
+    keywordstyle=[3]\color{black},    %%% Standardwörter
+    keywords=[3]{},
+    %
+    keywordstyle=[4]\color{clightblue},  %%% Methoden, Funktionen
+    keywords=[4]{onclick, html, charset, lang, rel, href},
+    %
+    keywordstyle=[5]\color{cgreen},  %%% Attribute
+    keywords=[5]{class, id, src, alt},
+    %
+    stringstyle=\color{corange},
+    commentstyle=\color{cgreen},
+    %
+    numbers=left,
+    %
+    breaklines=true,
+    backgroundcolor=\color{gray!12!white},
+    %
+    showstringspaces=false,
+    basicstyle=\ttfamily\small,
+    captionpos=b,
+    tabsize=2,
+}
+\lstdefinestyle{customHTML}{
+    language=HypertextML,
+    numbers=left,
+    frame=single,
+    xleftmargin=10pt,
+}
+\lstdefinestyle{HTMLBetween}{
+    language=HypertextML,
+    numbers=none,
+    nolol,
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinelanguage{cshtml}{
+    language=[Sharp]C,
+    %
+    alsoletter=-,
+    keywordstyle=\color{blue},     %%% Wörter der Sprache
+    deletekeywords={class, in, for},
+    morekeywords={p, a, h1, h2, h3, h4, h5, body, head, html, div, canvas, span, ul, li, table, tr, td, input, label},
+    %
+    keywordstyle=[2]\color{cred},    %%% Namen, Namespaces
+    keywords=[2]{@foreach, var, Console, in},
+    %
+    keywordstyle=[3]\color{clightblue},    %%% Standardwörter
+    keywords=[3]{item, @item, set, @system, system, allSystems},
+    %
+    keywordstyle=[4]\color{clightblue},  %%% Methoden, Funktionen
+    keywords=[4]{onclick},
+    %
+    keywordstyle=[5]\color{black},  %%% Attribute
+    keywords=[5]{class, id, src, alt},
+    %
+    keywordstyle=[6]\color{cgreen},
+    keywords=[6]{ToString, WriteLine, asp-page, asp-page-handler, method, @TSDTestSystemsDynamic},
+    %
+    stringstyle=\color{corange},
+    commentstyle=\color{gray},
+    %
+    numbers=left,
+    %
+    breaklines=true,
+    backgroundcolor=\color{gray!12!white},
+    %
+    showstringspaces=false,
+    basicstyle=\ttfamily\small,
+    captionpos=b,
+    tabsize=2,
+}
+\lstdefinestyle{CSHTMl}{
+    language=cshtml,
+    numbers=left,
+    frame=single,
+    xleftmargin=10pt,
+}
+\lstdefinestyle{CSHTMLBetween}{
+    language=cshtml,
+    numbers=none,
+    nolol,
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinelanguage{css}{
+    alsoletter={., \#, -},
+    keywordstyle=[1]\color{cdarkblue},
+    keywords=[1]{.myClass1, .myClass2, p, a},
+    %
+    keywordstyle=[2]\color{clightblue},
+    keywords=[2]{color, background-color, transform},
+    %
+    keywordstyle=[3]\color{corange},
+    keywords=[3]{},
+    %
+    stringstyle=\color{corange},
+    commentstyle=\color{cgreen},
+    morecomment=[s]{/*}{*/},
+    %
+    numbers=left,
+    %
+    breaklines=true,
+    backgroundcolor=\color{gray!12!white},
+    %
+    showstringspaces=false,
+    basicstyle=\ttfamily\small,
+    captionpos=b,
+}
+\lstdefinestyle{CSS}{
+    language=css,
+    numbers=left,
+    frame=single,
+    xleftmargin=10pt,
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinelanguage{js}{
+    language=[Sharp]C,
+    %
+    alsoletter={'},
+    keywordstyle=\color{cdarkblue},     %%% Wörter der Sprache
+    deletekeywords={Program, args, Console, const, var, let},
+    morekeywords={class, string},
+    %
+    keywordstyle=[1]\color{clightblue},  %%% Methoden, Funktionen
+    keywords=[1]{addEventListener, getElementById, log},
+    %
+    keywordstyle=[2]\color{blue},  %%% Methoden, Funktionen
+    keywords=[2]{console, const, var, let, document},
+    %
+    keywordstyle=[3]\color{cred},  %%% Methoden, Funktionen
+    keywords=[3]{'click'},
+    %
+    stringstyle=\color{black},
+    commentstyle=\color{gray},
+    %
+    numbers=left,
+    %
+    breaklines=true,
+    backgroundcolor=\color{gray!12!white},
+    %
+    showstringspaces=false,
+    basicstyle=\ttfamily\small,
+    captionpos=b,
+    tabsize=2,
+}
+\lstdefinestyle{JavaScript}{
+    language=js,
+    numbers=left,
+    frame=single,
+    xleftmargin=10pt,
+}
