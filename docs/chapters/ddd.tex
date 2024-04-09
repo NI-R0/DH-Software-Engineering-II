@@ -1,0 +1,40 @@
+\chapter{Domain Driven Design}
+\section{Analyse der Ubiquitous Language}
+
+Die Ubiquitous Language des Projektes richtet sich nach der üblichen Sprache der Domäne \q{Finanzsektor}. Die im Folgenden erläuterten Begriffe sind speziell aus der Subdomäne \q{Finanzverwaltung} entnommen und werden im weiteren Verlauf des Projektes verwendet.
+
+\paragraph*{\q{Konto} (Account):} Der Begriff bezeichnet eine Einheit, in der finanzielle Transaktionen abgewickelt werden können. Es gibt zwei verschiedene Arten von Konten: Bankkonten und Investmentkonten.
+
+\paragraph*{\q{Bankkonto} (Bank account):} Ein Bankkonto ist ein Konto, das für alltägliche Finanztransaktionen wie Einnahmen und Ausgaben genutzt wird. Es gehört zu einer bestimmten Bank und hat einen eindeutigen Namen.
+
+\paragraph*{\q{Investmentkonto} (Investment account):}  Ein Investmentkonto ist ein Konto, das für den Kauf und Verkauf von Vermögenswerten genutzt wird. Es gehört zu einem bestimmten Broker und hat ebenfalls einen eindeutigen Namen.
+
+\paragraph*{\q{Transaktion} (Transaction):} Transaktionen sind Ereignisse, die eine Veränderung des Kontostandes verursachen. Dazu gehören Einnahmen, Ausgaben, sowie Käufe und Verkäufe von Vermögenswerten. Transaktionen gehören immer zu genau einem Konto.
+
+\paragraph*{\q{Vermögenswert} (Asset):} Ein Vermögenswert ist eine Ressource, die einen monetären Wert besitzt und von Benutzern gehandelt werden kann, mit der Absicht, finanzielle Gewinne oder langfristige Wertsteigerungen zu erzielen. Vermögenswerte können verschiedene Formen wie Aktien, Fonds, Rohstoffe oder Kryptowährungen annehmen.
+
+\paragraph*{\q{Einnahme} (Income):} Einnahmen sind finanzielle Zuflüsse auf ein Bankkonto, die den Kontostand erhöhen.
+
+\paragraph*{\q{Ausgabe} (Expense):} Ausgaben sind finanzielle Abflüsse von einem Bankkonto, die den Kontostand verringern.
+
+\paragraph*{\q{Kauf/Verkauf von Vermögenswerten} (Purchase/Sale of Assets):} Diese Form von Transaktionen bezieht sich auf den Kauf, bzw. Verkauf von Vermögenswerten.
+
+\paragraph*{\q{Broker}:} Ein Broker ist eine Organisation, die als Vermittler für den Kauf und Verkauf von Vermögenswerten fungiert.
+
+\paragraph*{\q{Bank}:} Eine Bank ist eine finanzielle Institution, die Dienstleistungen wie z.B. die Verwaltung von Bankkonten, Kreditvergaben, usw. anbietet.
+
+\paragraph*{\q{Kontostand} (Balance):} Der Kontostand ist der aktuelle Geldbetrag, der auf einem Konto verfügbar ist. Er errechnet sich aus der Summe aller durchgeführten Transaktionen und kann sowohl positive als auch negative Zahlen annehmen.
+
+\paragraph*{\q{Benutzer} (User):} Der Benutzer der Anwendung, der die Konten erstellt und Transaktionen durchführt.
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Analyse und Begründung der verwendeten Muster}
+Value Objects, Entities, Aggregates, Repositories, Domain Services

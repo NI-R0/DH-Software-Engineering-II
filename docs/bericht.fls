@@ -1456,6 +1456,7 @@ INPUT .\chapters\ddd.tex
 INPUT chapters\ddd.tex
 INPUT .\chapters\ddd.tex
 INPUT chapters\ddd.tex
+INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
 INPUT .\chapters\clean_architecture.tex
 INPUT .\chapters\clean_architecture.tex
 INPUT .\chapters\clean_architecture.tex
