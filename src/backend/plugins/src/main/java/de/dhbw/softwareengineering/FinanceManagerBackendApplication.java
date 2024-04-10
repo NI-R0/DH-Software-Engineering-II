@@ -1,14 +1,12 @@
-package com.nir0.backend;
+package de.dhbw.softwareengineering;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
-public class BackendApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(BackendApplication.class, args);
-	}
-
+public class FinanceManagerBackendApplication {
+    public static void main(String[] args){
+        SpringApplication.run(FinanceManagerBackendApplication.class, args);
+    }
 }

@@ -11,8 +11,6 @@ Reallocating 'name_of_file' (item size: 1) to 32 items.
 A level-1 auxiliary file: chapters/clean_architecture.aux
 Reallocating 'name_of_file' (item size: 1) to 24 items.
 A level-1 auxiliary file: chapters/principles.aux
-Reallocating 'name_of_file' (item size: 1) to 23 items.
-A level-1 auxiliary file: chapters/unittests.aux
 Reallocating 'name_of_file' (item size: 1) to 25 items.
 A level-1 auxiliary file: chapters/refactoring.aux
 Reallocating 'name_of_file' (item size: 1) to 28 items.
@@ -34,48 +32,47 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Database file #1: bericht-blx.bib
 Database file #2: test_bib.bib
-Reallocating 'field_info' (item size: 4) to 10040 items.
 Biblatex version: 3.18
 Reallocating 'wiz_functions' (item size: 4) to 9000 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
-You've used 37 entries,
+You've used 1 entry,
             6399 wiz_defined-function locations,
-            1352 strings with 13510 characters,
-and the built_in function-call counts, 133307 in all, are:
-= -- 7251
-> -- 3126
-< -- 879
-+ -- 2132
-- -- 1036
-* -- 8582
-:= -- 11285
+            1208 strings with 9096 characters,
+and the built_in function-call counts, 1522 in all, are:
+= -- 72
+> -- 70
+< -- 1
++ -- 49
+- -- 28
+* -- 31
+:= -- 368
 add.period$ -- 0
-call.type$ -- 37
-change.case$ -- 330
+call.type$ -- 1
+change.case$ -- 0
 chr.to.int$ -- 42
-cite$ -- 72
-duplicate$ -- 14864
-empty$ -- 13882
-format.name$ -- 1792
-if$ -- 29146
+cite$ -- 0
+duplicate$ -- 11
+empty$ -- 103
+format.name$ -- 0
+if$ -- 322
 int.to.chr$ -- 0
-int.to.str$ -- 117
+int.to.str$ -- 0
 missing$ -- 0
-newline$ -- 775
-num.names$ -- 1616
-pop$ -- 11849
+newline$ -- 20
+num.names$ -- 0
+pop$ -- 47
 preamble$ -- 1
-purify$ -- 402
+purify$ -- 0
 quote$ -- 0
-skip$ -- 5979
+skip$ -- 77
 stack$ -- 0
-substring$ -- 9846
-swap$ -- 3953
-text.length$ -- 893
-text.prefix$ -- 36
+substring$ -- 151
+swap$ -- 1
+text.length$ -- 20
+text.prefix$ -- 0
 top$ -- 1
-type$ -- 1227
+type$ -- 22
 warning$ -- 0
-while$ -- 1417
+while$ -- 64
 width$ -- 0
-write$ -- 739
+write$ -- 20
