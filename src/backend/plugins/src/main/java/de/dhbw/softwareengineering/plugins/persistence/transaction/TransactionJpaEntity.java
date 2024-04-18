@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
@@ -24,7 +25,7 @@ public class TransactionJpaEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ACCOUNTID", nullable = false)
-    private AccountJpaEntity accountid;
+    private AccountJpaEntity accountId;
 
     @Size(max = 255)
     @Column(name = "DESCRIPTION")
@@ -42,7 +43,7 @@ public class TransactionJpaEntity {
 
     @NotNull
     @Column(name = "TIMESTAMP", nullable = false)
-    private Instant timestamp;
+    private Timestamp timestamp;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPE", nullable = false)
@@ -65,11 +66,11 @@ public class TransactionJpaEntity {
     }
 
     public AccountJpaEntity getAccountid() {
-        return accountid;
+        return accountId;
     }
 
-    public void setAccountid(AccountJpaEntity accountid) {
-        this.accountid = accountid;
+    public void setAccountid(AccountJpaEntity accountId) {
+        this.accountId = accountId;
     }
 
     public String getDescription() {
@@ -96,11 +97,11 @@ public class TransactionJpaEntity {
         this.unit = unit;
     }
 
-    public Instant getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Instant timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 

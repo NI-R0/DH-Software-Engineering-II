@@ -32,7 +32,7 @@ public class AccountJpaEntity {
     @NotNull
     @Column(name = "BALANCE", nullable = false)
     private Double balance;
-    @OneToMany(mappedBy = "accountid")
+    @OneToMany(mappedBy = "accountId")
     private Set<TransactionJpaEntity> transactions = new LinkedHashSet<>();
 
     public UUID getId() {
