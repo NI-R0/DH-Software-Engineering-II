@@ -1,22 +1,23 @@
 package de.dhbw.softwareengineering.account;
 
 import de.dhbw.softwareengineering.transaction.TransactionEntity;
+import de.dhbw.softwareengineering.values.NameValue;
 
 import java.util.List;
 import java.util.UUID;
 
 public class AccountAggregate {
     private UUID accountId;
-    private String name;
+    private NameValue name;
     private Double balance;
 
     private List<TransactionEntity> transactions;
 
-    public String getName() {
+    public NameValue getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(NameValue name) {
         this.name = name;
     }
 
