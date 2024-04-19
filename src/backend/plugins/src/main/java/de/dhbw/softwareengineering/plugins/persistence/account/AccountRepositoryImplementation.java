@@ -31,4 +31,9 @@ public class AccountRepositoryImplementation implements AccountRepository {
     public List<TransactionEntity> updateTransaction(TransactionEntity transaction){return null;}
     @Override
     public List<TransactionEntity> deleteTransaction(UUID id){return null;}
+
+    @Override
+    public Optional<TransactionEntity> findTransactionById(UUID id){
+        return null;
+    }
 }

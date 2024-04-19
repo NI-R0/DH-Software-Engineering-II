@@ -24,4 +24,13 @@ public class TransactionRepositoryImplementation implements TransactionRepositor
         Optional<TransactionJpaEntity> jpaOptional = jpaRepository.findById(id);
         return jpaOptional.map(jpa -> jpaToEntity.mapJpaToEntity(jpa));
     }
+
+    @Override
+    public void deleteTransaction(UUID id){
+    }
+
+    @Override
+    public TransactionEntity editTransaction(TransactionEntity entity){
+        return null;
+    }
 }
