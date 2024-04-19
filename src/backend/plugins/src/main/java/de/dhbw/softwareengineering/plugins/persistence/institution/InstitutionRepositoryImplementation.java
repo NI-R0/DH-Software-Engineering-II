@@ -21,6 +21,7 @@ public class InstitutionRepositoryImplementation implements InstitutionRepositor
     @Autowired
     JpaToEntityMapper jpaToEntity;
 
+    @Override
     public List<InstitutionAggregate> findAllInstitutions(){
         /*List<InstitutionAggregate> institutions = new ArrayList<>();
         List<InstitutionJpaEntity> JpaInstitutions = jpaRepository.findAll();
@@ -29,43 +30,43 @@ public class InstitutionRepositoryImplementation implements InstitutionRepositor
         });*/
         return null;
     }
-
+    @Override
     public Optional<InstitutionAggregate> findById(UUID id){
         return null;
     }
-
+    @Override
     public Optional<InstitutionAggregate> findByName(String name){
         return null;
     }
-
+    @Override
     public InstitutionAggregate create(InstitutionAggregate institution) throws Exception{
         return null;
     }
-
+    @Override
     public InstitutionAggregate update(InstitutionAggregate institution) throws Exception{
         return null;
     }
-
+    @Override
     public void deleteById(UUID id){
 
     }
-
+    @Override
     public void deleteByName(String name){
 
     }
-
+    @Override
     public List<AccountAggregate> findAllAccounts(){
         return null;
     }
-
+    @Override
     public List<AccountAggregate> createAccount(AccountAggregate account){
         return null;
     }
-
+    @Override
     public List<AccountAggregate> updateAccount(AccountAggregate account){
         return null;
     }
-
+    @Override
     public List<AccountAggregate> deleteAccount(AccountAggregate account){
         return null;
         //Warum nicht void

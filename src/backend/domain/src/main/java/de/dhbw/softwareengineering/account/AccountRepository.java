@@ -12,5 +12,5 @@ public interface AccountRepository {
     public List<TransactionEntity> findAllTransactions();
     public List<TransactionEntity> createTransaction(TransactionEntity transaction);
     public List<TransactionEntity> updateTransaction(TransactionEntity transaction);
-    public List<TransactionEntity> deleteTransaction(TransactionEntity transaction);
+    public List<TransactionEntity> deleteTransaction(UUID id);
 }
