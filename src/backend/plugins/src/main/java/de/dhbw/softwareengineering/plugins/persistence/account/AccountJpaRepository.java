@@ -12,5 +12,5 @@ import java.util.UUID;
 public interface AccountJpaRepository extends JpaRepository<AccountJpaEntity, UUID> {
 
     @Query(value="SELECT * FROM FINANCE-MANAGER-DB.ACCOUNT WHERE institutionid = ?1", nativeQuery = true)
-    List<TransactionJpaEntity> findByInstitution(UUID institutionId);
+    List<TransactionJpaEntity> findByInstitutionId(UUID institutionId);
 }

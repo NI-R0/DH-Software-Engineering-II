@@ -1,4 +1,4 @@
-package de.dhbw.softwareengineering.plugins.persistence.transaction.Mapper;
+package de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionMapper;
 
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaEntity;
 import de.dhbw.softwareengineering.transaction.TransactionEntity;
