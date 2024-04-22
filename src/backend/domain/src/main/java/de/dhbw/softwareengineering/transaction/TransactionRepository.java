@@ -8,5 +8,5 @@ public interface TransactionRepository {
 
     public void deleteTransaction(UUID id);
 
-    public TransactionEntity editTransaction(TransactionEntity entity);
+    public Optional<TransactionEntity> editTransaction(TransactionEntity entity);
 }

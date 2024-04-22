@@ -17,6 +17,10 @@ public class TransactionEntity {
 
     //GETTER AND SETTER
 
+    public void setTransactionId(UUID id) {
+        this.transactionId = id;
+    }
+
     public UUID getTransactionId(){
         return transactionId;
     }

@@ -13,6 +13,14 @@ public class AccountAggregate {
 
     private List<TransactionEntity> transactions;
 
+    public UUID getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(UUID accountId) {
+        this.accountId = accountId;
+    }
+
     public NameValue getName() {
         return name;
     }
