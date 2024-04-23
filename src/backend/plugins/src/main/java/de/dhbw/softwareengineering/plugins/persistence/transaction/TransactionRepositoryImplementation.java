@@ -50,8 +50,8 @@ public class TransactionRepositoryImplementation implements TransactionRepositor
     }
 
     @Override
-    public void deleteTransaction(UUID id){
-        Optional<TransactionJpaEntity> transactionJpa = jpaRepository.findById(id);
+    public void deleteTransaction(TransactionEntity transaction){
+        Optional<TransactionJpaEntity> transactionJpa = jpaRepository.findById(transaction.getTransactionId());
         transactionJpa.ifPresent(jpa -> jpaRepository.delete(jpa));
     }
 

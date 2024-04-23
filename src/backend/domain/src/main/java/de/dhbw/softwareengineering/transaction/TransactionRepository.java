@@ -8,7 +8,7 @@ public interface TransactionRepository {
 
     public Optional<TransactionEntity> findByIdAndAccount(UUID accountId, UUID transactionId);
 
-    public void deleteTransaction(UUID id);
+    public void deleteTransaction(TransactionEntity entity);
 
     public Optional<TransactionEntity> editTransaction(TransactionEntity entity);
 

@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface TransactionJpaRepository extends JpaRepository<TransactionJpaEntity, UUID> {
 
     @Query(value="SELECT * FROM FINANCE-MANAGER-DB.TRANSACTION WHERE accountid = ?1 ORDER BY timestamp ASC", nativeQuery = true)
-    List<TransactionJpaEntity> findByAccount(UUID accountId);
+    List<TransactionJpaEntity> findAllByAccount(UUID accountId);
 
     @Query(value="DELETE FROM FINANCE-MANAGER-DB.TRANSACTION WHERE accountid = ?1",nativeQuery = true)
     @Modifying

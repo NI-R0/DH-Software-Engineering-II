@@ -98,10 +98,12 @@ public class AccountRepositoryImplementation implements AccountRepository {
         }
     }
     @Override
-    public void deleteAccount(UUID id){
-        Optional<AccountJpaEntity> accountJpa = accountJpaRepository.findById(id);
-        transactionJpaRepository.deleteAllByAccount(id);
+    public void deleteAccount(AccountAggregate account){
+        deleteAllTransactions(account);
+        Optional<AccountJpaEntity> accountJpa = accountJpaRepository.findById(account.getAccountId());
         accountJpa.ifPresent(jpa -> accountJpaRepository.delete(jpa));
+
+        //Alternative: Durch Transaktionsliste loopen und einzeln löschen (func. deleteAllTransactions)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,19 +111,7 @@ public class AccountRepositoryImplementation implements AccountRepository {
     @Override
     public List<TransactionEntity> findAllTransactions(UUID accountId)
     {
-        List<TransactionEntity> transactionEntities = new ArrayList<>();
-        List<TransactionJpaEntity> transactionJpas = transactionJpaRepository.findByAccount(accountId);
-
-        transactionJpas.forEach(jpaEntity -> {
-            try {
-                transactionEntities.add(transactionJpaToEntity.mapJpaToEntity(jpaEntity));
-            } catch (Exception e) {
-                //TODO
-                System.out.println(e.toString());
-            }
-        });
-
-        return transactionEntities;
+        return jpaToAggregate.findAllTransactions(accountId);
     }
     @Override
     public List<TransactionEntity> createTransaction(UUID accountId, TransactionEntity transaction)
@@ -138,10 +128,16 @@ public class AccountRepositoryImplementation implements AccountRepository {
     }
 
     @Override
-    public List<TransactionEntity> deleteTransaction(UUID accountId, UUID id)
+    public List<TransactionEntity> deleteTransaction(UUID accountId, TransactionEntity transaction)
     {
-        transactionRepositoryImpl.deleteTransaction(id);
+        transactionRepositoryImpl.deleteTransaction(transaction);
         return findAllTransactions(accountId);
+    }
+
+    @Override
+    public List<TransactionEntity> deleteAllTransactions(AccountAggregate account){
+        transactionJpaRepository.deleteAllByAccount(account.getAccountId());
+        return findAllTransactions(account.getAccountId());
     }
 
     @Override

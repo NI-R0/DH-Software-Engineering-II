@@ -32,11 +32,11 @@ public class AccountJpaEntity {
     @Column(name = "BALANCE", nullable = false)
     private Double balance;
 
-    public UUID getId() {
+    public UUID getAccountId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setAccountId(UUID id) {
         this.id = id;
     }
 
@@ -72,7 +72,7 @@ public class AccountJpaEntity {
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
         AccountJpaEntity that = (AccountJpaEntity) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
+        return getAccountId() != null && Objects.equals(getAccountId(), that.getAccountId());
     }
 
     @Override

@@ -13,6 +13,14 @@ public class InstitutionAggregate {
     private InstitutionType type;
     private List<AccountAggregate> accounts;
 
+    public UUID getInstitutionId() {
+        return institutionId;
+    }
+
+    public void setInstitutionId(UUID institutionId) {
+        this.institutionId = institutionId;
+    }
+
     public NameValue getName() {
         return name;
     }

@@ -21,8 +21,6 @@ public class InstitutionJpaEntity {
     @Column(name = "NAME", nullable = false, length = 20)
     private String name;
 
-    @OneToMany(mappedBy = "institutionid")
-    private Set<AccountJpaEntity> accounts = new LinkedHashSet<>();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPE", nullable = false)
@@ -50,14 +48,6 @@ public class InstitutionJpaEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<AccountJpaEntity> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(Set<AccountJpaEntity> accounts) {
-        this.accounts = accounts;
     }
 
     @Override

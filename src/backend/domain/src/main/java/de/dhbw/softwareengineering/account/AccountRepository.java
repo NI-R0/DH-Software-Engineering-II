@@ -15,12 +15,13 @@ public interface AccountRepository {
 
     public Optional<AccountAggregate> editAccount(AccountAggregate account);
 
-    public void deleteAccount(UUID id);
+    public void deleteAccount(AccountAggregate account);
 
     public List<TransactionEntity> findAllTransactions(UUID accountId);
     public List<TransactionEntity> createTransaction(UUID accountId, TransactionEntity transaction);
     public List<TransactionEntity> updateTransaction(UUID accountId, TransactionEntity transaction);
-    public List<TransactionEntity> deleteTransaction(UUID accountId, UUID id);
+    public List<TransactionEntity> deleteTransaction(UUID accountId, TransactionEntity transaction);
+    public List<TransactionEntity> deleteAllTransactions(AccountAggregate account);
 
     public Optional<TransactionEntity> findTransactionById(UUID accountId, UUID id);
 }

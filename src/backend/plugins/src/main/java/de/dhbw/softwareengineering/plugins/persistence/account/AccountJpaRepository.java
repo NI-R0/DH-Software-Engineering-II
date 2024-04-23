@@ -13,9 +13,9 @@ import java.util.UUID;
 public interface AccountJpaRepository extends JpaRepository<AccountJpaEntity, UUID> {
 
     @Query(value="SELECT * FROM FINANCE-MANAGER-DB.ACCOUNT WHERE institutionid = ?1", nativeQuery = true)
-    List<TransactionJpaEntity> findByInstitutionId(UUID institutionId);
+    List<AccountJpaEntity> findAllByInstitutionId(UUID institutionId);
 
-    @Query(value="DELETE FROM FINANCE-MANAGER-DB.ACCOUNT WHERE institutionid = ?1",nativeQuery = true)
+    /*@Query(value="DELETE FROM FINANCE-MANAGER-DB.ACCOUNT WHERE institutionid = ?1",nativeQuery = true)
     @Modifying
-    void deleteAllByInstitution(UUID institutionId);
+    void deleteAllByInstitution(UUID institutionId);*/
 }

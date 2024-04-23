@@ -3,11 +3,16 @@ package de.dhbw.softwareengineering.plugins.persistence.institution;
 import de.dhbw.softwareengineering.account.AccountAggregate;
 import de.dhbw.softwareengineering.institution.InstitutionAggregate;
 import de.dhbw.softwareengineering.institution.InstitutionRepository;
-import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionMapper.EntityToJpaMapper;
-import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionMapper.JpaToEntityMapper;
+import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaEntity;
+import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaRepository;
+import de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper.AccountJpaToAggregateMapper;
+import de.dhbw.softwareengineering.plugins.persistence.account.AccountRepositoryImplementation;
+import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionMapper.InstitutionAggregateToJpaMapper;
+import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionMapper.InstitutionJpaToAggregateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,61 +20,131 @@ import java.util.UUID;
 @Repository
 public class InstitutionRepositoryImplementation implements InstitutionRepository {
     @Autowired
-    InstitutionJpaRepository jpaRepository;
+    InstitutionJpaRepository institutionJpaRepository;
     @Autowired
-    EntityToJpaMapper entityToJpa;
+    AccountJpaRepository accountJpaRepository;
     @Autowired
-    JpaToEntityMapper jpaToEntity;
+    InstitutionAggregateToJpaMapper aggregateToJpa;
+    @Autowired
+    InstitutionJpaToAggregateMapper jpaToAggregate;
+    @Autowired
+    AccountRepositoryImplementation accountRepositoryImpl;
+    @Autowired
+    AccountJpaToAggregateMapper accountJpaToAggregate;
 
     @Override
     public List<InstitutionAggregate> findAllInstitutions(){
-        /*List<InstitutionAggregate> institutions = new ArrayList<>();
-        List<InstitutionJpaEntity> JpaInstitutions = jpaRepository.findAll();
-        JpaInstitutions.forEach(jpa ->{
-            institutions.add(jpaToEntity.)
-        });*/
-        return null;
+        List<InstitutionAggregate> institutionAggregates = new ArrayList<>();
+        List<InstitutionJpaEntity> jpaOptionals = institutionJpaRepository.findAll();
+        jpaOptionals.forEach(jpaEntity -> {
+            try{
+                institutionAggregates.add(jpaToAggregate.mapJpaToAggregate(jpaEntity));
+            }
+            catch(Exception e){
+                System.out.println(e.toString());
+            }
+        });
+        return institutionAggregates;
     }
     @Override
     public Optional<InstitutionAggregate> findById(UUID id){
-        return null;
+        try{
+            Optional<InstitutionJpaEntity> jpaOptional = institutionJpaRepository.findById(id);
+            InstitutionJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
+            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            return Optional.empty();
+        }
     }
     @Override
     public Optional<InstitutionAggregate> findByName(String name){
-        return null;
+        try{
+            Optional<InstitutionJpaEntity> jpaOptional = institutionJpaRepository.findByName(name);
+            InstitutionJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
+            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            return Optional.empty();
+        }
     }
     @Override
-    public InstitutionAggregate create(InstitutionAggregate institution) throws Exception{
-        return null;
-    }
-    @Override
-    public InstitutionAggregate update(InstitutionAggregate institution) throws Exception{
-        return null;
-    }
-    @Override
-    public void deleteById(UUID id){
+    public Optional<InstitutionAggregate> createInstitution(InstitutionAggregate institution) throws Exception{
+        try{
+            Optional<InstitutionJpaEntity> jpaOptional = institutionJpaRepository.findById(institution.getInstitutionId());
 
-    }
-    @Override
-    public void deleteByName(String name){
+            if(jpaOptional.isPresent()){
+                throw new IllegalArgumentException("Transaction with ID " + institution.getInstitutionId().toString() + " already exists!");
+            }
 
+            InstitutionJpaEntity jpaEntity = aggregateToJpa.mapAggregateToNewJpa(institution);
+
+            institutionJpaRepository.save(jpaEntity);
+
+            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            return Optional.empty();
+        }
     }
     @Override
-    public List<AccountAggregate> findAllAccounts(){
-        return null;
+    public Optional<InstitutionAggregate> updateInstitution(InstitutionAggregate institution) throws Exception{
+        try{
+            Optional<InstitutionJpaEntity> jpaOptional = institutionJpaRepository.findById(institution.getInstitutionId());
+
+            InstitutionJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
+
+            jpaEntity = aggregateToJpa.mapAggregateToExistingJpa(institution, jpaEntity);
+
+            institutionJpaRepository.save(jpaEntity);
+
+            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            return Optional.empty();
+        }
     }
     @Override
-    public List<AccountAggregate> createAccount(AccountAggregate account){
-        return null;
+    public void deleteInstitution(InstitutionAggregate institution){
+        deleteAllAccounts(institution);
+        Optional<InstitutionJpaEntity> jpaOptional = institutionJpaRepository.findById(institution.getInstitutionId());
+        jpaOptional.ifPresent(jpa -> {
+            institutionJpaRepository.delete(jpa);
+        });
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public List<AccountAggregate> findAllAccounts(InstitutionAggregate institution){
+        return jpaToAggregate.findAllAccounts(institution.getInstitutionId());
     }
     @Override
-    public List<AccountAggregate> updateAccount(AccountAggregate account){
-        return null;
+    public List<AccountAggregate> createAccount(InstitutionAggregate institution, AccountAggregate account){
+        accountRepositoryImpl.createAccount(institution.getInstitutionId(), account);
+        return findAllAccounts(institution);
     }
     @Override
-    public List<AccountAggregate> deleteAccount(AccountAggregate account){
-        return null;
-        //Warum nicht void
+    public List<AccountAggregate> updateAccount(InstitutionAggregate institution, AccountAggregate account){
+        accountRepositoryImpl.editAccount(account);
+        return findAllAccounts(institution);
+    }
+    @Override
+    public List<AccountAggregate> deleteAccount(InstitutionAggregate institution, AccountAggregate account){
+        accountRepositoryImpl.deleteAccount(account);
+        return findAllAccounts(institution);
+    }
+
+    @Override
+    public List<AccountAggregate> deleteAllAccounts(InstitutionAggregate institution){
+        institution.getAccounts().forEach(account -> {
+            accountRepositoryImpl.deleteAccount(account);
+        });
+        return findAllAccounts(institution);
     }
 }
 

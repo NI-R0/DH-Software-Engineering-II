@@ -15,7 +15,7 @@ public class TransactionJpaToEntityMapper {
     //Transaction
     public TransactionEntity mapJpaToEntity(TransactionJpaEntity jpa) throws Exception{
 
-        if(!isJpaInputValid(jpa)){
+        if(isJpaInputInvalid(jpa)){
             throw new IllegalArgumentException("JPA properties could not be matched to entity!");
         }
 
@@ -30,7 +30,7 @@ public class TransactionJpaToEntityMapper {
         return entity;
     }
 
-    private boolean isJpaInputValid(TransactionJpaEntity jpa){
+    private boolean isJpaInputInvalid(TransactionJpaEntity jpa){
         UUID id = jpa.getId();
         String description = jpa.getDescription();
         Timestamp time = jpa.getTimestamp();
@@ -39,9 +39,12 @@ public class TransactionJpaToEntityMapper {
         TransactionType type = jpa.getTransactionType();
 
         if(id == null || description == null || time == null || unit.isEmpty() || amount == null || type == null){
-            return false;
+            return true;
+        }
+        if(amount.isInfinite()||amount.isNaN()){
+            return true;
         }
 
-        return true;
+        return false;
     }
 }

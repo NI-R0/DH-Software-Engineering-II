@@ -13,7 +13,7 @@ public class AccountAggregateToJpaMapper {
             throw new IllegalArgumentException("Illegal account parameter!");
         }
         AccountJpaEntity jpaEntity = new AccountJpaEntity();
-        jpaEntity.setId(account.getAccountId());
+        jpaEntity.setAccountId(account.getAccountId());
         jpaEntity.setName(account.getName().getName());
         jpaEntity.setBalance(account.getBalance());
         jpaEntity.setInstitutionId(institutionId);
