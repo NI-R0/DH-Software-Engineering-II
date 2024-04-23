@@ -7,6 +7,7 @@ import de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper.Acc
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaEntity;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaRepository;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionMapper.TransactionJpaToEntityMapper;
+import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionRepositoryImplementation;
 import de.dhbw.softwareengineering.transaction.TransactionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,8 @@ public class AccountRepositoryImplementation implements AccountRepository {
     AccountJpaToAggregateMapper accountJpaToEntity;
     @Autowired
     TransactionJpaToEntityMapper transactionJpaToEntity;
+    @Autowired
+    TransactionRepositoryImplementation transactionRepositoryImpl;
 
     @Override
     public Optional<AccountAggregate> findById(UUID id) {
@@ -60,14 +63,27 @@ public class AccountRepositoryImplementation implements AccountRepository {
         return transactionEntities;
     }
     @Override
-    public List<TransactionEntity> createTransaction(TransactionEntity transaction){return null;}
+    public List<TransactionEntity> createTransaction(UUID accountId, TransactionEntity transaction)
+    {
+        transactionRepositoryImpl.createTransaction(accountId, transaction);
+        return findAllTransactions(accountId);
+    }
     @Override
-    public List<TransactionEntity> updateTransaction(TransactionEntity transaction){return null;}
+    public List<TransactionEntity> updateTransaction(UUID accountId, TransactionEntity transaction)
+    {
+        transactionRepositoryImpl.editTransaction(transaction);
+        return findAllTransactions(accountId);
+    }
     @Override
-    public List<TransactionEntity> deleteTransaction(UUID id){return null;}
+    public List<TransactionEntity> deleteTransaction(UUID accountId, UUID id)
+    {
+        transactionRepositoryImpl.deleteTransaction(id);
+        return findAllTransactions(accountId);
+    }
 
     @Override
-    public Optional<TransactionEntity> findTransactionById(UUID id){
-        return null;
+    public Optional<TransactionEntity> findTransactionById(UUID accountId, UUID id)
+    {
+        return transactionRepositoryImpl.findByIdAndAccount(accountId, id);
     }
 }

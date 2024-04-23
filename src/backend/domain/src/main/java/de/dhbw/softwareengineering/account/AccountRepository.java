@@ -10,9 +10,9 @@ public interface AccountRepository {
     public Optional<AccountAggregate> findById(UUID id);
 
     public List<TransactionEntity> findAllTransactions(UUID accountId);
-    public List<TransactionEntity> createTransaction(TransactionEntity transaction);
-    public List<TransactionEntity> updateTransaction(TransactionEntity transaction);
-    public List<TransactionEntity> deleteTransaction(UUID id);
+    public List<TransactionEntity> createTransaction(UUID accountId, TransactionEntity transaction);
+    public List<TransactionEntity> updateTransaction(UUID accountId, TransactionEntity transaction);
+    public List<TransactionEntity> deleteTransaction(UUID accountId, UUID id);
 
-    public Optional<TransactionEntity> findTransactionById(UUID id);
+    public Optional<TransactionEntity> findTransactionById(UUID accountId, UUID id);
 }

@@ -21,23 +21,23 @@ public class TransactionEntityToJpaMapper {
     @Autowired
     TransactionJpaRepository jpaRepository;
 
-    /*public Optional<TransactionJpaEntity> mapEntityToJpa(TransactionEntity entity, boolean alreadyExists) throws Exception{
+    public TransactionJpaEntity mapEntityToNewJpa(UUID accountId, TransactionEntity entity) throws Exception{
 
-
-        if(!isTransactionValid(entity,alreadyExists)){
-            return Optional.empty();
+        if(!isInputValid(entity)){
+            throw new IllegalArgumentException("Illegal transaction parameter!");
         }
 
-        if(alreadyExists){
+        TransactionJpaEntity jpaEntity = new TransactionJpaEntity();
+        jpaEntity.setId(entity.getTransactionId());
+        jpaEntity.setDescription(entity.getDescription().getText());
+        jpaEntity.setTransactionType(entity.getType());
+        jpaEntity.setAmount(entity.getAmount());
+        jpaEntity.setUnit(entity.getUnit());
+        jpaEntity.setTimestamp(entity.getTimestamp());
+        jpaEntity.setAccountId(accountId);
 
-            Optional<TransactionJpaEntity> newJpa = mapToExistingJpa(entity);
-            return null;
-        }
-
-        //TransactionJpaEntity newJpa = mapNonExistingEntity(entity);
-
-        return Optional.empty();
-    }*/
+        return jpaEntity;
+    }
 
     public TransactionJpaEntity mapEntityToExistingJpa(TransactionEntity entity, TransactionJpaEntity jpa) throws Exception{
 

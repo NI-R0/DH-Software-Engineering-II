@@ -34,6 +34,22 @@ public class TransactionRepositoryImplementation implements TransactionRepositor
     }
 
     @Override
+    public Optional<TransactionEntity> findByIdAndAccount(UUID accountId, UUID transactionId){
+        try {
+            Optional<TransactionJpaEntity> jpaOptional = jpaRepository.findById(transactionId);
+            TransactionJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
+            if(jpaEntity.getAccountId() != accountId){
+                throw new IllegalArgumentException("ID not found");
+            }
+            return Optional.of(jpaToEntity.mapJpaToEntity(jpaEntity));
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+            return Optional.empty();
+        }
+    }
+
+    @Override
     public void deleteTransaction(UUID id){
         Optional<TransactionJpaEntity> transactionJpa = jpaRepository.findById(id);
         transactionJpa.ifPresent(jpa -> jpaRepository.delete(jpa));
@@ -47,6 +63,27 @@ public class TransactionRepositoryImplementation implements TransactionRepositor
             TransactionJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
 
             jpaEntity = entityToJpa.mapEntityToExistingJpa(entity, jpaEntity);
+
+            jpaRepository.save(jpaEntity);
+
+            return Optional.of(jpaToEntity.mapJpaToEntity(jpaEntity));
+
+        }catch(Exception e){
+            System.out.println(e.toString());
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<TransactionEntity> createTransaction(UUID accountId, TransactionEntity entity){
+        try{
+            Optional<TransactionJpaEntity> jpaOptional = jpaRepository.findById(entity.getTransactionId());
+
+            if(jpaOptional.isPresent()){
+                throw new IllegalArgumentException("Transaction with ID " + entity.getTransactionId().toString() + " already exists!");
+            }
+
+            TransactionJpaEntity jpaEntity = entityToJpa.mapEntityToNewJpa(accountId, entity);
 
             jpaRepository.save(jpaEntity);
 

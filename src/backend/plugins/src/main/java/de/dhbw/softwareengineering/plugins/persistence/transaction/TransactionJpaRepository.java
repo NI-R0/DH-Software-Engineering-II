@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 public interface TransactionJpaRepository extends JpaRepository<TransactionJpaEntity, UUID> {
 
-    @Query(value="SELECT * FROM FINANCE-MANAGER-DB.TRANSACTION WHERE accountid = ?1", nativeQuery = true)
+    @Query(value="SELECT * FROM FINANCE-MANAGER-DB.TRANSACTION WHERE accountid = ?1 ORDER BY timestamp ASC", nativeQuery = true)
     List<TransactionJpaEntity> findByAccount(UUID accountId);
 
 }

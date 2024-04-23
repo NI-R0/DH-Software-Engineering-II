@@ -23,10 +23,9 @@ public class TransactionJpaEntity {
     private UUID id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "ACCOUNTID", nullable = false)
-    private AccountJpaEntity accountId;
+    @Column(name = "ACCOUNTID", nullable = false)
+    private UUID accountId;
 
     @Size(max = 255)
     @Column(name = "DESCRIPTION")
@@ -66,11 +65,11 @@ public class TransactionJpaEntity {
         this.id = id;
     }
 
-    public AccountJpaEntity getAccountid() {
+    public UUID getAccountId() {
         return accountId;
     }
 
-    public void setAccountid(AccountJpaEntity accountId) {
+    public void setAccountId(UUID accountId) {
         this.accountId = accountId;
     }
 
