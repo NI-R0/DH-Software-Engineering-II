@@ -23,7 +23,7 @@ public class TransactionEntityToJpaMapper {
 
     public TransactionJpaEntity mapEntityToNewJpa(UUID accountId, TransactionEntity entity) throws Exception{
 
-        if(!isInputValid(entity)){
+        if(isInputInvalid(entity)){
             throw new IllegalArgumentException("Illegal transaction parameter!");
         }
 
@@ -41,7 +41,7 @@ public class TransactionEntityToJpaMapper {
 
     public TransactionJpaEntity mapEntityToExistingJpa(TransactionEntity entity, TransactionJpaEntity jpa) throws Exception{
 
-        if(!isInputValid(entity)){
+        if(isInputInvalid(entity)){
             throw new IllegalArgumentException("Illegal transaction parameter!");
         }
 
@@ -63,13 +63,13 @@ public class TransactionEntityToJpaMapper {
         return jpa;
     }
 
-    private boolean isInputValid(TransactionEntity entity){
+    private boolean isInputInvalid(TransactionEntity entity){
         String description = entity.getDescription().getText();
         String unit = entity.getUnit();
-        if(description.length() > 255 || Objects.equals(unit, "")){
-            return false;
+        if(description.length() > 255 || Objects.equals(unit, "") || unit.length() > 10){
+            return true;
         }
-        return true;
+        return false;
     }
 
     /*public TransactionJpaEntity mapNonExistingEntity(TransactionEntity entity){

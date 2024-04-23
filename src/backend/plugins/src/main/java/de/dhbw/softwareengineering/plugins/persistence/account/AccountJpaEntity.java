@@ -31,8 +31,6 @@ public class AccountJpaEntity {
     @NotNull
     @Column(name = "BALANCE", nullable = false)
     private Double balance;
-    @OneToMany(mappedBy = "accountId")
-    private Set<TransactionJpaEntity> transactions = new LinkedHashSet<>();
 
     public UUID getId() {
         return id;
@@ -64,14 +62,6 @@ public class AccountJpaEntity {
 
     public void setBalance(Double balance) {
         this.balance = balance;
-    }
-
-    public Set<TransactionJpaEntity> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(Set<TransactionJpaEntity> transactions) {
-        this.transactions = transactions;
     }
 
     @Override

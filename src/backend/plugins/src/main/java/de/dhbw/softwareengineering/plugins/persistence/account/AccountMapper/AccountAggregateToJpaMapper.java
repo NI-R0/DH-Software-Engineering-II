@@ -9,14 +9,38 @@ import java.util.UUID;
 @Component
 public class AccountAggregateToJpaMapper {
     public AccountJpaEntity mapAggregateToNewJpa(UUID institutionId, AccountAggregate account) throws Exception{
-        return null;
+        if(isAggregateInputInvalid(account)){
+            throw new IllegalArgumentException("Illegal account parameter!");
+        }
+        AccountJpaEntity jpaEntity = new AccountJpaEntity();
+        jpaEntity.setId(account.getAccountId());
+        jpaEntity.setName(account.getName().getName());
+        jpaEntity.setBalance(account.getBalance());
+        jpaEntity.setInstitutionId(institutionId);
+
+        return jpaEntity;
     }
 
     public AccountJpaEntity mapAggregateToExistingJpa(AccountAggregate account, AccountJpaEntity jpa) throws Exception{
-        return null;
+
+        if(isAggregateInputInvalid(account)){
+            throw new IllegalArgumentException("Illegal account parameter!");
+        }
+        if(account.getBalance() != null){
+            jpa.setBalance(account.getBalance());
+        }
+        if(account.getName() != null && account.getName().getName() != null){
+            jpa.setName(account.getName().getName());
+        }
+
+        return jpa;
     }
 
-    private boolean isAggregateInputValid(AccountAggregate account){
+    private boolean isAggregateInputInvalid(AccountAggregate account){
+        String name = account.getName().getName();
+        if(name.isEmpty() || name.length() > 10){
+            return true;
+        }
         return false;
     }
 }
