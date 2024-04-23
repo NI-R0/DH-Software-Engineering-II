@@ -21,10 +21,9 @@ public class AccountJpaEntity {
     @Column(name = "ACCOUNTID", nullable = false)
     private UUID id;
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "INSTITUTIONID", nullable = false)
-    private InstitutionJpaEntity institutionid;
+    @Column(name = "INSTITUTIONID", nullable = false)
+    private UUID institutionid;
     @Size(max = 20)
     @NotNull
     @Column(name = "NAME", nullable = false, length = 20)
@@ -43,11 +42,11 @@ public class AccountJpaEntity {
         this.id = id;
     }
 
-    public InstitutionJpaEntity getInstitutionid() {
+    public UUID getInstitutionId() {
         return institutionid;
     }
 
-    public void setInstitutionid(InstitutionJpaEntity institutionid) {
+    public void setInstitutionId(UUID institutionid) {
         this.institutionid = institutionid;
     }
 

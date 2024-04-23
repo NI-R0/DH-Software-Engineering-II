@@ -24,9 +24,9 @@ public class AccountRepositoryImplementation implements AccountRepository {
     @Autowired
     TransactionJpaRepository transactionJpaRepository;
     @Autowired
-    AccountAggregateToJpaMapper accountEntityToJpa;
+    AccountAggregateToJpaMapper aggregateToJpa;
     @Autowired
-    AccountJpaToAggregateMapper accountJpaToEntity;
+    AccountJpaToAggregateMapper jpaToAggregate;
     @Autowired
     TransactionJpaToEntityMapper transactionJpaToEntity;
     @Autowired
@@ -37,13 +37,74 @@ public class AccountRepositoryImplementation implements AccountRepository {
         try{
             Optional<AccountJpaEntity> jpaOptional = accountJpaRepository.findById(id);
             AccountJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
-            return accountJpaToEntity.mapJpaToAggregate(jpaEntity);
+            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
         }
         catch(Exception e){
             System.out.println(e.toString());
             return Optional.empty();
         }
     }
+
+    @Override
+    public Optional<AccountAggregate> findByIdAndInstitution(UUID institutionId, UUID accountId){
+        try{
+            Optional<AccountJpaEntity> jpaOptional = accountJpaRepository.findById(accountId);
+            AccountJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
+            if(jpaEntity.getInstitutionId() != accountId){
+                throw new IllegalArgumentException("ID not found");
+            }
+            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            return Optional.empty();
+        }
+    }
+    @Override
+    public Optional<AccountAggregate> createAccount(UUID institutionId, AccountAggregate account){
+        try{
+            Optional<AccountJpaEntity> jpaOptional = accountJpaRepository.findById(account.getAccountId());
+
+            if(jpaOptional.isPresent()){
+                throw new IllegalArgumentException("Transaction with ID " + account.getAccountId().toString() + " already exists!");
+            }
+
+            AccountJpaEntity jpaEntity = aggregateToJpa.mapAggregateToNewJpa(institutionId, account);
+
+            accountJpaRepository.save(jpaEntity);
+
+            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            return Optional.empty();
+        }
+    }
+    @Override
+    public Optional<AccountAggregate> editAccount(AccountAggregate account){
+        try{
+            Optional<AccountJpaEntity> jpaOptional = accountJpaRepository.findById(account.getAccountId());
+            AccountJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
+
+            jpaEntity = aggregateToJpa.mapAggregateToExistingJpa(account, jpaEntity);
+
+            accountJpaRepository.save(jpaEntity);
+
+            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            return Optional.empty();
+        }
+    }
+    @Override
+    public void deleteAccount(UUID id){
+        Optional<AccountJpaEntity> accountJpa = accountJpaRepository.findById(id);
+        transactionJpaRepository.deleteAllByAccount(id);
+        accountJpa.ifPresent(jpa -> accountJpaRepository.delete(jpa));
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public List<TransactionEntity> findAllTransactions(UUID accountId)
@@ -68,12 +129,14 @@ public class AccountRepositoryImplementation implements AccountRepository {
         transactionRepositoryImpl.createTransaction(accountId, transaction);
         return findAllTransactions(accountId);
     }
+
     @Override
     public List<TransactionEntity> updateTransaction(UUID accountId, TransactionEntity transaction)
     {
         transactionRepositoryImpl.editTransaction(transaction);
         return findAllTransactions(accountId);
     }
+
     @Override
     public List<TransactionEntity> deleteTransaction(UUID accountId, UUID id)
     {

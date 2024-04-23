@@ -10,7 +10,7 @@ import java.util.Optional;
 @Component
 public class AccountJpaToAggregateMapper {
 
-    public Optional<AccountAggregate> mapJpaToAggregate(AccountJpaEntity jpa) throws Exception{
+    public AccountAggregate mapJpaToAggregate(AccountJpaEntity jpa) throws Exception{
         return null;
     }
 
