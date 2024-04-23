@@ -2,7 +2,9 @@ package de.dhbw.softwareengineering.adapters.transaction;
 
 import de.dhbw.softwareengineering.adapters.values.DescriptionDto;
 import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TransactionEntityToDtoMapper {
 
     public TransactionDto mapEntityToDto(TransactionEntity entity){

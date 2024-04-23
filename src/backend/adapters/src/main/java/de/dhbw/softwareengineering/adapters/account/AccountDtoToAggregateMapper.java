@@ -5,6 +5,8 @@ import de.dhbw.softwareengineering.adapters.transaction.TransactionDto;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionDtoToEntityMapper;
 import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
 import de.dhbw.softwareengineering.domain.values.NameValue;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
