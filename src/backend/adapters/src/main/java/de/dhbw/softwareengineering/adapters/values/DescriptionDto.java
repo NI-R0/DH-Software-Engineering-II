@@ -1,4 +1,4 @@
-package de.dhbw.softwareengineering.values;
+package de.dhbw.softwareengineering.adapters.values;
 
 public class DescriptionDto {
     private  String text;

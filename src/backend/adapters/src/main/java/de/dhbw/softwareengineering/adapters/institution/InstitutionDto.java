@@ -1,17 +1,17 @@
-package de.dhbw.softwareengineering.institution;
+package de.dhbw.softwareengineering.adapters.institution;
+
+import de.dhbw.softwareengineering.adapters.account.AccountDto;
+import de.dhbw.softwareengineering.enums.InstitutionType;
+import de.dhbw.softwareengineering.adapters.values.NameDto;
 
 import java.util.List;
 import java.util.UUID;
 
-import de.dhbw.softwareengineering.account.AccountAggregate;
-import de.dhbw.softwareengineering.enums.InstitutionType;
-import de.dhbw.softwareengineering.values.NameValue;
-
-public class InstitutionAggregate {
+public class InstitutionDto {
     private UUID institutionId;
-    private NameValue name;
+    private NameDto name;
     private InstitutionType type;
-    private List<AccountAggregate> accounts;
+    private List<AccountDto> accounts;
 
     public UUID getInstitutionId() {
         return institutionId;
@@ -21,11 +21,11 @@ public class InstitutionAggregate {
         this.institutionId = institutionId;
     }
 
-    public NameValue getName() {
+    public NameDto getName() {
         return name;
     }
 
-    public void setName(NameValue name) {
+    public void setName(NameDto name) {
         this.name = name;
     }
 
@@ -37,11 +37,11 @@ public class InstitutionAggregate {
         this.type = type;
     }
 
-    public List<AccountAggregate> getAccounts() {
+    public List<AccountDto> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(List<AccountAggregate> accounts) {
+    public void setAccounts(List<AccountDto> accounts) {
         this.accounts = accounts;
     }
 }

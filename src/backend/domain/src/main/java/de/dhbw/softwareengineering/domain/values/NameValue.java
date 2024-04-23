@@ -1,4 +1,4 @@
-package de.dhbw.softwareengineering.values;
+package de.dhbw.softwareengineering.domain.values;
 
 public final class NameValue {
 

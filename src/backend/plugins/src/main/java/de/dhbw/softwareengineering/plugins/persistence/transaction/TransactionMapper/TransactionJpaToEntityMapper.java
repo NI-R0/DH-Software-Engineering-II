@@ -2,12 +2,11 @@ package de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionM
 
 import de.dhbw.softwareengineering.enums.TransactionType;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaEntity;
-import de.dhbw.softwareengineering.transaction.TransactionEntity;
-import de.dhbw.softwareengineering.values.DescriptionValue;
+import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
+import de.dhbw.softwareengineering.domain.values.DescriptionValue;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
-import java.util.Optional;
 import java.util.UUID;
 
 @Component

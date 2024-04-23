@@ -1,7 +1,7 @@
-package de.dhbw.softwareengineering.account;
+package de.dhbw.softwareengineering.domain.account;
 
-import de.dhbw.softwareengineering.transaction.TransactionEntity;
-import de.dhbw.softwareengineering.values.NameValue;
+import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
+import de.dhbw.softwareengineering.domain.values.NameValue;
 
 import java.util.List;
 import java.util.UUID;

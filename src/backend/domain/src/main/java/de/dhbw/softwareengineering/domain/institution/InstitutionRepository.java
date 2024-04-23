@@ -1,6 +1,6 @@
-package de.dhbw.softwareengineering.institution;
+package de.dhbw.softwareengineering.domain.institution;
 
-import de.dhbw.softwareengineering.account.AccountAggregate;
+import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 
 import java.util.List;
 import java.util.Optional;

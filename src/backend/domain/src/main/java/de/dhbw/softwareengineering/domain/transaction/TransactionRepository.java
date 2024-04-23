@@ -1,4 +1,4 @@
-package de.dhbw.softwareengineering.transaction;
+package de.dhbw.softwareengineering.domain.transaction;
 
 import java.util.Optional;
 import java.util.UUID;

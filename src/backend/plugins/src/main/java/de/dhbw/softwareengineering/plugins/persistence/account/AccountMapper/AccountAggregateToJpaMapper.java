@@ -1,6 +1,6 @@
 package de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper;
 
-import de.dhbw.softwareengineering.account.AccountAggregate;
+import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaEntity;
 import org.springframework.stereotype.Component;
 

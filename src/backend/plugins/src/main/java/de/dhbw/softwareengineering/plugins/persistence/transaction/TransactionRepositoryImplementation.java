@@ -2,12 +2,11 @@ package de.dhbw.softwareengineering.plugins.persistence.transaction;
 
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionMapper.TransactionEntityToJpaMapper;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionMapper.TransactionJpaToEntityMapper;
-import de.dhbw.softwareengineering.transaction.TransactionEntity;
-import de.dhbw.softwareengineering.transaction.TransactionRepository;
+import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
+import de.dhbw.softwareengineering.domain.transaction.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.InvalidPropertiesFormatException;
 import java.util.Optional;
 import java.util.UUID;
 

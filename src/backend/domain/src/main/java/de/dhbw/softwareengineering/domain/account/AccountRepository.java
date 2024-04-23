@@ -1,6 +1,6 @@
-package de.dhbw.softwareengineering.account;
+package de.dhbw.softwareengineering.domain.account;
 
-import de.dhbw.softwareengineering.transaction.TransactionEntity;
+import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
 
 import java.util.List;
 import java.util.Optional;

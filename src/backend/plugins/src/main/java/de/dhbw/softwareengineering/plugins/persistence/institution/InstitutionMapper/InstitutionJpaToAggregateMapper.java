@@ -1,14 +1,13 @@
 package de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionMapper;
 
-import de.dhbw.softwareengineering.account.AccountAggregate;
+import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.enums.InstitutionType;
-import de.dhbw.softwareengineering.institution.InstitutionAggregate;
+import de.dhbw.softwareengineering.domain.institution.InstitutionAggregate;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaEntity;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaRepository;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper.AccountJpaToAggregateMapper;
 import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionJpaEntity;
-import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionRepositoryImplementation;
-import de.dhbw.softwareengineering.values.NameValue;
+import de.dhbw.softwareengineering.domain.values.NameValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

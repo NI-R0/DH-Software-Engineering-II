@@ -1,8 +1,6 @@
 package de.dhbw.softwareengineering.plugins.persistence.transaction;
 
 import de.dhbw.softwareengineering.enums.TransactionType;
-import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaEntity;
-import de.dhbw.softwareengineering.values.DescriptionValue;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -11,7 +9,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 

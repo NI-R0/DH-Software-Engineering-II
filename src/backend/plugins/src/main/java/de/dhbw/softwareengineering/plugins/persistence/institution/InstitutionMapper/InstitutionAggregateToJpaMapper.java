@@ -1,9 +1,7 @@
 package de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionMapper;
 
-import de.dhbw.softwareengineering.account.AccountAggregate;
-import de.dhbw.softwareengineering.institution.InstitutionAggregate;
+import de.dhbw.softwareengineering.domain.institution.InstitutionAggregate;
 import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionJpaEntity;
-import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionJpaRepository;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,9 +1,8 @@
 package de.dhbw.softwareengineering.plugins.persistence.institution;
 
-import de.dhbw.softwareengineering.account.AccountAggregate;
-import de.dhbw.softwareengineering.institution.InstitutionAggregate;
-import de.dhbw.softwareengineering.institution.InstitutionRepository;
-import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaEntity;
+import de.dhbw.softwareengineering.domain.account.AccountAggregate;
+import de.dhbw.softwareengineering.domain.institution.InstitutionAggregate;
+import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaRepository;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper.AccountJpaToAggregateMapper;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountRepositoryImplementation;

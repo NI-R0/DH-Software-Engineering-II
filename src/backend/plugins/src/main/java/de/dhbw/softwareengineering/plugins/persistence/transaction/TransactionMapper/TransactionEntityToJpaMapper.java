@@ -1,20 +1,13 @@
 package de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionMapper;
 
-import de.dhbw.softwareengineering.enums.TransactionType;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaEntity;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaRepository;
-import de.dhbw.softwareengineering.transaction.TransactionEntity;
-import de.dhbw.softwareengineering.values.DescriptionValue;
-import org.hibernate.Transaction;
+import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.Callable;
-import java.util.function.Function;
 
 @Component
 public class TransactionEntityToJpaMapper {

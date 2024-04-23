@@ -1,15 +1,14 @@
-package de.dhbw.softwareengineering.transaction;
+package de.dhbw.softwareengineering.adapters.transaction;
 
+import de.dhbw.softwareengineering.adapters.values.DescriptionDto;
 import de.dhbw.softwareengineering.enums.TransactionType;
-import de.dhbw.softwareengineering.values.DescriptionValue;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.UUID;
 
-public class TransactionEntity {
+public class TransactionDto {
     private UUID transactionId;
-    private DescriptionValue description; //ALS VALUE
+    private DescriptionDto description; //ALS VALUE
     private Double amount;
     private String unit;
     private Timestamp timestamp;
@@ -25,11 +24,11 @@ public class TransactionEntity {
         return transactionId;
     }
 
-    public DescriptionValue getDescription() {
+    public DescriptionDto getDescription() {
         return description;
     }
 
-    public void setDescription(DescriptionValue description) {
+    public void setDescription(DescriptionDto description) {
         this.description = description;
     }
 

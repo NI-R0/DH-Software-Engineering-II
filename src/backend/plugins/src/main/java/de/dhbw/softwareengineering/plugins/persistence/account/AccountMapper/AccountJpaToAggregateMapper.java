@@ -1,19 +1,17 @@
 package de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper;
 
-import de.dhbw.softwareengineering.account.AccountAggregate;
+import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaEntity;
-import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaRepository;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaEntity;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaRepository;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionMapper.TransactionJpaToEntityMapper;
-import de.dhbw.softwareengineering.transaction.TransactionEntity;
-import de.dhbw.softwareengineering.values.NameValue;
+import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
+import de.dhbw.softwareengineering.domain.values.NameValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Component

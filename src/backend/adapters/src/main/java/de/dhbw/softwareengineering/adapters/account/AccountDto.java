@@ -1,7 +1,7 @@
-package de.dhbw.softwareengineering.account;
+package de.dhbw.softwareengineering.adapters.account;
 
-import de.dhbw.softwareengineering.transaction.TransactionDto;
-import de.dhbw.softwareengineering.values.NameDto;
+import de.dhbw.softwareengineering.adapters.transaction.TransactionDto;
+import de.dhbw.softwareengineering.adapters.values.NameDto;
 
 import java.util.List;
 import java.util.UUID;
