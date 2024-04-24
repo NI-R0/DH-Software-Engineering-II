@@ -12,6 +12,12 @@ public interface InstitutionRepository {
     public Optional<InstitutionAggregate> findById(UUID id);
     public Optional<InstitutionAggregate> findByName(String name);
 
+
+
+
+
+
+
     public Optional<InstitutionAggregate> createInstitution(InstitutionAggregate institution) throws Exception;
     public Optional<InstitutionAggregate> updateInstitution(InstitutionAggregate institution) throws Exception;
 
