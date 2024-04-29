@@ -12,6 +12,7 @@ public class InstitutionAggregateToJpaMapper {
             throw new IllegalArgumentException("Illegal account parameter!");
         }
         InstitutionJpaEntity jpaEntity = new InstitutionJpaEntity();
+        jpaEntity.setId(institution.getInstitutionId());
         jpaEntity.setName(institution.getName().getName());
         jpaEntity.setInstitutionType(institution.getType());
 
@@ -33,7 +34,7 @@ public class InstitutionAggregateToJpaMapper {
 
     private boolean isAggregateInputInvalid(InstitutionAggregate institution){
         String name = institution.getName().getName();
-        if(name.isEmpty() || name.length() > 10){
+        if(name.isEmpty() || name.length() > 20){
             return true;
         }
         return false;

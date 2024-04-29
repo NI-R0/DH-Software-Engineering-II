@@ -45,4 +45,9 @@ public class InstitutionService {
         Optional<InstitutionAggregate> institution = repository.createInstitution(dtoToAggregateMapper.mapDtoToAggregate(dto));
         return institution.map(aggregate -> aggregateToDto.mapAggregateToDto(aggregate));
     }
+
+    public Optional<InstitutionDto> updateInstitution(InstitutionDto dto) throws Exception{
+        Optional<InstitutionAggregate> institution = repository.updateInstitution(dtoToAggregateMapper.mapDtoToAggregate(dto));
+        return institution.map(aggregate -> aggregateToDto.mapAggregateToDto(aggregate));
+    }
 }

@@ -43,4 +43,15 @@ public class InstitutionController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @PutMapping("/institutions/updateInstitution")
+    public ResponseEntity<InstitutionDto> updateInstitution(@RequestBody InstitutionDto dto){
+        try{
+            Optional<InstitutionDto> body = service.updateInstitution(dto);
+            return ResponseEntity.ok(body.orElseThrow(IllegalArgumentException::new));
+        }
+        catch(Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
