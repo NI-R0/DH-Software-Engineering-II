@@ -2,6 +2,7 @@ package de.dhbw.softwareengineering.adapters.account;
 
 import de.dhbw.softwareengineering.adapters.transaction.TransactionDto;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionEntityToDtoMapper;
+import de.dhbw.softwareengineering.adapters.values.AccountOwnerNameDto;
 import de.dhbw.softwareengineering.adapters.values.NameDto;
 import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
@@ -22,8 +23,13 @@ public class AccountAggregateToDtoMapper {
         dto.setAccountId(aggregate.getAccountId());
 
         NameDto name = new NameDto();
-        name.setName(aggregate.getName().getName());
-        dto.setName(name);
+        name.setName(aggregate.getAccountName().getName());
+        dto.setAccountName(name);
+
+        AccountOwnerNameDto owner = new AccountOwnerNameDto();
+        owner.setFirstName(aggregate.getOwner().getFirstName());
+        owner.setLastName(aggregate.getOwner().getLastName());
+        dto.setOwner(owner);
 
         dto.setBalance(aggregate.getBalance());
 

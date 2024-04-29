@@ -120,11 +120,11 @@ public class InstitutionRepositoryImplementation implements InstitutionRepositor
 
     @Override
     public List<AccountAggregate> findAllAccounts(InstitutionAggregate institution){
-        return jpaToAggregate.findAllAccounts(institution.getInstitutionId());
+        return jpaToAggregate.findAllAccounts(institution.getName().getName());
     }
     @Override
     public List<AccountAggregate> createAccount(InstitutionAggregate institution, AccountAggregate account){
-        accountRepositoryImpl.createAccount(institution.getInstitutionId(), account);
+        accountRepositoryImpl.createAccount(institution.getName().getName(), account);
         return findAllAccounts(institution);
     }
     @Override

@@ -21,13 +21,25 @@ public class AccountJpaEntity {
     @Column(name = "ACCOUNTID", nullable = false)
     private UUID id;
     @NotNull
+    @Size(max = 20)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @Column(name = "INSTITUTIONID", nullable = false)
-    private UUID institutionid;
+    @Column(name = "institution", nullable = false, length = 20)
+    private String institutionname;
     @Size(max = 20)
     @NotNull
-    @Column(name = "NAME", nullable = false, length = 20)
-    private String name;
+    @Column(name = "ACCOUNTNAME", nullable = false, length = 20)
+    private String accountname;
+
+    @Size(max = 15)
+    @NotNull
+    @Column(name="OWNERFIRSTNAME", nullable = false, length = 15)
+    private String ownerfirstname;
+
+    @Size(max = 25)
+    @NotNull
+    @Column(name = "OWNERLASTNAME", nullable = false, length = 25)
+    private String ownerlastname;
+
     @NotNull
     @Column(name = "BALANCE", nullable = false)
     private Double balance;
@@ -40,20 +52,20 @@ public class AccountJpaEntity {
         this.id = id;
     }
 
-    public UUID getInstitutionId() {
-        return institutionid;
+    public String getInstitutionName() {
+        return institutionname;
     }
 
-    public void setInstitutionId(UUID institutionid) {
-        this.institutionid = institutionid;
+    public void setInstitutionName(String institutionName) {
+        this.institutionname = institutionName;
     }
 
     public String getName() {
-        return name;
+        return accountname;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.accountname = name;
     }
 
     public Double getBalance() {
@@ -62,6 +74,22 @@ public class AccountJpaEntity {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public String getOwnerfirstname() {
+        return ownerfirstname;
+    }
+
+    public void setOwnerfirstname(String ownerfirstname) {
+        this.ownerfirstname = ownerfirstname;
+    }
+
+    public String getOwnerlastname() {
+        return ownerlastname;
+    }
+
+    public void setOwnerlastname(String ownerlastname) {
+        this.ownerlastname = ownerlastname;
     }
 
     @Override

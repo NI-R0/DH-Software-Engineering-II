@@ -4,6 +4,7 @@ import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionDto;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionDtoToEntityMapper;
 import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
+import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import de.dhbw.softwareengineering.domain.values.NameValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,8 @@ public class AccountDtoToAggregateMapper {
         AccountAggregate account = new AccountAggregate();
         account.setAccountId(dto.getAccountId());
         account.setBalance(dto.getBalance());
-        account.setName(new NameValue(dto.getName().getName()));
+        account.setAccountName(new NameValue(dto.getAccountName().getName()));
+        account.setOwner(new AccountOwnerNameValue(dto.getOwner().getFirstName(), dto.getOwner().getLastName()));
         /*account.setTransactions(dto.getTransactions());*/
 
         List<TransactionEntity> transactions = new ArrayList<>();

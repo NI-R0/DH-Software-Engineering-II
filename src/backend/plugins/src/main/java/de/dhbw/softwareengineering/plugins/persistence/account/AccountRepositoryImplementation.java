@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,11 +45,11 @@ public class AccountRepositoryImplementation implements AccountRepository {
     }
 
     @Override
-    public Optional<AccountAggregate> findByIdAndInstitution(UUID institutionId, UUID accountId){
+    public Optional<AccountAggregate> findByIdAndInstitution(String institutionName, UUID accountId){
         try{
             Optional<AccountJpaEntity> jpaOptional = accountJpaRepository.findById(accountId);
             AccountJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
-            if(jpaEntity.getInstitutionId() != accountId){
+            if(!Objects.equals(jpaEntity.getInstitutionName(), institutionName)){
                 throw new IllegalArgumentException("ID not found");
             }
             return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
@@ -59,7 +60,7 @@ public class AccountRepositoryImplementation implements AccountRepository {
         }
     }
     @Override
-    public Optional<AccountAggregate> createAccount(UUID institutionId, AccountAggregate account){
+    public Optional<AccountAggregate> createAccount(String institutionName , AccountAggregate account){
         try{
             Optional<AccountJpaEntity> jpaOptional = accountJpaRepository.findById(account.getAccountId());
 
@@ -67,7 +68,7 @@ public class AccountRepositoryImplementation implements AccountRepository {
                 throw new IllegalArgumentException("Transaction with ID " + account.getAccountId().toString() + " already exists!");
             }
 
-            AccountJpaEntity jpaEntity = aggregateToJpa.mapAggregateToNewJpa(institutionId, account);
+            AccountJpaEntity jpaEntity = aggregateToJpa.mapAggregateToNewJpa(institutionName, account);
 
             accountJpaRepository.save(jpaEntity);
 

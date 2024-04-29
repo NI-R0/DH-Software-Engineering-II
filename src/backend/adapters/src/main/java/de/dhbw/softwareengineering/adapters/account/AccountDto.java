@@ -1,6 +1,7 @@
 package de.dhbw.softwareengineering.adapters.account;
 
 import de.dhbw.softwareengineering.adapters.transaction.TransactionDto;
+import de.dhbw.softwareengineering.adapters.values.AccountOwnerNameDto;
 import de.dhbw.softwareengineering.adapters.values.NameDto;
 
 import java.util.List;
@@ -8,7 +9,9 @@ import java.util.UUID;
 
 public class AccountDto {
     private UUID accountId;
-    private NameDto name;
+    private NameDto accountName;
+
+    private AccountOwnerNameDto owner;
     private Double balance;
 
     private List<TransactionDto> transactions;
@@ -21,12 +24,20 @@ public class AccountDto {
         this.accountId = accountId;
     }
 
-    public NameDto getName() {
-        return name;
+    public AccountOwnerNameDto getOwner() {
+        return owner;
     }
 
-    public void setName(NameDto name) {
-        this.name = name;
+    public void setOwner(AccountOwnerNameDto owner) {
+        this.owner = owner;
+    }
+
+    public NameDto getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(NameDto name) {
+        this.accountName = name;
     }
 
     public Double getBalance() {

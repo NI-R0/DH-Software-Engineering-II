@@ -1,6 +1,7 @@
 package de.dhbw.softwareengineering.domain.account;
 
 import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
+import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import de.dhbw.softwareengineering.domain.values.NameValue;
 
 import java.util.List;
@@ -8,8 +9,18 @@ import java.util.UUID;
 
 public class AccountAggregate {
     private UUID accountId;
-    private NameValue name;
+    private NameValue accountName;
     private Double balance;
+
+    private AccountOwnerNameValue owner;
+
+    public AccountOwnerNameValue getOwner() {
+        return owner;
+    }
+
+    public void setOwner(AccountOwnerNameValue owner) {
+        this.owner = owner;
+    }
 
     private List<TransactionEntity> transactions;
 
@@ -21,12 +32,12 @@ public class AccountAggregate {
         this.accountId = accountId;
     }
 
-    public NameValue getName() {
-        return name;
+    public NameValue getAccountName() {
+        return accountName;
     }
 
-    public void setName(NameValue name) {
-        this.name = name;
+    public void setAccountName(NameValue name) {
+        this.accountName = name;
     }
 
     public Double getBalance() {

@@ -31,14 +31,14 @@ public class InstitutionJpaToAggregateMapper {
         institution.setType(jpa.getInstitutionType());
         institution.setName(new NameValue(jpa.getName()));
 
-        institution.setAccounts(findAllAccounts(jpa.getId()));
+        institution.setAccounts(findAllAccounts(jpa.getName()));
 
         return institution;
     }
 
-    public List<AccountAggregate> findAllAccounts(UUID institutionId){
+    public List<AccountAggregate> findAllAccounts(String institutionName){
         List<AccountAggregate> accountAggregates = new ArrayList<>();
-        List<AccountJpaEntity> jpaOptionals = accountJpaRepository.findAllByInstitutionId(institutionId);
+        List<AccountJpaEntity> jpaOptionals = accountJpaRepository.findAllByInstitutionName(institutionName);
 
         jpaOptionals.forEach(jpaEntity -> {
             try{

@@ -9,9 +9,9 @@ import java.util.UUID;
 public interface AccountRepository {
     public Optional<AccountAggregate> findById(UUID id);
 
-    public Optional<AccountAggregate> findByIdAndInstitution(UUID institutionId, UUID accountId);
+    public Optional<AccountAggregate> findByIdAndInstitution(String institutionName, UUID accountId);
 
-    public Optional<AccountAggregate> createAccount(UUID institutionId, AccountAggregate account);
+    public Optional<AccountAggregate> createAccount(String institutionName, AccountAggregate account);
 
     public Optional<AccountAggregate> editAccount(AccountAggregate account);
 

@@ -1,6 +1,7 @@
 package de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper;
 
 import de.dhbw.softwareengineering.domain.account.AccountAggregate;
+import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaEntity;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaEntity;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaRepository;
@@ -29,9 +30,9 @@ public class AccountJpaToAggregateMapper {
 
         AccountAggregate account = new AccountAggregate();
         account.setAccountId(jpa.getAccountId());
-        account.setName(new NameValue(jpa.getName()));
+        account.setAccountName(new NameValue(jpa.getName()));
         account.setBalance(jpa.getBalance());
-
+        account.setOwner(new AccountOwnerNameValue(jpa.getOwnerfirstname(), jpa.getOwnerlastname()));
         account.setTransactions(findAllTransactions(jpa.getAccountId()));
 
         return account;
