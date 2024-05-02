@@ -4,34 +4,34 @@
 --);
 
 create table if not exists  Institution(
-                                           institutionId uuid primary key,
-                                           name varchar(20) unique not null,
-                                           type enum('BANK','BROKER') not null
+   institutionId uuid primary key,
+   name varchar(20) unique not null,
+   type enum('BANK','BROKER') not null
 );
 
 create table if not exists  Account(
-                                       accountId uuid primary key,
-                                       institution varchar(20) not null,
-                                       accountName varchar(20) not null,
-                                       ownerFirstName varchar(15) not null,
-                                       ownerLastName varchar(25) not null,
-                                       balance double not null,
+    accountId uuid primary key,
+    institution varchar(20) not null,
+    accountName varchar(20) unique not null,
+    ownerFirstName varchar(15) not null,
+    ownerLastName varchar(25) not null,
+    balance double not null,
 
     --userId bigint not null,
-                                       foreign key (institution) references Institution(name)
+   foreign key (institution) references Institution(name)
     --foreign key (institutionName) references Institution(name)
     --foreign key (userId) references Users(userId)
 );
 
 create table if not exists  Transaction(
-                                           transactionId uuid primary key,
-                                           accountId uuid not null,
-                                           description varchar(255),
-                                           type enum('INCOME','EXPENSE','BUY','SELL'),
-                                           amount float not null,
-                                           unit varchar(10) not null,
-                                           timestamp timestamp not null,
-                                           foreign key (accountId) references Account(accountId)
+   transactionId uuid primary key,
+   accountId uuid not null,
+   description varchar(255),
+   type enum('INCOME','EXPENSE','BUY','SELL'),
+   amount float not null,
+   unit varchar(10) not null,
+   timestamp timestamp not null,
+   foreign key (accountId) references Account(accountId)
 );
 
 

@@ -50,4 +50,12 @@ public class InstitutionService {
         Optional<InstitutionAggregate> institution = repository.updateInstitution(dtoToAggregateMapper.mapDtoToAggregate(dto));
         return institution.map(aggregate -> aggregateToDto.mapAggregateToDto(aggregate));
     }
+
+    public void deleteInstitutionById(UUID id) throws Exception{
+
+    }
+
+    public void deleteInstitutionByName(String name) throws Exception{
+
+    }
 }
