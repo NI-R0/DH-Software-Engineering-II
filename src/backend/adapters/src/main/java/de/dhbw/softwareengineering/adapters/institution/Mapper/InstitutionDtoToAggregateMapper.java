@@ -5,7 +5,6 @@ import de.dhbw.softwareengineering.adapters.account.Mapper.AccountDtoToAggregate
 import de.dhbw.softwareengineering.adapters.institution.InstitutionDto;
 import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.domain.institution.InstitutionAggregate;
-import de.dhbw.softwareengineering.domain.values.NameValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +20,7 @@ public class InstitutionDtoToAggregateMapper {
         InstitutionAggregate institution = new InstitutionAggregate();
         institution.setInstitutionId(dto.getInstitutionId());
         institution.setType(dto.getType());
-        institution.setName(new NameValue(dto.getName().getName()));
+        institution.setName(dto.getName());
 
         List<AccountAggregate> accounts = new ArrayList<>();
         List<AccountDto> accountDtos = dto.getAccounts();

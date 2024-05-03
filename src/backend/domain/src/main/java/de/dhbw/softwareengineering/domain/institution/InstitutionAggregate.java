@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.UUID;
 
 import de.dhbw.softwareengineering.domain.account.AccountAggregate;
-import de.dhbw.softwareengineering.domain.values.NameValue;
 import de.dhbw.softwareengineering.enums.InstitutionType;
 
 public class InstitutionAggregate {
     private UUID institutionId;
-    private NameValue name;
+    private String name;
     private InstitutionType type;
     private List<AccountAggregate> accounts;
 
@@ -21,11 +20,11 @@ public class InstitutionAggregate {
         this.institutionId = institutionId;
     }
 
-    public NameValue getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(NameValue name) {
+    public void setName(String name) {
         this.name = name;
     }
 

@@ -2,14 +2,13 @@ package de.dhbw.softwareengineering.domain.account;
 
 import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
 import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
-import de.dhbw.softwareengineering.domain.values.NameValue;
 
 import java.util.List;
 import java.util.UUID;
 
 public class AccountAggregate {
     private UUID accountId;
-    private NameValue accountName;
+    private String accountName;
     private Double balance;
 
     private AccountOwnerNameValue owner;
@@ -32,11 +31,11 @@ public class AccountAggregate {
         this.accountId = accountId;
     }
 
-    public NameValue getAccountName() {
+    public String getAccountName() {
         return accountName;
     }
 
-    public void setAccountName(NameValue name) {
+    public void setAccountName(String name) {
         this.accountName = name;
     }
 

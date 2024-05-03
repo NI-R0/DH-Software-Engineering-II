@@ -7,7 +7,6 @@ import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJp
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaRepository;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionMapper.TransactionJpaToEntityMapper;
 import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
-import de.dhbw.softwareengineering.domain.values.NameValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +29,7 @@ public class AccountJpaToAggregateMapper {
 
         AccountAggregate account = new AccountAggregate();
         account.setAccountId(jpa.getAccountId());
-        account.setAccountName(new NameValue(jpa.getName()));
+        account.setAccountName(jpa.getName());
         account.setBalance(jpa.getBalance());
         account.setOwner(new AccountOwnerNameValue(jpa.getOwnerfirstname(), jpa.getOwnerlastname()));
         account.setTransactions(findAllTransactions(jpa.getAccountId()));

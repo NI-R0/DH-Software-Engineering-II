@@ -1,15 +1,12 @@
 package de.dhbw.softwareengineering.adapters.institution;
 
-import de.dhbw.softwareengineering.adapters.account.AccountDto;
-import de.dhbw.softwareengineering.adapters.values.NameDto;
 import de.dhbw.softwareengineering.enums.InstitutionType;
 
-import java.util.List;
 import java.util.UUID;
 
-public class InstitutionCreationDto {
+public class InstitutionPostDto {
     private UUID institutionId;
-    private NameDto name;
+    private String name;
     private InstitutionType type;
 
     public UUID getInstitutionId() {
@@ -20,11 +17,11 @@ public class InstitutionCreationDto {
         this.institutionId = institutionId;
     }
 
-    public NameDto getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(NameDto name) {
+    public void setName(String name) {
         this.name = name;
     }
 

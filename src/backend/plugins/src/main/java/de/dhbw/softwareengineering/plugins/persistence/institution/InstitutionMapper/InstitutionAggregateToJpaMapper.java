@@ -13,7 +13,7 @@ public class InstitutionAggregateToJpaMapper {
         }
         InstitutionJpaEntity jpaEntity = new InstitutionJpaEntity();
         jpaEntity.setId(institution.getInstitutionId());
-        jpaEntity.setName(institution.getName().getName());
+        jpaEntity.setName(institution.getName());
         jpaEntity.setInstitutionType(institution.getType());
 
         return jpaEntity;
@@ -23,8 +23,8 @@ public class InstitutionAggregateToJpaMapper {
         if(isAggregateInputInvalid(institution)){
             throw new IllegalArgumentException("Illegal account parameter!");
         }
-        if(institution.getName() != null && institution.getName().getName() != null){
-            jpa.setName(institution.getName().getName());
+        if(institution.getName() != null && institution.getName() != null){
+            jpa.setName(institution.getName());
         }
         if(institution.getType() != null){
             jpa.setInstitutionType(institution.getType());
@@ -33,7 +33,7 @@ public class InstitutionAggregateToJpaMapper {
     }
 
     private boolean isAggregateInputInvalid(InstitutionAggregate institution){
-        String name = institution.getName().getName();
+        String name = institution.getName();
         if(name.isEmpty() || name.length() > 20){
             return true;
         }

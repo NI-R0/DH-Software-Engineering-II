@@ -7,7 +7,6 @@ import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaEntity;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaRepository;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper.AccountJpaToAggregateMapper;
 import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionJpaEntity;
-import de.dhbw.softwareengineering.domain.values.NameValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +28,7 @@ public class InstitutionJpaToAggregateMapper {
         InstitutionAggregate institution = new InstitutionAggregate();
         institution.setInstitutionId(jpa.getId());
         institution.setType(jpa.getInstitutionType());
-        institution.setName(new NameValue(jpa.getName()));
+        institution.setName(jpa.getName());
 
         institution.setAccounts(findAllAccounts(jpa.getName()));
 

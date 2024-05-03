@@ -2,14 +2,13 @@ package de.dhbw.softwareengineering.adapters.account;
 
 import de.dhbw.softwareengineering.adapters.transaction.TransactionDto;
 import de.dhbw.softwareengineering.adapters.values.AccountOwnerNameDto;
-import de.dhbw.softwareengineering.adapters.values.NameDto;
 
 import java.util.List;
 import java.util.UUID;
 
 public class AccountDto {
     private UUID accountId;
-    private NameDto accountName;
+    private String accountName;
 
     private AccountOwnerNameDto owner;
     private Double balance;
@@ -32,11 +31,11 @@ public class AccountDto {
         this.owner = owner;
     }
 
-    public NameDto getAccountName() {
+    public String getAccountName() {
         return accountName;
     }
 
-    public void setAccountName(NameDto name) {
+    public void setAccountName(String name) {
         this.accountName = name;
     }
 

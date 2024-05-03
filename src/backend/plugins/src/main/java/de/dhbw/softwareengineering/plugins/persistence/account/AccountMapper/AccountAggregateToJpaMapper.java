@@ -14,7 +14,7 @@ public class AccountAggregateToJpaMapper {
         }
         AccountJpaEntity jpaEntity = new AccountJpaEntity();
         jpaEntity.setAccountId(account.getAccountId());
-        jpaEntity.setName(account.getAccountName().getName());
+        jpaEntity.setName(account.getAccountName());
         jpaEntity.setBalance(account.getBalance());
         jpaEntity.setInstitutionName(institutionName);
         jpaEntity.setOwnerfirstname(account.getOwner().getFirstName());
@@ -31,8 +31,8 @@ public class AccountAggregateToJpaMapper {
         if(account.getBalance() != null){
             jpa.setBalance(account.getBalance());
         }
-        if(account.getAccountName() != null && account.getAccountName().getName() != null){
-            jpa.setName(account.getAccountName().getName());
+        if(account.getAccountName() != null && account.getAccountName() != null){
+            jpa.setName(account.getAccountName());
         }
         if(account.getOwner() != null && !account.getOwner().getFullName().isEmpty()){
             jpa.setOwnerlastname(account.getOwner().getLastName());
@@ -43,7 +43,7 @@ public class AccountAggregateToJpaMapper {
     }
 
     private boolean isAggregateInputInvalid(AccountAggregate account){
-        String accountName = account.getAccountName().getName();
+        String accountName = account.getAccountName();
         String firstName = account.getOwner().getFirstName();
         String lastName = account.getOwner().getLastName();
         if(accountName.isEmpty() || accountName.length() > 10){

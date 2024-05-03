@@ -3,7 +3,6 @@ package de.dhbw.softwareengineering.adapters.institution.Mapper;
 import de.dhbw.softwareengineering.adapters.account.Mapper.AccountAggregateToDtoMapper;
 import de.dhbw.softwareengineering.adapters.account.AccountDto;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionDto;
-import de.dhbw.softwareengineering.adapters.values.NameDto;
 import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.domain.institution.InstitutionAggregate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,7 @@ public class InstitutionAggregateToDtoMapper {
         dto.setInstitutionId(aggregate.getInstitutionId());
         dto.setType(aggregate.getType());
 
-        NameDto name = new NameDto();
-        name.setName(aggregate.getName().getName());
-        dto.setName(name);
+        dto.setName(aggregate.getName());
 
         List<AccountDto> accounts = new ArrayList<>();
         List<AccountAggregate> accountAggregates = aggregate.getAccounts();

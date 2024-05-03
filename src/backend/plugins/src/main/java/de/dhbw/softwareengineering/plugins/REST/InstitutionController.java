@@ -1,7 +1,6 @@
 package de.dhbw.softwareengineering.plugins.REST;
 
 import de.dhbw.softwareengineering.adapters.account.AccountDto;
-import de.dhbw.softwareengineering.adapters.institution.InstitutionCreationDto;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionDto;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionDto;
 import de.dhbw.softwareengineering.application.AccountService;
