@@ -7,6 +7,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface AccountRepository {
+
+    public List<AccountAggregate> findAllByInstitution(String institutionName);
+
     public Optional<AccountAggregate> findById(UUID id);
 
     public Optional<AccountAggregate> findByIdAndInstitution(String institutionName, UUID accountId);

@@ -23,7 +23,7 @@ public class InstitutionAggregateToJpaMapper {
         if(isAggregateInputInvalid(institution)){
             throw new IllegalArgumentException("Illegal account parameter!");
         }
-        if(institution.getName() != null && institution.getName() != null){
+        if(institution.getName() != null){
             jpa.setName(institution.getName());
         }
         if(institution.getType() != null){

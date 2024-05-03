@@ -11,25 +11,40 @@ import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Repository
 public class AccountRepositoryImplementation implements AccountRepository {
     @Autowired
     AccountJpaRepository accountJpaRepository;
     @Autowired
-    TransactionJpaRepository transactionJpaRepository;
-    @Autowired
     AccountAggregateToJpaMapper aggregateToJpa;
     @Autowired
     AccountJpaToAggregateMapper jpaToAggregate;
+
+
+    @Autowired
+    TransactionJpaRepository transactionJpaRepository;
     @Autowired
     TransactionJpaToEntityMapper transactionJpaToEntity;
     @Autowired
     TransactionRepositoryImplementation transactionRepositoryImpl;
+
+
+    @Override
+    public List<AccountAggregate> findAllByInstitution(String institutionName){
+        List<AccountAggregate> aggregates = new ArrayList<>();
+        accountJpaRepository.findAllByInstitutionName(institutionName).forEach(jpa -> {
+            try{
+                aggregates.add(jpaToAggregate.mapJpaToAggregate(jpa));
+            }
+            catch(Exception e){
+                System.out.println(e.toString());
+            }
+        });
+        return aggregates;
+    }
+
 
     @Override
     public Optional<AccountAggregate> findById(UUID id) {
@@ -108,27 +123,23 @@ public class AccountRepositoryImplementation implements AccountRepository {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
-    public List<TransactionEntity> findAllTransactions(UUID accountId)
-    {
+    public List<TransactionEntity> findAllTransactions(UUID accountId) {
         return jpaToAggregate.findAllTransactions(accountId);
     }
     @Override
-    public List<TransactionEntity> createTransaction(UUID accountId, TransactionEntity transaction)
-    {
+    public List<TransactionEntity> createTransaction(UUID accountId, TransactionEntity transaction) {
         transactionRepositoryImpl.createTransaction(accountId, transaction);
         return findAllTransactions(accountId);
     }
 
     @Override
-    public List<TransactionEntity> updateTransaction(UUID accountId, TransactionEntity transaction)
-    {
+    public List<TransactionEntity> updateTransaction(UUID accountId, TransactionEntity transaction) {
         transactionRepositoryImpl.editTransaction(transaction);
         return findAllTransactions(accountId);
     }
 
     @Override
-    public List<TransactionEntity> deleteTransaction(UUID accountId, TransactionEntity transaction)
-    {
+    public List<TransactionEntity> deleteTransaction(UUID accountId, TransactionEntity transaction) {
         transactionRepositoryImpl.deleteTransaction(transaction);
         return findAllTransactions(accountId);
     }
@@ -140,8 +151,7 @@ public class AccountRepositoryImplementation implements AccountRepository {
     }
 
     @Override
-    public Optional<TransactionEntity> findTransactionById(UUID accountId, UUID id)
-    {
+    public Optional<TransactionEntity> findTransactionById(UUID accountId, UUID id) {
         return transactionRepositoryImpl.findByIdAndAccount(accountId, id);
     }
 }

@@ -13,21 +13,21 @@ public interface InstitutionRepository {
     public Optional<InstitutionAggregate> findByName(String name);
 
 
-
-
-
-
-
-    public Optional<InstitutionAggregate> createInstitution(InstitutionAggregate institution) throws Exception;
+    /*public Optional<InstitutionAggregate> createInstitution(InstitutionAggregate institution) throws Exception;
     public Optional<InstitutionAggregate> updateInstitution(InstitutionAggregate institution) throws Exception;
-
     public void deleteInstitution(InstitutionAggregate institution);
 
     public List<AccountAggregate> findAllAccounts(InstitutionAggregate institution);
     public List<AccountAggregate> createAccount(InstitutionAggregate institution, AccountAggregate account);
     public List<AccountAggregate> updateAccount(InstitutionAggregate institution, AccountAggregate account);
     public List<AccountAggregate> deleteAccount(InstitutionAggregate institution, AccountAggregate account);
+    public List<AccountAggregate> deleteAllAccounts(InstitutionAggregate institution);*/
 
-    public List<AccountAggregate> deleteAllAccounts(InstitutionAggregate institution);
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public InstitutionAggregate save(InstitutionAggregate institution);
+    public void delete(InstitutionAggregate institution);
 
 }

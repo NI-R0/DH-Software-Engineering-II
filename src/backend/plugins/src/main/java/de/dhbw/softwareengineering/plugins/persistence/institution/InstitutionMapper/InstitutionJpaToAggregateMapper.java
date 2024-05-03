@@ -6,6 +6,7 @@ import de.dhbw.softwareengineering.domain.institution.InstitutionAggregate;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaEntity;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaRepository;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper.AccountJpaToAggregateMapper;
+import de.dhbw.softwareengineering.plugins.persistence.account.AccountRepositoryImplementation;
 import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionJpaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @Component
 public class InstitutionJpaToAggregateMapper {
     @Autowired
-    AccountJpaRepository accountJpaRepository;
+    AccountRepositoryImplementation accountRepositoryImpl;
     @Autowired
     AccountJpaToAggregateMapper accountJpaToAggregate;
 
@@ -30,24 +31,9 @@ public class InstitutionJpaToAggregateMapper {
         institution.setType(jpa.getInstitutionType());
         institution.setName(jpa.getName());
 
-        institution.setAccounts(findAllAccounts(jpa.getName()));
+        institution.setAccounts(accountRepositoryImpl.findAllByInstitution(jpa.getName()));
 
         return institution;
-    }
-
-    public List<AccountAggregate> findAllAccounts(String institutionName){
-        List<AccountAggregate> accountAggregates = new ArrayList<>();
-        List<AccountJpaEntity> jpaOptionals = accountJpaRepository.findAllByInstitutionName(institutionName);
-
-        jpaOptionals.forEach(jpaEntity -> {
-            try{
-                accountAggregates.add(accountJpaToAggregate.mapJpaToAggregate(jpaEntity));
-            }
-            catch(Exception e){
-                System.out.println(e.toString());
-            }
-        });
-        return accountAggregates;
     }
 
     private boolean isJpaInputInvalid(InstitutionJpaEntity jpa){
