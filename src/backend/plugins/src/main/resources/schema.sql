@@ -12,7 +12,7 @@ create table if not exists  Institution(
 create table if not exists  Account(
     accountId uuid primary key,
     institution varchar(20) not null,
-    accountName varchar(20) unique not null,
+    accountName varchar(20) not null,
     ownerFirstName varchar(15) not null,
     ownerLastName varchar(25) not null,
     balance double not null,
