@@ -1,8 +1,9 @@
-package de.dhbw.softwareengineering.adapters.account;
+package de.dhbw.softwareengineering.adapters.account.Mapper;
 
+import de.dhbw.softwareengineering.adapters.account.AccountDto;
 import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionDto;
-import de.dhbw.softwareengineering.adapters.transaction.TransactionDtoToEntityMapper;
+import de.dhbw.softwareengineering.adapters.transaction.Mapper.TransactionDtoToEntityMapper;
 import de.dhbw.softwareengineering.domain.transaction.TransactionEntity;
 import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import de.dhbw.softwareengineering.domain.values.NameValue;

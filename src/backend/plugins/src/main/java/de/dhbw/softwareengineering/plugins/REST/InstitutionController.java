@@ -3,8 +3,10 @@ package de.dhbw.softwareengineering.plugins.REST;
 import de.dhbw.softwareengineering.adapters.account.AccountDto;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionCreationDto;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionDto;
+import de.dhbw.softwareengineering.adapters.transaction.TransactionDto;
 import de.dhbw.softwareengineering.application.AccountService;
 import de.dhbw.softwareengineering.application.InstitutionService;
+import de.dhbw.softwareengineering.application.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -24,6 +26,8 @@ public class InstitutionController {
     InstitutionService institutionService;
     @Autowired
     AccountService accountService;
+    @Autowired
+    TransactionService transactionService;
 
     @GetMapping("/api/institutions/getAll")
     @Operation(
@@ -229,7 +233,7 @@ public class InstitutionController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/api/institution={institution}/accounts/delete/name={name}")
+    @DeleteMapping("/api/institution/{institution}/accounts/delete/{name}")
     @Operation(
             summary = "Delete account by name",
             description = "Delete an account by its name.",
@@ -260,10 +264,10 @@ public class InstitutionController {
             @Parameter(name = "institution", description = "Name of institution"),
             @Parameter(name = "account" ,description = "Name of account")
     })
-    public ResponseEntity<List<AccountDto>> getAllTransactions(@PathVariable("institution") String institutionName,
-                                                               @PathVariable("account") String accountName)
+    public ResponseEntity<List<TransactionDto>> getAllTransactions(@PathVariable("institution") String institutionName,
+                                                                   @PathVariable("account") String accountName)
     {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(transactionService.getAllTransactions(institutionName, accountName));
     }
 
     @GetMapping("/api/institution={institution}/account={account}/transactions/get/id={id}")
@@ -335,24 +339,4 @@ public class InstitutionController {
     {
         return ResponseEntity.ok().build();
     }
-
-
-
-
-
-
-
-    /*@Operation(
-            summary = "Retrieve a Tutorial by Id",
-            description = "Get a Tutorial object by specifying its id. The response is Tutorial object with id, title, description and published status.",
-            tags = { "tutorials", "get" })
-            @Parameters({
-    @Parameter(name = "title", description = "Search Tutorials by title"),
-    @Parameter(name = "page", description = "Page number, starting from 0", required = true),
-    @Parameter(name = "size", description = "Number of items per page", required = true)
-  })
-    @GetMapping("/tutorials/{id}")
-    public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id) {
-
-    }*/
 }

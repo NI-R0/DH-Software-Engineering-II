@@ -41,7 +41,7 @@ public class AccountJpaToAggregateMapper {
     public List<TransactionEntity> findAllTransactions(UUID accountId)
     {
         List<TransactionEntity> transactionEntities = new ArrayList<>();
-        List<TransactionJpaEntity> transactionJpas = transactionJpaRepository.findAllByAccount(accountId);
+        List<TransactionJpaEntity> transactionJpas = transactionJpaRepository.findAllByAccountId(accountId);
 
         transactionJpas.forEach(jpaEntity -> {
             try {

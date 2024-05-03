@@ -7,6 +7,8 @@ import de.dhbw.softwareengineering.domain.transaction.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,6 +48,24 @@ public class TransactionRepositoryImplementation implements TransactionRepositor
             System.out.println(e.toString());
             return Optional.empty();
         }
+    }
+
+    @Override
+    public List<TransactionEntity> findAllByAccountName(String accountName){
+
+        List<TransactionEntity> entities = new ArrayList<>();
+        List<TransactionJpaEntity> jpas = jpaRepository.findAllByAccountName(accountName);
+
+        jpas.forEach(jpaEntity -> {
+            try {
+                entities.add(jpaToEntity.mapJpaToEntity(jpaEntity));
+            } catch (Exception e) {
+                //TODO
+                System.out.println(e.toString());
+            }
+        });
+
+        return entities;
     }
 
     @Override

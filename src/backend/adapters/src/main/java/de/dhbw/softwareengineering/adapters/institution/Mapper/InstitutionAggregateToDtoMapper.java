@@ -1,7 +1,8 @@
-package de.dhbw.softwareengineering.adapters.institution;
+package de.dhbw.softwareengineering.adapters.institution.Mapper;
 
-import de.dhbw.softwareengineering.adapters.account.AccountAggregateToDtoMapper;
+import de.dhbw.softwareengineering.adapters.account.Mapper.AccountAggregateToDtoMapper;
 import de.dhbw.softwareengineering.adapters.account.AccountDto;
+import de.dhbw.softwareengineering.adapters.institution.InstitutionDto;
 import de.dhbw.softwareengineering.adapters.values.NameDto;
 import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.domain.institution.InstitutionAggregate;
