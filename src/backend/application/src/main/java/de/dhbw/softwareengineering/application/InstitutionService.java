@@ -52,7 +52,7 @@ public class InstitutionService {
             throw new IllegalArgumentException("Institution with this name already exists!");
         }
         InstitutionAggregate institution = dtoToAggregateMapper.mapCreateDtoToAggregate(dto);
-        InstitutionAggregate saved = repository.save(institution);
+        InstitutionAggregate saved = repository.saveInstitution(institution);
         return aggregateToDtoMapper.mapAggregateToGetDto(saved);
     }
 
@@ -72,7 +72,7 @@ public class InstitutionService {
         if(dto.getType() != null){
             institution.setType(dto.getType());
         }
-        InstitutionAggregate saved = repository.save(institution);
+        InstitutionAggregate saved = repository.saveInstitution(institution);
         return aggregateToDtoMapper.mapAggregateToGetDto(saved);
     }
 
@@ -85,8 +85,6 @@ public class InstitutionService {
         InstitutionAggregate institution = repository.findByName(name).orElseThrow(IllegalArgumentException::new);
         repository.deleteInstitution(institution);
     }
-
-
 
     private boolean containsName(List<InstitutionAggregate> institutions, String name){
         return institutions.stream().anyMatch(institution -> institution.getName().equals(name));

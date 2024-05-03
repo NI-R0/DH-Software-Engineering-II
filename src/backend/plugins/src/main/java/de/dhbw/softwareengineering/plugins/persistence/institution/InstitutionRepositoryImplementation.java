@@ -8,6 +8,7 @@ import de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper.Acc
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountRepositoryImplementation;
 import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionMapper.InstitutionAggregateToJpaMapper;
 import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionMapper.InstitutionJpaToAggregateMapper;
+import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,13 +24,15 @@ public class InstitutionRepositoryImplementation implements InstitutionRepositor
     @Autowired
     AccountJpaRepository accountJpaRepository;
     @Autowired
+    TransactionJpaRepository transactionJpaRepository;
+
+
+    @Autowired
     InstitutionAggregateToJpaMapper aggregateToJpa;
     @Autowired
     InstitutionJpaToAggregateMapper jpaToAggregate;
-    @Autowired
-    AccountRepositoryImplementation accountRepositoryImpl;
-    @Autowired
-    AccountJpaToAggregateMapper accountJpaToAggregate;
+
+
 
     @Override
     public List<InstitutionAggregate> findAllInstitutions(){
@@ -69,56 +72,56 @@ public class InstitutionRepositoryImplementation implements InstitutionRepositor
             return Optional.empty();
         }
     }
+
     @Override
-    public Optional<InstitutionAggregate> createInstitution(InstitutionAggregate institution) throws Exception{
-        try{
-            Optional<InstitutionJpaEntity> jpaOptional = institutionJpaRepository.findById(institution.getInstitutionId());
+    public InstitutionAggregate saveInstitution(InstitutionAggregate institution){
 
-            if(jpaOptional.isPresent()){
-                throw new IllegalArgumentException("Transaction with ID " + institution.getInstitutionId().toString() + " already exists!");
-            }
-
-            InstitutionJpaEntity jpaEntity = aggregateToJpa.mapAggregateToNewJpa(institution);
-
-            institutionJpaRepository.save(jpaEntity);
-
-            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
-        }
-        catch(Exception e){
-            System.out.println(e.toString());
-            return Optional.empty();
-        }
+        InstitutionJpaEntity jpaEntity = aggregateToJpa.mapAggregateToJpa(institution);
+        institutionJpaRepository.save(jpaEntity);
+        return institution;
     }
+
     @Override
-    public Optional<InstitutionAggregate> updateInstitution(InstitutionAggregate institution) throws Exception{
-        try{
-            Optional<InstitutionJpaEntity> jpaOptional = institutionJpaRepository.findById(institution.getInstitutionId());
-
-            InstitutionJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
-
-            jpaEntity = aggregateToJpa.mapAggregateToExistingJpa(institution, jpaEntity);
-
-            institutionJpaRepository.save(jpaEntity);
-
-            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
-        }
-        catch(Exception e){
-            System.out.println(e.toString());
-            return Optional.empty();
-        }
+    public void deleteInstitution(InstitutionAggregate institution){
+        //Delete rekursiv
+        InstitutionJpaEntity jpaEntity = aggregateToJpa.mapAggregateToJpa(institution);
+        institutionJpaRepository.delete(jpaEntity);
     }
-    @Override
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*@Override
     public void deleteInstitution(InstitutionAggregate institution){
         deleteAllAccounts(institution);
         Optional<InstitutionJpaEntity> jpaOptional = institutionJpaRepository.findById(institution.getInstitutionId());
         jpaOptional.ifPresent(jpa -> {
             institutionJpaRepository.delete(jpa);
         });
-    }
+    }*/
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @Override
+    /*@Override
     public List<AccountAggregate> findAllAccounts(InstitutionAggregate institution){
         return accountRepositoryImpl.findAllByInstitution(institution.getName());
     }
@@ -144,7 +147,7 @@ public class InstitutionRepositoryImplementation implements InstitutionRepositor
             accountRepositoryImpl.deleteAccount(account);
         });
         return findAllAccounts(institution);
-    }
+    }*/
 }
 
 

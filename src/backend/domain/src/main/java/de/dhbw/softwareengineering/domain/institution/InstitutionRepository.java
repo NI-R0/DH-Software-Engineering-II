@@ -11,6 +11,8 @@ public interface InstitutionRepository {
     public List<InstitutionAggregate> findAllInstitutions();
     public Optional<InstitutionAggregate> findById(UUID id);
     public Optional<InstitutionAggregate> findByName(String name);
+    public InstitutionAggregate saveInstitution(InstitutionAggregate institution);
+    public void deleteInstitution(InstitutionAggregate institution);
 
 
     /*public Optional<InstitutionAggregate> createInstitution(InstitutionAggregate institution) throws Exception;
@@ -27,7 +29,7 @@ public interface InstitutionRepository {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public InstitutionAggregate save(InstitutionAggregate institution);
-    public void delete(InstitutionAggregate institution);
+    //Nur Account/transaction controller und service
+    //Nur institutionRepo
 
 }

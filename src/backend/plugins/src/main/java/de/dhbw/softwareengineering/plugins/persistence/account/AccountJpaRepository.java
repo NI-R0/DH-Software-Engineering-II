@@ -18,7 +18,7 @@ public interface AccountJpaRepository extends JpaRepository<AccountJpaEntity, UU
     @Query(value="SELECT * FROM ACCOUNT WHERE institution = ?1", nativeQuery = true)
     List<AccountJpaEntity> findAllByInstitutionName(String institutionName);
 
-    /*@Query(value="DELETE FROM FINANCE-MANAGER-DB.ACCOUNT WHERE institutionid = ?1",nativeQuery = true)
+    @Query(value="DELETE FROM FINANCE-MANAGER-DB.ACCOUNT WHERE institutionid = ?1",nativeQuery = true)
     @Modifying
-    void deleteAllByInstitution(UUID institutionId);*/
+    void deleteAllByInstitution(UUID institutionId);
 }

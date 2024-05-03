@@ -7,36 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class InstitutionAggregateToJpaMapper {
 
-    public InstitutionJpaEntity mapAggregateToNewJpa(InstitutionAggregate institution) throws Exception{
-        if(isAggregateInputInvalid(institution)){
-            throw new IllegalArgumentException("Illegal account parameter!");
-        }
+    public InstitutionJpaEntity mapAggregateToJpa(InstitutionAggregate institution){
         InstitutionJpaEntity jpaEntity = new InstitutionJpaEntity();
         jpaEntity.setId(institution.getInstitutionId());
         jpaEntity.setName(institution.getName());
         jpaEntity.setInstitutionType(institution.getType());
-
         return jpaEntity;
-    }
-
-    public InstitutionJpaEntity mapAggregateToExistingJpa(InstitutionAggregate institution, InstitutionJpaEntity jpa) throws Exception{
-        if(isAggregateInputInvalid(institution)){
-            throw new IllegalArgumentException("Illegal account parameter!");
-        }
-        if(institution.getName() != null){
-            jpa.setName(institution.getName());
-        }
-        if(institution.getType() != null){
-            jpa.setInstitutionType(institution.getType());
-        }
-        return jpa;
-    }
-
-    private boolean isAggregateInputInvalid(InstitutionAggregate institution){
-        String name = institution.getName();
-        if(name.isEmpty() || name.length() > 20){
-            return true;
-        }
-        return false;
     }
 }

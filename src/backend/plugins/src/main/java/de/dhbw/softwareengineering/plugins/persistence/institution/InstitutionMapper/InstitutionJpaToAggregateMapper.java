@@ -23,9 +23,9 @@ public class InstitutionJpaToAggregateMapper {
     AccountJpaToAggregateMapper accountJpaToAggregate;
 
     public InstitutionAggregate mapJpaToAggregate(InstitutionJpaEntity jpa) throws Exception{
-        if(isJpaInputInvalid(jpa)){
+        /*if(isJpaInputInvalid(jpa)){
             throw new IllegalArgumentException("JPA properties are illegal!");
-        }
+        }*/
         InstitutionAggregate institution = new InstitutionAggregate();
         institution.setInstitutionId(jpa.getId());
         institution.setType(jpa.getInstitutionType());
@@ -36,7 +36,7 @@ public class InstitutionJpaToAggregateMapper {
         return institution;
     }
 
-    private boolean isJpaInputInvalid(InstitutionJpaEntity jpa){
+    /*private boolean isJpaInputInvalid(InstitutionJpaEntity jpa){
         UUID id = jpa.getId();
         String name = jpa.getName();
         InstitutionType type = jpa.getInstitutionType();
@@ -44,5 +44,5 @@ public class InstitutionJpaToAggregateMapper {
             return true;
         }
         return false;
-    }
+    }*/
 }
