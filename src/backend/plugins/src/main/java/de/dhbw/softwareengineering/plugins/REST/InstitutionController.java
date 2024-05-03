@@ -1,7 +1,9 @@
 package de.dhbw.softwareengineering.plugins.REST;
 
 import de.dhbw.softwareengineering.adapters.account.AccountDto;
-import de.dhbw.softwareengineering.adapters.institution.InstitutionDto;
+import de.dhbw.softwareengineering.adapters.institution.InstitutionCreateDto;
+import de.dhbw.softwareengineering.adapters.institution.InstitutionGetDto;
+import de.dhbw.softwareengineering.adapters.institution.InstitutionUpdateDto;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionDto;
 import de.dhbw.softwareengineering.application.AccountService;
 import de.dhbw.softwareengineering.application.InstitutionService;
@@ -9,8 +11,6 @@ import de.dhbw.softwareengineering.application.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +32,10 @@ public class InstitutionController {
     @Operation(
             summary = "Retrieve all institutions",
             description = "Retrieve all institutions.",
-            tags = {"Institution Controller"}
+            tags = {"Institution Controller"},
+            deprecated = true
     )
-    public ResponseEntity<List<InstitutionDto>> getAllInstitutions(){
+    public ResponseEntity<List<InstitutionGetDto>> getAllInstitutions(){
         return ResponseEntity.ok(institutionService.getAllInstitutions());
     }
 
@@ -42,13 +43,14 @@ public class InstitutionController {
     @Operation(
             summary = "Retrieve institution by ID",
             description = "Retrieve an institution by its ID.",
-            tags = {"Institution Controller"}
+            tags = {"Institution Controller"},
+            deprecated = true
     )
     @Parameters({
             @Parameter(name = "id", description = "ID of institution to retrieve")
     })
-    public ResponseEntity<InstitutionDto> getInstitutionById(@PathVariable UUID id){
-        Optional<InstitutionDto> dto = institutionService.getInstitutionById(id);
+    public ResponseEntity<InstitutionGetDto> getInstitutionById(@PathVariable UUID id){
+        Optional<InstitutionGetDto> dto = institutionService.getInstitutionById(id);
         return dto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -56,13 +58,14 @@ public class InstitutionController {
     @Operation(
             summary = "Retrieve institution by name",
             description = "Retrieve an institution by its name.",
-            tags = {"Institution Controller"}
+            tags = {"Institution Controller"},
+            deprecated = true
     )
     @Parameters({
             @Parameter(name = "name", description = "Name of institution to retrieve")
     })
-    public ResponseEntity<InstitutionDto> getInstitutionByName(@PathVariable String name){
-        Optional<InstitutionDto> dto = institutionService.getInstitutionByName(name);
+    public ResponseEntity<InstitutionGetDto> getInstitutionByName(@PathVariable String name){
+        Optional<InstitutionGetDto> dto = institutionService.getInstitutionByName(name);
         return dto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -71,11 +74,12 @@ public class InstitutionController {
     @Operation(
             summary = "Create institution",
             description = "Create a new institution.",
-            tags = {"Institution Controller"}
+            tags = {"Institution Controller"},
+            deprecated = true
     )
-    public ResponseEntity<InstitutionDto> createInstitution(@RequestBody InstitutionDto dto){
+    public ResponseEntity<InstitutionGetDto> createInstitution(@RequestBody InstitutionCreateDto dto){
         try{
-            Optional<InstitutionDto> body = institutionService.createInstitution(dto);
+            Optional<InstitutionGetDto> body = institutionService.createInstitution(dto);
             return ResponseEntity.ok(body.orElseThrow(IllegalArgumentException::new));
         }
         catch(Exception e){
@@ -85,13 +89,14 @@ public class InstitutionController {
 
     @PutMapping("/api/institutions/update")
     @Operation(
-            summary = "Update institution",
-            description = "Update an institution. Name or ID must match an existing institution in the database.",
-            tags = {"Institution Controller"}
+            summary = "Update institution by ID",
+            description = "Update an institution. ID must match an existing institution in the database.",
+            tags = {"Institution Controller"},
+            deprecated = true
     )
-    public ResponseEntity<InstitutionDto> updateInstitution(@RequestBody InstitutionDto dto){
+    public ResponseEntity<InstitutionGetDto> updateInstitution(@RequestBody InstitutionUpdateDto dto){
         try{
-            Optional<InstitutionDto> body = institutionService.updateInstitution(dto);
+            Optional<InstitutionGetDto> body = institutionService.updateInstitution(dto);
             return ResponseEntity.ok(body.orElseThrow(IllegalArgumentException::new));
         }
         catch(Exception e){
@@ -103,7 +108,8 @@ public class InstitutionController {
     @Operation(
             summary = "Delete institution by ID",
             description = "Deletes an institution by its ID.",
-            tags = {"Institution Controller"}
+            tags = {"Institution Controller"},
+            deprecated = true
     )
     @Parameters({
             @Parameter(name = "id", description = "ID of institution to delete")
@@ -122,7 +128,8 @@ public class InstitutionController {
     @Operation(
             summary = "Delete institution by name",
             description = "Deletes an institution by its name.",
-            tags = {"Institution Controller"}
+            tags = {"Institution Controller"},
+            deprecated = true
     )
     @Parameters({
             @Parameter(name = "name", description = "Name of institution to delete")
@@ -195,7 +202,7 @@ public class InstitutionController {
     @Parameters({
             @Parameter(name = "institution", description = "Name of institution")
     })
-    public ResponseEntity<InstitutionDto> createAccount(@PathVariable("institution") String institutionName,
+    public ResponseEntity<InstitutionGetDto> createAccount(@PathVariable("institution") String institutionName,
                                                         @RequestBody AccountDto dto)
     {
         return ResponseEntity.ok().build();
@@ -210,7 +217,7 @@ public class InstitutionController {
     @Parameters({
             @Parameter(name = "institution", description = "Name of institution")
     })
-    public ResponseEntity<InstitutionDto> updateAccount(@PathVariable("institution") String institutionName,
+    public ResponseEntity<InstitutionGetDto> updateAccount(@PathVariable("institution") String institutionName,
                                                         @RequestBody AccountDto dto)
     {
         return ResponseEntity.ok().build();
@@ -297,7 +304,7 @@ public class InstitutionController {
             @Parameter(name = "institution", description = "Name of institution"),
             @Parameter(name = "account" ,description = "Name of account")
     })
-    public ResponseEntity<InstitutionDto> createTransaction(@PathVariable("institution") String institutionName,
+    public ResponseEntity<InstitutionGetDto> createTransaction(@PathVariable("institution") String institutionName,
                                                             @PathVariable("account") String accountName,
                                                             @RequestBody AccountDto dto)
     {
@@ -314,7 +321,7 @@ public class InstitutionController {
             @Parameter(name = "institution", description = "Name of institution"),
             @Parameter(name = "account" ,description = "Name of account")
     })
-    public ResponseEntity<InstitutionDto> updateTransaction(@PathVariable("institution") String institutionName,
+    public ResponseEntity<InstitutionGetDto> updateTransaction(@PathVariable("institution") String institutionName,
                                                             @PathVariable("account") String accountName,
                                                             @RequestBody AccountDto dto)
     {

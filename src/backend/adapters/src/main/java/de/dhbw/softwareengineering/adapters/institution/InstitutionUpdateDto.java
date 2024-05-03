@@ -4,10 +4,8 @@ import de.dhbw.softwareengineering.enums.InstitutionType;
 
 import java.util.UUID;
 
-public class InstitutionPostDto {
+public class InstitutionUpdateDto {
     private UUID institutionId;
-    private String name;
-    private InstitutionType type;
 
     public UUID getInstitutionId() {
         return institutionId;
@@ -16,6 +14,9 @@ public class InstitutionPostDto {
     public void setInstitutionId(UUID institutionId) {
         this.institutionId = institutionId;
     }
+
+    private String name;
+    private InstitutionType type;
 
     public String getName() {
         return name;
