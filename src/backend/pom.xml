@@ -16,6 +16,14 @@
     <artifactId>financemanager-backend</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <modules>
+        <module>0-plugins</module>
+        <module>1-adapters</module>
+        <module>2-application</module>
+        <module>3-domain</module>
+        <module>4-abstractions</module>
+    </modules>
+
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
