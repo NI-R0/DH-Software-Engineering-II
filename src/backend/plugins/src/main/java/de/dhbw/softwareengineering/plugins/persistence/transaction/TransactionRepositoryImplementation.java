@@ -39,7 +39,7 @@ public class TransactionRepositoryImplementation implements TransactionRepositor
         try {
             Optional<TransactionJpaEntity> jpaOptional = jpaRepository.findById(transactionId);
             TransactionJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
-            if(jpaEntity.getAccountId() != accountId){
+            if(jpaEntity.getAccountid() != accountId){
                 throw new IllegalArgumentException("ID not found");
             }
             return Optional.of(jpaToEntity.mapJpaToEntity(jpaEntity));

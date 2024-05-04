@@ -14,7 +14,19 @@ public interface AccountRepository {
 
     public Optional<AccountAggregate> findByIdAndInstitution(String institutionName, UUID accountId);
 
-    public Optional<AccountAggregate> createAccount(String institutionName, AccountAggregate account);
+    public Optional<AccountAggregate> findByNameAndInstitution(String institutionName, String accountName);
+
+
+
+
+    /////////////////////////////////////////////////////
+
+
+
+
+
+
+    /*public Optional<AccountAggregate> createAccount(String institutionName, AccountAggregate account);
 
     public Optional<AccountAggregate> editAccount(AccountAggregate account);
 
@@ -26,5 +38,5 @@ public interface AccountRepository {
     public List<TransactionEntity> deleteTransaction(UUID accountId, TransactionEntity transaction);
     public List<TransactionEntity> deleteAllTransactions(AccountAggregate account);
 
-    public Optional<TransactionEntity> findTransactionById(UUID accountId, UUID id);
+    public Optional<TransactionEntity> findTransactionById(UUID accountId, UUID id);*/
 }

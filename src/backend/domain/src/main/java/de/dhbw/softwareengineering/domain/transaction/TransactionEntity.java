@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public class TransactionEntity {
     private UUID transactionId;
+    private UUID accountId;
     private DescriptionValue description; //ALS VALUE
     private Double amount;
     private String unit;
@@ -24,6 +25,12 @@ public class TransactionEntity {
         return transactionId;
     }
 
+    public UUID getAccountId() {
+        return accountId;
+    }
+    public void setAccountId(UUID accountId) {
+        this.accountId = accountId;
+    }
     public DescriptionValue getDescription() {
         return description;
     }

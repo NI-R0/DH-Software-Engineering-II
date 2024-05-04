@@ -32,12 +32,7 @@ public class InstitutionService {
         return dtos;
     }
 
-    public Optional<InstitutionGetDto> getInstitutionById(UUID id){
-        Optional<InstitutionAggregate> optional = repository.findById(id);
-        return optional.map(institution -> aggregateToDtoMapper.mapAggregateToGetDto(institution));
-    }
-
-    public Optional<InstitutionGetDto> getInstitutionByName(String name){
+    public Optional<InstitutionGetDto> getInstitution(String name){
         Optional<InstitutionAggregate> optional = repository.findByName(name);
         return optional.map(institution -> aggregateToDtoMapper.mapAggregateToGetDto(institution));
     }
@@ -47,12 +42,16 @@ public class InstitutionService {
         /*Optional<InstitutionAggregate> institution = repository.createInstitution(dtoToAggregateMapper.mapCreateDtoToAggregate(dto));
         return institution.map(aggregate -> aggregateToDtoMapper.mapAggregateToGetDto(aggregate));*/
 
+        if(isInstitutionInputInvalid(dtoToAggregateMapper.mapCreateDtoToAggregate(dto), true)){
+            throw new IllegalArgumentException("Wrong input!");
+        }
+
         List<InstitutionAggregate> institutions = repository.findAllInstitutions();
         if(containsName(institutions, dto.getName())){
             throw new IllegalArgumentException("Institution with this name already exists!");
         }
         InstitutionAggregate institution = dtoToAggregateMapper.mapCreateDtoToAggregate(dto);
-        InstitutionAggregate saved = repository.saveInstitution(institution);
+        InstitutionAggregate saved = repository.save(institution);
         return aggregateToDtoMapper.mapAggregateToGetDto(saved);
     }
 
@@ -60,39 +59,43 @@ public class InstitutionService {
         /*Optional<InstitutionAggregate> institution = repository.updateInstitution(dtoToAggregateMapper.mapUpdateDtoToAggregate(dto));
         return institution.map(aggregate -> aggregateToDtoMapper.mapAggregateToGetDto(aggregate));*/
 
-        Optional<InstitutionAggregate> optional = repository.findById(dto.getInstitutionId());
+        Optional<InstitutionAggregate> optional = repository.findByName(dto.getName());
         InstitutionAggregate institution = optional.orElseThrow(IllegalArgumentException::new);
-        if(isInstitutionInputInvalid(institution)){
-            throw new IllegalArgumentException("ID does not exist!");
+
+        Optional<InstitutionAggregate> newInstitution = repository.findByName(dto.getNewName());
+        newInstitution.ifPresent(i -> {throw new IllegalArgumentException("New name already exists!");});
+
+        repository.delete(institution);
+
+        if(isInstitutionInputInvalid(dtoToAggregateMapper.mapUpdateDtoToAggregate(dto), false)){
+            throw new IllegalArgumentException("Wrong input!");
         }
 
-        if(dto.getName() != null){
-            institution.setName(dto.getName());
+        if(dto.getNewName() != null){
+            institution.setName(dto.getNewName());
         }
         if(dto.getType() != null){
             institution.setType(dto.getType());
         }
-        InstitutionAggregate saved = repository.saveInstitution(institution);
+        InstitutionAggregate saved = repository.save(institution);
         return aggregateToDtoMapper.mapAggregateToGetDto(saved);
     }
 
-    public void deleteInstitutionById(UUID id) throws Exception{
-        InstitutionAggregate institution = repository.findById(id).orElseThrow(IllegalArgumentException::new);
-        repository.deleteInstitution(institution);
-    }
-
-    public void deleteInstitutionByName(String name) throws Exception{
+    public void deleteInstitution(String name) throws Exception{
         InstitutionAggregate institution = repository.findByName(name).orElseThrow(IllegalArgumentException::new);
-        repository.deleteInstitution(institution);
+        repository.delete(institution);
     }
 
     private boolean containsName(List<InstitutionAggregate> institutions, String name){
         return institutions.stream().anyMatch(institution -> institution.getName().equals(name));
     }
 
-    private boolean isInstitutionInputInvalid(InstitutionAggregate institution){
+    private boolean isInstitutionInputInvalid(InstitutionAggregate institution, boolean newInstitution){
         String name = institution.getName();
-        if(name.isEmpty() || name.length() > 20){
+        if(name.isBlank() || name.length() > 20){
+            return true;
+        }
+        if(newInstitution && institution.getType() == null){
             return true;
         }
         return false;

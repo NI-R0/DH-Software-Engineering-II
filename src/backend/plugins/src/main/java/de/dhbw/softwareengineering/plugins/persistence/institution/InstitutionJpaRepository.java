@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface InstitutionJpaRepository extends JpaRepository<InstitutionJpaEntity, UUID> {
-    @Query(value="SELECT * FROM INSTITUTION WHERE name=?1",nativeQuery = true)
-    Optional<InstitutionJpaEntity> findByName(String institutionName);
+public interface InstitutionJpaRepository extends JpaRepository<InstitutionJpaEntity, String> {
+
 }

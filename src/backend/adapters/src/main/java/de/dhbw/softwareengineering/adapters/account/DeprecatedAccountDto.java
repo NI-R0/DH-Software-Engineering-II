@@ -6,7 +6,7 @@ import de.dhbw.softwareengineering.adapters.values.AccountOwnerNameDto;
 import java.util.List;
 import java.util.UUID;
 
-public class AccountDto {
+public class DeprecatedAccountDto {
     private UUID accountId;
     private String accountName;
 

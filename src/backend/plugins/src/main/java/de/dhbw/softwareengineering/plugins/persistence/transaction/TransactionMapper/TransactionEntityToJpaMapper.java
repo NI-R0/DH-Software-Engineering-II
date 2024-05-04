@@ -14,6 +14,28 @@ public class TransactionEntityToJpaMapper {
     @Autowired
     TransactionJpaRepository jpaRepository;
 
+    public TransactionJpaEntity mapEntityToJpa(TransactionEntity entity){
+        TransactionJpaEntity jpaEntity = new TransactionJpaEntity();
+        jpaEntity.setId(entity.getTransactionId());
+        jpaEntity.setDescription(entity.getDescription().getText());
+        jpaEntity.setAccountid(entity.getAccountId());
+        jpaEntity.setUnit(entity.getUnit());
+        jpaEntity.setAmount(entity.getAmount());
+        jpaEntity.setTimestamp(entity.getTimestamp());
+        jpaEntity.setTransactionType(entity.getType());
+
+        return jpaEntity;
+    }
+
+
+
+
+
+
+
+
+
+
     public TransactionJpaEntity mapEntityToNewJpa(UUID accountId, TransactionEntity entity) throws Exception{
 
         if(isInputInvalid(entity)){
@@ -27,7 +49,7 @@ public class TransactionEntityToJpaMapper {
         jpaEntity.setAmount(entity.getAmount());
         jpaEntity.setUnit(entity.getUnit());
         jpaEntity.setTimestamp(entity.getTimestamp());
-        jpaEntity.setAccountId(accountId);
+        jpaEntity.setId(accountId);
 
         return jpaEntity;
     }

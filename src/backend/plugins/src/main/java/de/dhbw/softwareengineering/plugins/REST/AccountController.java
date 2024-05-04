@@ -1,9 +1,11 @@
 package de.dhbw.softwareengineering.plugins.REST;
 
-import de.dhbw.softwareengineering.adapters.account.AccountDto;
+import de.dhbw.softwareengineering.adapters.account.AccountCreateDto;
+import de.dhbw.softwareengineering.adapters.account.AccountGetDto;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionGetDto;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionNameDto;
 import de.dhbw.softwareengineering.application.AccountService;
+import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -12,9 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
+@RequestMapping(value = "/api/accounts")
 public class AccountController {
 
     @Autowired
@@ -37,18 +41,18 @@ public class AccountController {
         return ResponseEntity.ok().build();
     }*/
 
-    @GetMapping("/api/accounts/getAll")
+    @GetMapping("/getAll/{institutionName}")
     @Operation(
             summary = "Retrieve all accounts",
             description = "Retrieve all accounts of an institution.",
             tags = {"Account Controller"}
     )
-    public ResponseEntity<List<AccountDto>> getAllAccounts(@RequestBody InstitutionNameDto dto)
+    public ResponseEntity<List<AccountGetDto>> getAllAccounts(@PathVariable String institutionName)
     {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(accountService.getAllAccounts(institutionName));
     }
 
-    @GetMapping("/api/accounts/get/name={name}")
+    @GetMapping("/get/{institutionName}/{accountName}")
     @Operation(
             summary = "Retrieve account by name",
             description = "Retrieve an account by its name.",
@@ -57,13 +61,14 @@ public class AccountController {
     @Parameters({
             @Parameter(name = "name", description = "Name of account to retrieve")
     })
-    public ResponseEntity<List<AccountDto>> getAccountByName(@PathVariable("name") String accountName,
-                                                             @RequestBody InstitutionNameDto dto)
+    public ResponseEntity<AccountGetDto> getAccountByName(@PathVariable String institutionName,
+                                                          @PathVariable String accountName)
     {
-        return ResponseEntity.ok().build();
+        Optional<AccountGetDto> account = accountService.getAccountByName(institutionName, accountName);
+        return account.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/api/accounts/get/id={id}")
+    @GetMapping("/get/{institutionName}/{accountId}")
     @Operation(
             summary = "Retrieve account by ID",
             description = "Retrieve an account by its ID.",
@@ -72,32 +77,39 @@ public class AccountController {
     @Parameters({
             @Parameter(name = "id", description = "ID of account to retrieve.")
     })
-    public ResponseEntity<List<AccountDto>> getAccountById(@PathVariable("id") UUID accountId,
-                                                           @RequestBody InstitutionNameDto dto)
+    public ResponseEntity<AccountGetDto> getAccountById(@PathVariable String institutionName,
+                                                        @PathVariable UUID accountId)
     {
-        return ResponseEntity.ok().build();
+        Optional<AccountGetDto> account = accountService.getAccountById(institutionName, accountId);
+        return account.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-
-
-
-
-    @PostMapping("/api/institution={institution}/accounts/create")
+    @PostMapping("/create")
     @Operation(
             summary = "Create new account",
             description = "Create a new account.",
             tags = {"Account Controller"}
     )
-    @Parameters({
-            @Parameter(name = "institution", description = "Name of institution")
-    })
-    public ResponseEntity<InstitutionGetDto> createAccount(@PathVariable("institution") String institutionName,
-                                                           @RequestBody AccountDto dto)
+    public ResponseEntity<AccountGetDto> createAccount(@RequestBody AccountCreateDto dto)
     {
-        return ResponseEntity.ok().build();
+        try{
+            AccountGetDto body = accountService.createAccount(dto);
+            return ResponseEntity.ok(body);
+        }
+        catch(Exception e){
+            return ResponseEntity.badRequest().build();
+        }
     }
 
-    @PutMapping("/api/institution={institution}/accounts/update")
+
+
+
+
+
+
+
+
+    @PutMapping("/accounts/update")
     @Operation(
             summary = "Update account",
             description = "Update an account. Name or ID must match an existing account.",
@@ -107,12 +119,12 @@ public class AccountController {
             @Parameter(name = "institution", description = "Name of institution")
     })
     public ResponseEntity<InstitutionGetDto> updateAccount(@PathVariable("institution") String institutionName,
-                                                           @RequestBody AccountDto dto)
+                                                           @RequestBody AccountCreateDto dto)
     {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/api/institution={institution}/accounts/delete/id={id}")
+    @DeleteMapping("/delete/id={id}")
     @Operation(
             summary = "Delete account by ID",
             description = "Delete an account by its ID.",
@@ -128,7 +140,7 @@ public class AccountController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/api/institution/{institution}/accounts/delete/{name}")
+    @DeleteMapping("/delete/{name}")
     @Operation(
             summary = "Delete account by name",
             description = "Delete an account by its name.",

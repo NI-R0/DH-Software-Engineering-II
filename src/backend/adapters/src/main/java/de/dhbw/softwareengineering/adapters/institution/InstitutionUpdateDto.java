@@ -5,17 +5,8 @@ import de.dhbw.softwareengineering.enums.InstitutionType;
 import java.util.UUID;
 
 public class InstitutionUpdateDto {
-    private UUID institutionId;
-
-    public UUID getInstitutionId() {
-        return institutionId;
-    }
-
-    public void setInstitutionId(UUID institutionId) {
-        this.institutionId = institutionId;
-    }
-
     private String name;
+    private String newName;
     private InstitutionType type;
 
     public String getName() {
@@ -32,5 +23,13 @@ public class InstitutionUpdateDto {
 
     public void setType(InstitutionType type) {
         this.type = type;
+    }
+
+    public String getNewName() {
+        return newName;
+    }
+
+    public void setNewName(String newName) {
+        this.newName = newName;
     }
 }

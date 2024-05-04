@@ -2,21 +2,22 @@ package de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper;
 
 import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaEntity;
+import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
 public class AccountAggregateToJpaMapper {
-    public AccountJpaEntity mapAggregateToNewJpa(String institutionName, AccountAggregate account) throws Exception{
+    /*public AccountJpaEntity mapAggregateToNewJpa(String institutionName, AccountAggregate account) throws Exception{
         if(isAggregateInputInvalid(account)){
             throw new IllegalArgumentException("Illegal account parameter!");
         }
         AccountJpaEntity jpaEntity = new AccountJpaEntity();
-        jpaEntity.setAccountId(account.getAccountId());
-        jpaEntity.setName(account.getAccountName());
+        jpaEntity.setId(account.getAccountId());
+        jpaEntity.setAccountname(account.getAccountName());
         jpaEntity.setBalance(account.getBalance());
-        jpaEntity.setInstitutionName(institutionName);
+        jpaEntity.setInstitution(institutionName);
         jpaEntity.setOwnerfirstname(account.getOwner().getFirstName());
         jpaEntity.setOwnerlastname(account.getOwner().getLastName());
 
@@ -32,7 +33,7 @@ public class AccountAggregateToJpaMapper {
             jpa.setBalance(account.getBalance());
         }
         if(account.getAccountName() != null && account.getAccountName() != null){
-            jpa.setName(account.getAccountName());
+            jpa.setAccountname(account.getAccountName());
         }
         if(account.getOwner() != null && !account.getOwner().getFullName().isEmpty()){
             jpa.setOwnerlastname(account.getOwner().getLastName());
@@ -57,5 +58,17 @@ public class AccountAggregateToJpaMapper {
         }
 
         return false;
+    }*/
+    public AccountJpaEntity mapAggregateToJpa(AccountAggregate aggregate){
+        AccountJpaEntity jpa = new AccountJpaEntity();
+        jpa.setId(aggregate.getAccountId());
+        jpa.setAccountname(aggregate.getAccountName());
+        jpa.setOwnerfirstname(aggregate.getOwner().getFirstName());
+        jpa.setOwnerlastname(aggregate.getOwner().getLastName());
+        jpa.setBalance(aggregate.getBalance());
+        jpa.setInstitution(aggregate.getInstitutionName());
+        //jpa.setTransactions(aggregate.getTransactions());
+
+        return jpa;
     }
 }

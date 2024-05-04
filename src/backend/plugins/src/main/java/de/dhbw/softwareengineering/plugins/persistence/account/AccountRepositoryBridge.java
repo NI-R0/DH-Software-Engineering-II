@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 @Repository
-public class AccountRepositoryImplementation implements AccountRepository {
+public class AccountRepositoryBridge implements AccountRepository {
     @Autowired
     AccountJpaRepository accountJpaRepository;
     @Autowired
@@ -62,11 +62,8 @@ public class AccountRepositoryImplementation implements AccountRepository {
     @Override
     public Optional<AccountAggregate> findByIdAndInstitution(String institutionName, UUID accountId){
         try{
-            Optional<AccountJpaEntity> jpaOptional = accountJpaRepository.findById(accountId);
+            Optional<AccountJpaEntity> jpaOptional = accountJpaRepository.findByIdAndInstitution(institutionName, accountId);
             AccountJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
-            if(!Objects.equals(jpaEntity.getInstitutionName(), institutionName)){
-                throw new IllegalArgumentException("ID not found");
-            }
             return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
         }
         catch(Exception e){
@@ -74,7 +71,29 @@ public class AccountRepositoryImplementation implements AccountRepository {
             return Optional.empty();
         }
     }
+
     @Override
+    public Optional<AccountAggregate> findByNameAndInstitution(String institutionName, String accountName){
+        try{
+            Optional<AccountJpaEntity> jpaOptional = accountJpaRepository.findByNameAndInstitution(institutionName, accountName);
+            AccountJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
+            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            return Optional.empty();
+        }
+    }
+
+
+
+    /////////////////////////////////////////////
+
+
+
+
+
+    /*@Override
     public Optional<AccountAggregate> createAccount(String institutionName , AccountAggregate account){
         try{
             Optional<AccountJpaEntity> jpaOptional = accountJpaRepository.findById(account.getAccountId());
@@ -153,5 +172,5 @@ public class AccountRepositoryImplementation implements AccountRepository {
     @Override
     public Optional<TransactionEntity> findTransactionById(UUID accountId, UUID id) {
         return transactionRepositoryImpl.findByIdAndAccount(accountId, id);
-    }
+    }*/
 }

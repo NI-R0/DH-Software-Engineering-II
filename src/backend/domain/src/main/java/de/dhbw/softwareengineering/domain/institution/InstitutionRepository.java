@@ -9,10 +9,11 @@ import java.util.UUID;
 public interface InstitutionRepository {
 
     public List<InstitutionAggregate> findAllInstitutions();
-    public Optional<InstitutionAggregate> findById(UUID id);
     public Optional<InstitutionAggregate> findByName(String name);
-    public InstitutionAggregate saveInstitution(InstitutionAggregate institution);
-    public void deleteInstitution(InstitutionAggregate institution);
+    public InstitutionAggregate save(InstitutionAggregate institution);
+    public void delete(InstitutionAggregate institution);
+
+    //public InstitutionAggregate saveWithAccount(InstitutionAggregate institution);
 
 
     /*public Optional<InstitutionAggregate> createInstitution(InstitutionAggregate institution) throws Exception;

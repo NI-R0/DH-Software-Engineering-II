@@ -7,19 +7,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class InstitutionGetDto {
-    private UUID institutionId;
     private String name;
-
     private InstitutionType type;
     private List<String> accountNames;
-
-    public UUID getInstitutionId() {
-        return institutionId;
-    }
-
-    public void setInstitutionId(UUID institutionId) {
-        this.institutionId = institutionId;
-    }
 
     public String getName() {
         return name;

@@ -1,6 +1,6 @@
 package de.dhbw.softwareengineering.plugins.REST;
 
-import de.dhbw.softwareengineering.adapters.account.AccountDto;
+import de.dhbw.softwareengineering.adapters.account.AccountGetDto;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionGetDto;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionDto;
 import de.dhbw.softwareengineering.application.TransactionService;
@@ -49,9 +49,9 @@ public class TransactionController {
             @Parameter(name = "account" ,description = "Name of account"),
             @Parameter(name = "id", description = "ID of transaction to retrieve")
     })
-    public ResponseEntity<List<AccountDto>> getTransactionById(@PathVariable("institution") String institutionName,
-                                                               @PathVariable("account") String accountName,
-                                                               @PathVariable("id") UUID transactionId)
+    public ResponseEntity<List<AccountGetDto>> getTransactionById(@PathVariable("institution") String institutionName,
+                                                                      @PathVariable("account") String accountName,
+                                                                      @PathVariable("id") UUID transactionId)
     {
         return ResponseEntity.ok().build();
     }
@@ -68,7 +68,7 @@ public class TransactionController {
     })
     public ResponseEntity<InstitutionGetDto> createTransaction(@PathVariable("institution") String institutionName,
                                                                @PathVariable("account") String accountName,
-                                                               @RequestBody AccountDto dto)
+                                                               @RequestBody AccountGetDto dto)
     {
         return ResponseEntity.ok().build();
     }
@@ -85,7 +85,7 @@ public class TransactionController {
     })
     public ResponseEntity<InstitutionGetDto> updateTransaction(@PathVariable("institution") String institutionName,
                                                                @PathVariable("account") String accountName,
-                                                               @RequestBody AccountDto dto)
+                                                               @RequestBody AccountGetDto dto)
     {
         return ResponseEntity.ok().build();
     }

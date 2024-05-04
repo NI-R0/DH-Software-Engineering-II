@@ -7,18 +7,9 @@ import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.enums.InstitutionType;
 
 public class InstitutionAggregate {
-    private UUID institutionId;
     private String name;
     private InstitutionType type;
     private List<AccountAggregate> accounts;
-
-    public UUID getInstitutionId() {
-        return institutionId;
-    }
-
-    public void setInstitutionId(UUID institutionId) {
-        this.institutionId = institutionId;
-    }
 
     public String getName() {
         return name;

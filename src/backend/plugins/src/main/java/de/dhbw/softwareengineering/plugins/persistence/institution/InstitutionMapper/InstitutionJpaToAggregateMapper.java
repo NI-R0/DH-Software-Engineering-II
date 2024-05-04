@@ -1,12 +1,8 @@
 package de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionMapper;
 
-import de.dhbw.softwareengineering.domain.account.AccountAggregate;
-import de.dhbw.softwareengineering.enums.InstitutionType;
+import de.dhbw.softwareengineering.domain.account.AccountRepository;
 import de.dhbw.softwareengineering.domain.institution.InstitutionAggregate;
-import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaEntity;
-import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaRepository;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper.AccountJpaToAggregateMapper;
-import de.dhbw.softwareengineering.plugins.persistence.account.AccountRepositoryImplementation;
 import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionJpaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +14,7 @@ import java.util.UUID;
 @Component
 public class InstitutionJpaToAggregateMapper {
     @Autowired
-    AccountRepositoryImplementation accountRepositoryImpl;
+    AccountRepository accountRepository;
     @Autowired
     AccountJpaToAggregateMapper accountJpaToAggregate;
 
@@ -27,11 +23,10 @@ public class InstitutionJpaToAggregateMapper {
             throw new IllegalArgumentException("JPA properties are illegal!");
         }*/
         InstitutionAggregate institution = new InstitutionAggregate();
-        institution.setInstitutionId(jpa.getId());
         institution.setType(jpa.getInstitutionType());
         institution.setName(jpa.getName());
 
-        institution.setAccounts(accountRepositoryImpl.findAllByInstitution(jpa.getName()));
+        institution.setAccounts(accountRepository.findAllByInstitution(jpa.getName()));
 
         return institution;
     }

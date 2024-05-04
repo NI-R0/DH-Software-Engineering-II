@@ -28,11 +28,11 @@ public class AccountJpaToAggregateMapper {
         }
 
         AccountAggregate account = new AccountAggregate();
-        account.setAccountId(jpa.getAccountId());
-        account.setAccountName(jpa.getName());
+        account.setAccountId(jpa.getId());
+        account.setAccountName(jpa.getAccountname());
         account.setBalance(jpa.getBalance());
         account.setOwner(new AccountOwnerNameValue(jpa.getOwnerfirstname(), jpa.getOwnerlastname()));
-        account.setTransactions(findAllTransactions(jpa.getAccountId()));
+        account.setTransactions(findAllTransactions(jpa.getId()));
 
         return account;
     }
@@ -55,8 +55,8 @@ public class AccountJpaToAggregateMapper {
     }
 
     private boolean isJpaInputInvalid(AccountJpaEntity jpa){
-        UUID id = jpa.getAccountId();
-        String name = jpa.getName();
+        UUID id = jpa.getId();
+        String name = jpa.getAccountname();
         Double balance = jpa.getBalance();
 
         if(id == null || name.isEmpty() || balance == null){

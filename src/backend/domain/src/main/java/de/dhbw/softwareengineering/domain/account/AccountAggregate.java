@@ -9,9 +9,11 @@ import java.util.UUID;
 public class AccountAggregate {
     private UUID accountId;
     private String accountName;
+    private String institutionName;
     private Double balance;
-
     private AccountOwnerNameValue owner;
+    private List<TransactionEntity> transactions;
+
 
     public AccountOwnerNameValue getOwner() {
         return owner;
@@ -20,8 +22,6 @@ public class AccountAggregate {
     public void setOwner(AccountOwnerNameValue owner) {
         this.owner = owner;
     }
-
-    private List<TransactionEntity> transactions;
 
     public UUID getAccountId() {
         return accountId;
@@ -37,6 +37,14 @@ public class AccountAggregate {
 
     public void setAccountName(String name) {
         this.accountName = name;
+    }
+
+    public String getInstitutionName() {
+        return institutionName;
+    }
+
+    public void setInstitutionName(String institutionName) {
+        this.institutionName = institutionName;
     }
 
     public Double getBalance() {

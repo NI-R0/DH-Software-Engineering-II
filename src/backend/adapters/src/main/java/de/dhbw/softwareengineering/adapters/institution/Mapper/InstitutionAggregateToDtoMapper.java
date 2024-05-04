@@ -37,7 +37,6 @@ public class InstitutionAggregateToDtoMapper {
         InstitutionGetDto dto = new InstitutionGetDto();
         dto.setName(aggregate.getName());
         dto.setType(aggregate.getType());
-        dto.setInstitutionId(aggregate.getInstitutionId());
 
         List<String> accountNames = new ArrayList<>();
         List<AccountAggregate> accountAggregates = aggregate.getAccounts();

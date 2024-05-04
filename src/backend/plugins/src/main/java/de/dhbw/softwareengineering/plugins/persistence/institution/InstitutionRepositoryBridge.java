@@ -1,15 +1,15 @@
 package de.dhbw.softwareengineering.plugins.persistence.institution;
 
-import de.dhbw.softwareengineering.domain.account.AccountAggregate;
 import de.dhbw.softwareengineering.domain.institution.InstitutionAggregate;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
 import de.dhbw.softwareengineering.plugins.persistence.account.AccountJpaRepository;
-import de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper.AccountJpaToAggregateMapper;
-import de.dhbw.softwareengineering.plugins.persistence.account.AccountRepositoryImplementation;
+import de.dhbw.softwareengineering.plugins.persistence.account.AccountMapper.AccountAggregateToJpaMapper;
 import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionMapper.InstitutionAggregateToJpaMapper;
 import de.dhbw.softwareengineering.plugins.persistence.institution.InstitutionMapper.InstitutionJpaToAggregateMapper;
 import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionJpaRepository;
+import de.dhbw.softwareengineering.plugins.persistence.transaction.TransactionMapper.TransactionEntityToJpaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class InstitutionRepositoryImplementation implements InstitutionRepository {
+public class InstitutionRepositoryBridge implements InstitutionRepository {
     @Autowired
     InstitutionJpaRepository institutionJpaRepository;
     @Autowired
@@ -31,6 +31,11 @@ public class InstitutionRepositoryImplementation implements InstitutionRepositor
     InstitutionAggregateToJpaMapper aggregateToJpa;
     @Autowired
     InstitutionJpaToAggregateMapper jpaToAggregate;
+
+    @Autowired
+    AccountAggregateToJpaMapper accountAggregateToJpa;
+    @Autowired
+    TransactionEntityToJpaMapper transactionEntityToJpa;
 
 
 
@@ -49,21 +54,9 @@ public class InstitutionRepositoryImplementation implements InstitutionRepositor
         return institutionAggregates;
     }
     @Override
-    public Optional<InstitutionAggregate> findById(UUID id){
-        try{
-            Optional<InstitutionJpaEntity> jpaOptional = institutionJpaRepository.findById(id);
-            InstitutionJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
-            return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
-        }
-        catch(Exception e){
-            System.out.println(e.toString());
-            return Optional.empty();
-        }
-    }
-    @Override
     public Optional<InstitutionAggregate> findByName(String name){
         try{
-            Optional<InstitutionJpaEntity> jpaOptional = institutionJpaRepository.findByName(name);
+            Optional<InstitutionJpaEntity> jpaOptional = institutionJpaRepository.findById(name);
             InstitutionJpaEntity jpaEntity = jpaOptional.orElseThrow(IllegalArgumentException::new);
             return Optional.of(jpaToAggregate.mapJpaToAggregate(jpaEntity));
         }
@@ -74,18 +67,45 @@ public class InstitutionRepositoryImplementation implements InstitutionRepositor
     }
 
     @Override
-    public InstitutionAggregate saveInstitution(InstitutionAggregate institution){
+    public InstitutionAggregate save(InstitutionAggregate institution){
+
+        /*institution.getAccounts().forEach(account -> {
+            account.getTransactions().forEach(transaction -> {
+                try{
+                    transactionJpaRepository.save(transactionEntityToJpa.mapEntityToJpa(transaction));
+                }
+                catch(Exception e){
+                    System.out.println("Transaction already saved!");
+                }
+            });
+            try{
+                accountJpaRepository.save(accountAggregateToJpa.mapAggregateToJpa(account));
+            }
+            catch(Exception e){
+                System.out.println("Account already saved!");
+            }
+
+        });*/
 
         InstitutionJpaEntity jpaEntity = aggregateToJpa.mapAggregateToJpa(institution);
         institutionJpaRepository.save(jpaEntity);
+
         return institution;
     }
 
+    @Modifying
     @Override
-    public void deleteInstitution(InstitutionAggregate institution){
-        //Delete rekursiv
+    public void delete(InstitutionAggregate institution){
+
+        institution.getAccounts().forEach(account -> {
+            transactionJpaRepository.deleteAllByAccount(account.getAccountId());
+            accountJpaRepository.deleteById(account.getAccountId());
+        });
+        //accountJpaRepository.deleteAllByInstitution(institution.getName());
         InstitutionJpaEntity jpaEntity = aggregateToJpa.mapAggregateToJpa(institution);
+
         institutionJpaRepository.delete(jpaEntity);
+
     }
 
 

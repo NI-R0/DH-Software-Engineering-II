@@ -41,7 +41,6 @@ public class InstitutionDtoToAggregateMapper {
         institution.setType(dto.getType());
         List<AccountAggregate> accounts = new ArrayList<>();
         institution.setAccounts(accounts);
-        institution.setInstitutionId(UUID.randomUUID());
 
         return institution;
     }
@@ -49,8 +48,7 @@ public class InstitutionDtoToAggregateMapper {
     public InstitutionAggregate mapUpdateDtoToAggregate(InstitutionUpdateDto dto){
         InstitutionAggregate institution = new InstitutionAggregate();
 
-        institution.setInstitutionId(dto.getInstitutionId());
-        institution.setName(dto.getName());
+        institution.setName(dto.getNewName());
         institution.setType(dto.getType());
         List<AccountAggregate> accounts = new ArrayList<>();
         institution.setAccounts(accounts);
