@@ -3,7 +3,7 @@
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
-    <option name="reverseEngineeringLastDbConnectionId" value="275cbe0d-5f86-4e9d-b41c-d24ee32d2ec2" />
+    <option name="reverseEngineeringLastDbConnectionId" value="275cbe0d-5f86-4e9d-b41c-d24ee32d2ec2__FINANCE-MANAGER-DB_PUBLIC" />
     <option name="reLastEntityCreationPackage" value="plugins/src/main/java/de/dhbw/softwareengineering/plugins/persistence" />
   </component>
 </project>
