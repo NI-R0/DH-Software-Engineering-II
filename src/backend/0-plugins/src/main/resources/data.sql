@@ -1,7 +1,7 @@
-insert into Institution(name, institution_type) values('Volksbank', 'BANK');
-insert into Institution(name, institution_type) values('Sparkasse', 'BANK');
-insert into Institution(name, institution_type) values('ING DIBA', 'BANK');
+INSERT IGNORE INTO institution(name, institution_type) VALUES('Volksbank', 'BANK');
+INSERT IGNORE INTO institution(name, institution_type) VALUES('Sparkasse', 'BANK');
+INSERT IGNORE INTO institution(name, institution_type) VALUES('ING DIBA', 'BANK');
 
-insert into Institution(name, institution_type) values('Binance', 'BROKER');
-insert into Institution(name, institution_type) values('Flatex', 'BROKER');
-insert into Institution(name, institution_type) values('eToro', 'BROKER');
+INSERT IGNORE INTO institution(name, institution_type) VALUES('Binance', 'BROKER');
+INSERT IGNORE INTO institution(name, institution_type) VALUES('Flatex', 'BROKER');
+INSERT IGNORE INTO institution(name, institution_type) VALUES('eToro', 'BROKER');
