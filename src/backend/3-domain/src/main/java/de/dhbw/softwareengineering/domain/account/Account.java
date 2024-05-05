@@ -48,6 +48,10 @@ public class Account {
 
     protected Account(){}
 
+    public Account(final List<Transaction> transactions){
+        this.transactions = transactions;
+    }
+
     public Account(final UUID id,
                    final Institution institution,
                    final String accountName,
@@ -91,5 +95,29 @@ public class Account {
 
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setInstitution(Institution institution) {
+        this.institution = institution;
+    }
+
+    public void setAccountName(@NotNull @NotBlank @NotEmpty @Size(max = 20, min = 3) String accountName) {
+        this.accountName = accountName;
+    }
+
+    public void setAccountOwner(AccountOwnerNameValue accountOwner) {
+        this.accountOwner = accountOwner;
+    }
+
+    public void setBalance(@NotNull Double balance) {
+        this.balance = balance;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }

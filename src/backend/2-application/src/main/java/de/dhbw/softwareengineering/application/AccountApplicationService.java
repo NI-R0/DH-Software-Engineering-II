@@ -1,6 +1,7 @@
 package de.dhbw.softwareengineering.application;
 
 import de.dhbw.softwareengineering.adapters.account.AccountCreateDTO;
+import de.dhbw.softwareengineering.adapters.account.AccountUpdateDTO;
 import de.dhbw.softwareengineering.adapters.account.Mapper.CreateDTOToAccountMapper;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.account.AccountRepository;
@@ -53,7 +54,7 @@ public class AccountApplicationService {
 
         Account toCreate = createMapper.apply(dto, institution);
 
-        if(isInputValid(toCreate)){
+        if(isInputInvalid(toCreate)){
             throw new IllegalArgumentException("Wrong account input!");
         }
 
@@ -65,8 +66,36 @@ public class AccountApplicationService {
         return toCreate;
     }
 
-    public Account updateAccount(AccountCreateDTO dto) throws Exception{
-        return null;
+    public Account updateAccount(AccountUpdateDTO dto) throws Exception{
+
+        if(isInputInvalid(dto)){
+            throw new IllegalArgumentException("Wrong input!");
+        }
+
+        Institution institution = this.institutionRepository.findByName(dto.getInstitutionName()).orElseThrow(IllegalArgumentException::new);
+        List<Account> accounts = institution.getAccounts();
+
+        if(containsId(accounts, dto.getAccountId())){
+
+            Account toUpdate = this.accountRepository.findByInstitutionAndId(dto.getInstitutionName(), dto.getAccountId()).orElseThrow(IllegalArgumentException::new);
+
+            String newAccountName = dto.getAccountInfo().getAccountName();
+            if(newAccountName != null && containsName(accounts, newAccountName) && !newAccountName.equals(toUpdate.getAccountName())){
+                throw new IllegalArgumentException("Account with new name already exists");
+            }
+
+            accounts.removeIf(a -> a.getId() == toUpdate.getId());
+
+            Account newAccount = updateAccountProperties(toUpdate, dto);
+
+            accounts.add(newAccount);
+            institution.setAccounts(accounts);
+            this.institutionRepository.save(institution);
+
+            return newAccount;
+        }
+
+        throw new IllegalArgumentException("Account with new name already exists!");
     }
 
     public void deleteAccountByName(String institutionName, String accountName) throws Exception{
@@ -93,7 +122,29 @@ public class AccountApplicationService {
 
 
 
-    private boolean isInputValid(Account account){
+    private Account updateAccountProperties(Account toUpdate, AccountUpdateDTO dto){
+
+        if(dto.getAccountInfo().getBalance() != null){
+            toUpdate.setBalance(dto.getAccountInfo().getBalance());
+        }
+        AccountOwnerNameValue owner = new AccountOwnerNameValue();
+        if(dto.getAccountInfo().getOwner().getFirstName() != null){
+            owner.setFirstName(dto.getAccountInfo().getOwner().getFirstName());
+        }
+        if(dto.getAccountInfo().getOwner().getLastName() != null){
+            owner.setLastName(dto.getAccountInfo().getOwner().getLastName());
+        }
+        if(dto.getAccountInfo().getOwner() != null){
+            toUpdate.setAccountOwner(owner);
+        }
+        if(dto.getAccountInfo().getAccountName() != null){
+            toUpdate.setAccountName(dto.getAccountInfo().getAccountName());
+        }
+
+        return toUpdate;
+    }
+
+    private boolean isInputInvalid(Account account){
         UUID accountId = account.getId();
         String accountName = account.getAccountName();
         Double balance = account.getBalance();
@@ -109,6 +160,38 @@ public class AccountApplicationService {
         }
         if(owner.getFirstName().isBlank() || owner.getLastName().isBlank()){
             return true;
+        }
+        return false;
+    }
+    private boolean isInputInvalid(AccountUpdateDTO dto){
+        String name = dto.getAccountInfo().getAccountName();
+        Double balance = dto.getAccountInfo().getBalance();
+        String ownerFirstName = dto.getAccountInfo().getOwner().getFirstName();
+        String ownerLastName = dto.getAccountInfo().getOwner().getLastName();
+
+        if(dto.getAccountInfo()==null){
+            return true;
+        }
+        if(dto.getInstitutionName() == null){
+            return true;
+        }
+        if(dto.getAccountInfo().getAccountName() != null){
+            if(name.isBlank() || name.length() > 20 || name.length() < 3){
+                return true;
+            }
+        }
+        if(balance != null){
+            if(balance.isNaN() || balance.isInfinite()){
+                return true;
+            }
+        }
+        if(dto.getAccountInfo().getOwner() != null){
+            if(ownerFirstName.isEmpty() || ownerFirstName.isBlank() || ownerFirstName.length() > 15){
+                return true;
+            }
+            if(ownerLastName.isEmpty() || ownerLastName.isBlank() || ownerFirstName.length() > 25){
+                return true;
+            }
         }
         return false;
     }

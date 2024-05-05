@@ -99,9 +99,16 @@ public class InstitutionApplicationService {
 
     private boolean isInputInvalid(InstitutionUpdateDTO dto){
         String oldName = dto.getName();
+        String newName = dto.getNewName();
 
         if(oldName.isBlank() || oldName.isEmpty()){
             return true;
+        }
+        if(dto.getNewName() != null){
+            if(newName.isBlank() || newName.length() > 20 || newName.length() < 3){
+                return true;
+            }
+            return false;
         }
         //Old name correct
 
