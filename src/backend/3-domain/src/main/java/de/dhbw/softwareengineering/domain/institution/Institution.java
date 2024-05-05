@@ -31,6 +31,10 @@ public class Institution {
 
     protected Institution(){}
 
+    public Institution(final List<Account> accounts){
+        this.accounts = accounts;
+    }
+
     public Institution(final String name, final InstitutionType type, final List<Account> accounts){
         Validate.notBlank(name);
         Validate.notNull(type);
@@ -51,5 +55,13 @@ public class Institution {
 
     public List<Account> getAccounts() {
         return accounts;
+    }
+
+    public void updateName(@Size(max = 20, min = 3) String name) {
+        this.name = name;
+    }
+
+    public void updateInstitutionType(@NotNull @NotBlank @NotEmpty InstitutionType institutionType) {
+        this.institutionType = institutionType;
     }
 }
