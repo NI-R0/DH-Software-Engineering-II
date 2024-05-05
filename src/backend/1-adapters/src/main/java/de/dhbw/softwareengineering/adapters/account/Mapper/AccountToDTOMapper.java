@@ -1,5 +1,6 @@
-package de.dhbw.softwareengineering.adapters.account;
+package de.dhbw.softwareengineering.adapters.account.Mapper;
 
+import de.dhbw.softwareengineering.adapters.account.AccountDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionToDTOMapper;
 import de.dhbw.softwareengineering.adapters.values.AccountOwnerNameDTO;

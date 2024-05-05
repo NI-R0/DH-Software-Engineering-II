@@ -34,4 +34,11 @@ public final class AccountOwnerNameValue {
         return firstName + " " + lastName;
     }
 
+    public void setFirstName(@Size(max = 15, min = 2) @NotNull @NotBlank @NotEmpty String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(@Size(max = 25) @NotNull @NotBlank String lastName) {
+        this.lastName = lastName;
+    }
 }
