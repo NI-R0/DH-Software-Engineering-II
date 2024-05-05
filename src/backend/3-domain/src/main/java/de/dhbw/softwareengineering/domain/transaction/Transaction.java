@@ -98,4 +98,32 @@ public class Transaction {
     public TransactionType getTransactionType() {
         return transactionType;
     }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public void setDescription(@Size(max = 255) String description) {
+        this.description = description;
+    }
+
+    public void setAmount(@NotNull Double amount) {
+        this.amount = amount;
+    }
+
+    public void setUnit(@NotBlank @NotEmpty @Size(max = 10, min = 2) String unit) {
+        this.unit = unit;
+    }
+
+    public void setTimestamp(@NotNull Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
 }

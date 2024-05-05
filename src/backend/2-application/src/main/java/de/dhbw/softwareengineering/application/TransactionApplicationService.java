@@ -2,6 +2,7 @@ package de.dhbw.softwareengineering.application;
 
 import de.dhbw.softwareengineering.adapters.account.Mapper.CreateDTOToAccountMapper;
 import de.dhbw.softwareengineering.adapters.transaction.Mapper.CreateDTOToTransactionMapper;
+import de.dhbw.softwareengineering.adapters.transaction.TransactionBaseDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;
 import de.dhbw.softwareengineering.domain.account.Account;
@@ -52,17 +53,18 @@ public class TransactionApplicationService {
 
         if(containsId(transactions, transactionId)){
             accounts.removeIf(a -> Objects.equals(a.getAccountName(), accountName));
-            transactions.removeIf(t -> t.getId() == transactionId);
+            transactions.removeIf(t -> t.getId().equals(transactionId));
             account.setTransactions(transactions);
             accounts.add(account);
             institution.setAccounts(accounts);
             this.institutionRepository.save(institution);
+            return;
         }
+        throw new IllegalArgumentException("Transaction does not exist!");
     }
 
 
     public Transaction createTransaction(TransactionCreateDTO transaction) throws Exception{
-        //check if input is correct
 
         Institution institution = this.institutionRepository.findByName(transaction.getInstitutionName()).orElseThrow(IllegalArgumentException::new);
         List<Account> institutionAccounts = institution.getAccounts();
@@ -85,9 +87,66 @@ public class TransactionApplicationService {
     }
 
     public Transaction updateTransaction(TransactionUpdateDTO transaction) throws Exception{
-        return null;
+
+        if(isInputInvalid(transaction)){
+            throw new IllegalArgumentException("Wrong transaction input!");
+        }
+
+        //Get institution -> accounts -> account -> transactions -> transaction
+        Institution institution = this.institutionRepository.findByName(transaction.getInstitutionName()).orElseThrow(IllegalArgumentException::new);
+        List<Account> institutionAccounts = institution.getAccounts();
+        Account account = institutionAccounts.stream().filter(a -> a.getAccountName().equals(transaction.getAccountName())).findFirst().orElseThrow(IllegalArgumentException::new);
+        List<Transaction> accountTransactions = account.getTransactions();
+
+        //Transaction toUpdate = accountTransactions.stream().filter(t -> t.getId() == transaction.getTransactionId()).findFirst().orElseThrow(IllegalArgumentException::new);
+
+        if(containsId(accountTransactions, transaction.getTransactionId())){
+            Transaction toUpdate = this.transactionRepository.findByAccountAndId(account.getId(), transaction.getTransactionId()).orElseThrow(IllegalArgumentException::new);
+            //Check input
+            if(!isTransactionTypeCompatible(transaction.getTransaction().getTransactionType(), institution.getInstitutionType())){
+                throw new IllegalArgumentException("Types not compatible!");
+            }
+
+            // Remove account from institution
+            institutionAccounts.removeIf(a -> Objects.equals(a.getAccountName(), transaction.getAccountName()));
+            //remove transaction
+            accountTransactions.removeIf(t -> t.getId() == transaction.getTransactionId());
+            //edit/create new transaction -> add to account
+            Transaction newTransaction = updateTransactionProperties(toUpdate, transaction);
+            //add account to institution
+            accountTransactions.add(newTransaction);
+            account.setTransactions(accountTransactions);
+            institutionAccounts.add(account);
+            institution.setAccounts(institutionAccounts);
+            //save institution
+            this.institutionRepository.save(institution);
+
+            return newTransaction;
+        }
+        throw new IllegalArgumentException("Transaction does not exist!");
     }
 
+
+    private Transaction updateTransactionProperties(Transaction toUpdate, TransactionUpdateDTO dto){
+        TransactionBaseDTO parameters = dto.getTransaction();
+        if(parameters.getDescription() != null){
+            toUpdate.setDescription(parameters.getDescription());
+        }
+        if(parameters.getAmount() != null){
+            toUpdate.setAmount(parameters.getAmount());
+        }
+        if(parameters.getUnit() != null){
+            toUpdate.setUnit(parameters.getUnit());
+        }
+        if(parameters.getTimestamp() != null){
+            toUpdate.setTimestamp(parameters.getTimestamp());
+        }
+        if(parameters.getTransactionType() != null){
+            toUpdate.setTransactionType(parameters.getTransactionType());
+        }
+
+        return toUpdate;
+    }
 
 
     private boolean containsId(List<Transaction> transactions, UUID id){
@@ -107,15 +166,8 @@ public class TransactionApplicationService {
         if(id == null || amount.isNaN() || amount.isInfinite() || time == null){
             return true;
         }
-        if(institutionType == InstitutionType.BANK){
-            if(type == TransactionType.BUY || type == TransactionType.SELL){
-                return true;
-            }
-        }
-        else{
-            if(type == TransactionType.INCOME || type == TransactionType.EXPENSE){
-                return true;
-            }
+        if(!isTransactionTypeCompatible(type, institutionType)){
+            return true;
         }
         if(accountName == null || accountName.isEmpty() || accountName.isBlank()){
             return true;
@@ -133,4 +185,34 @@ public class TransactionApplicationService {
     }
 
 
+    private boolean isInputInvalid(TransactionUpdateDTO dto){
+        UUID id = dto.getTransactionId();
+        String institutionName = dto.getInstitutionName();
+        String accountName = dto.getAccountName();
+        if(id == null || institutionName == null || accountName == null || institutionName.isEmpty() || institutionName.isBlank() || accountName.isBlank() || accountName.isEmpty()){
+            return true;
+        }
+        if(dto.getTransaction().getDescription().length() > 255){
+            return true;
+        }
+        Double amount = dto.getTransaction().getAmount();
+        if(amount != null && (amount.isInfinite() || amount.isNaN())){
+            return true;
+        }
+        String unit = dto.getTransaction().getUnit();
+        if(unit != null && (unit.isEmpty() || unit.isBlank())){
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isTransactionTypeCompatible(TransactionType transactionType, InstitutionType institutionType){
+        if(institutionType == InstitutionType.BANK){
+            return transactionType != TransactionType.BUY && transactionType != TransactionType.SELL;
+        }
+        else{
+            return transactionType != TransactionType.INCOME && transactionType != TransactionType.EXPENSE;
+        }
+    }
 }

@@ -136,7 +136,7 @@ public class AccountController {
             tags = {"Account Controller"}
     )
     @Parameters({
-            @Parameter(name = "institution", description = "Name of institution"),
+            @Parameter(name = "institutionName", description = "Name of institution"),
             @Parameter(name = "name" ,description = "Name of account to delete")
     })
     public ResponseEntity<Void> deleteByName(@PathVariable String institutionName, @PathVariable("name") String accountName){
@@ -157,7 +157,7 @@ public class AccountController {
             tags = {"Account Controller"}
     )
     @Parameters({
-            @Parameter(name = "institution", description = "Name of institution"),
+            @Parameter(name = "institutionName", description = "Name of institution"),
             @Parameter(name = "id" ,description = "ID of account to delete")
     })
     public ResponseEntity<Void> deleteById(@PathVariable String institutionName, @PathVariable("id") UUID accountId){

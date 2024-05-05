@@ -38,8 +38,8 @@ public class TransactionController {
             tags = {"Transaction Controller"}
     )
     @Parameters({
-            @Parameter(name = "institution", description = "Name of institution"),
-            @Parameter(name = "account" ,description = "Name of account")
+            @Parameter(name = "institutionName", description = "Name of institution"),
+            @Parameter(name = "accountName" ,description = "Name of account")
     })
     public ResponseEntity<List<TransactionReturnDTO>> getAllTransactions(@PathVariable String institutionName, @PathVariable String accountName){
         return ResponseEntity.ok(this.transactionService.getAllTransactions(institutionName, accountName)
@@ -55,8 +55,8 @@ public class TransactionController {
             tags = {"Transaction Controller"}
     )
     @Parameters({
-            @Parameter(name = "institution", description = "Name of institution"),
-            @Parameter(name = "account" ,description = "Name of account"),
+            @Parameter(name = "institutionName", description = "Name of institution"),
+            @Parameter(name = "accountName" ,description = "Name of account"),
             @Parameter(name = "id", description = "ID of transaction to retrieve")
     })
     public ResponseEntity<TransactionReturnDTO> getTransactionById(@PathVariable String institutionName, @PathVariable String accountName, @PathVariable("id") UUID transactionId){
@@ -77,8 +77,8 @@ public class TransactionController {
             tags = {"Transaction Controller"}
     )
     @Parameters({
-            @Parameter(name = "institution", description = "Name of institution"),
-            @Parameter(name = "account" ,description = "Name of account"),
+            @Parameter(name = "institutionName", description = "Name of institution"),
+            @Parameter(name = "accountName" ,description = "Name of account"),
             @Parameter(name = "id", description = "ID of transaction to delete")
     })
     public ResponseEntity<Void> deleteTransaction(@PathVariable String institutionName, @PathVariable String accountName, @PathVariable("id") UUID transactionId){
