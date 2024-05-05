@@ -3,6 +3,10 @@ package de.dhbw.softwareengineering.domain.account;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
@@ -13,23 +17,35 @@ import java.util.UUID;
 @Table(name = "account")
 public class Account {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "institution_name")
     private Institution institution;
 
-    @Column(name = "account_name")
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    @Size(max = 20, min = 3)
+    @Column(name = "account_name", nullable = false, length = 20)
     private String accountName;
 
-    @Column(name = "owner_first_name")
+    @Size(max = 15, min = 2)
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    @Column(name = "owner_first_name", length = 15, nullable = false)
     private String ownerFirstName;
 
-    @Column(name = "owner_last_name")
+    @Size(max = 25)
+    @NotNull
+    @NotBlank
+    @Column(name = "owner_last_name", length = 25, nullable = false)
     private String ownerLastName;
 
-    @Column(name = "balance")
+    @NotNull
+    @Column(name = "balance", nullable = false)
     private Double balance;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
