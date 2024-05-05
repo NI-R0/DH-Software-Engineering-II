@@ -1,14 +1,26 @@
 package de.dhbw.softwareengineering.domain.values;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
+@Embeddable
 public final class AccountOwnerNameValue {
 
-    private final String firstName;
-    private final String lastName;
+    @Size(max = 15, min = 2)
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    private String firstName;
 
-    public AccountOwnerNameValue(String firstName, String lastName) {
+    @Size(max = 25)
+    @NotNull
+    @NotBlank
+    private String lastName;
+
+    /*public AccountOwnerNameValue(final String firstName, final String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-    }
+    }*/
 
     public String getFirstName() {
         return firstName;

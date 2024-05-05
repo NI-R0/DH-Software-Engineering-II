@@ -2,6 +2,7 @@ package de.dhbw.softwareengineering.domain.account;
 
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
+import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -31,18 +32,12 @@ public class Account {
     @Column(name = "account_name", nullable = false, length = 20)
     private String accountName;
 
-    @Size(max = 15, min = 2)
-    @NotNull
-    @NotBlank
-    @NotEmpty
-    @Column(name = "owner_first_name", length = 15, nullable = false)
-    private String ownerFirstName;
-
-    @Size(max = 25)
-    @NotNull
-    @NotBlank
-    @Column(name = "owner_last_name", length = 25, nullable = false)
-    private String ownerLastName;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "firstName", column = @Column(name = "owner_first_name", length = 15, nullable = false)),
+            @AttributeOverride(name = "lastName", column = @Column(name = "owner_last_name", length = 25, nullable = false))
+    })
+    private AccountOwnerNameValue accountOwner;
 
     @NotNull
     @Column(name = "balance", nullable = false)
@@ -56,23 +51,20 @@ public class Account {
     public Account(final UUID id,
                    final Institution institution,
                    final String accountName,
-                   final String ownerFirstName,
-                   final String ownerLastName,
+                   final AccountOwnerNameValue accountOwner,
                    final Double balance,
                    final List<Transaction> transactions){
         Validate.notNull(id);
         Validate.notNull(institution);
         Validate.notBlank(accountName);
-        Validate.notBlank(ownerFirstName);
-        Validate.notBlank(ownerLastName);
+        Validate.notNull(accountOwner);
         Validate.notNaN(balance);
         transactions.forEach(Validate::notNull);
 
         this.id = id;
         this.institution = institution;
         this.accountName = accountName;
-        this.ownerFirstName = ownerFirstName;
-        this.ownerLastName = ownerLastName;
+        this.accountOwner = accountOwner;
         this.balance = balance;
         this.transactions = transactions;
     }
@@ -89,12 +81,8 @@ public class Account {
         return accountName;
     }
 
-    public String getOwnerFirstName() {
-        return ownerFirstName;
-    }
-
-    public String getOwnerLastName() {
-        return ownerLastName;
+    public AccountOwnerNameValue getOwner() {
+        return accountOwner;
     }
 
     public Double getBalance() {
