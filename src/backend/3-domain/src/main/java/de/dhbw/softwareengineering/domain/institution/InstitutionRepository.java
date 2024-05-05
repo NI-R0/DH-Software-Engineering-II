@@ -7,7 +7,7 @@ public interface InstitutionRepository {
 
     List<Institution> findAllInstitutions();
 
-    Optional<Institution> findByName();
+    Optional<Institution> findByName(String institutionName);
 
     Institution save(Institution institution);
 
