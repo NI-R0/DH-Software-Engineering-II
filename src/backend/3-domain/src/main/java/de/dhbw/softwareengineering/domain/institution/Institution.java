@@ -26,7 +26,7 @@ public class Institution {
     @Column(name = "institution_type", nullable = false)
     private InstitutionType institutionType;
 
-    @OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "institution", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Account> accounts;
 
     protected Institution(){}

@@ -83,6 +83,8 @@ public class InstitutionApplicationService {
         Institution institution = this.institutionRepository.findByName(name)
                 .orElseThrow(IllegalArgumentException::new);
         this.institutionRepository.delete(institution);
+
+        //ONRESTRICT: ZUERST ACCOUNTS UND TRANSAKTIONEN LÖSCHEN
     }
 
 

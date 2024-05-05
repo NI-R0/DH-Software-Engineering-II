@@ -57,6 +57,7 @@ public class TransactionApplicationService {
             account.setTransactions(transactions);
             accounts.add(account);
             institution.setAccounts(accounts);
+
             this.institutionRepository.save(institution);
             return;
         }

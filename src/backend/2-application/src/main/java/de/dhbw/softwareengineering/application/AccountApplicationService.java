@@ -106,7 +106,9 @@ public class AccountApplicationService {
             accounts.removeIf(a -> Objects.equals(a.getAccountName(), accountName));
             institution.setAccounts(accounts);
             this.institutionRepository.save(institution);
+            return;
         }
+        throw new IllegalArgumentException("Account does not exists!");
     }
 
     public void deleteAccountById(String institutionName, UUID accountId) throws Exception{

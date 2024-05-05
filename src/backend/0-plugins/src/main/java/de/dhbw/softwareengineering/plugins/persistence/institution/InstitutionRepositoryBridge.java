@@ -2,9 +2,11 @@ package de.dhbw.softwareengineering.plugins.persistence.institution;
 
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
+import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +31,16 @@ public class InstitutionRepositoryBridge implements InstitutionRepository {
     }
 
     @Override
-    public Institution save(Institution institution) {
-        return this.springDataRepository.save(institution);
+    public Institution save(Institution newInstitution) {
+
+        /*Optional<Institution> optional = this.springDataRepository.findById(newInstitution.getName());
+        if(optional.isEmpty()){
+            return this.springDataRepository.save(newInstitution);
+        }
+
+        return deleteDifference(optional.get(), newInstitution);*/
+        return this.springDataRepository.save(newInstitution);
+
     }
 
     @Override

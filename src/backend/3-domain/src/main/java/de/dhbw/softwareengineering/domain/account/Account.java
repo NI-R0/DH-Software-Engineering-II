@@ -43,7 +43,7 @@ public class Account {
     @Column(name = "balance", nullable = false)
     private Double balance;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transactions;
 
     protected Account(){}
