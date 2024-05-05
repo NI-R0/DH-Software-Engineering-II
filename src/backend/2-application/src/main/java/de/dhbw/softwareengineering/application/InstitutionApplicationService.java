@@ -3,12 +3,8 @@ package de.dhbw.softwareengineering.application;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionCreateDTO;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionUpdateDTO;
 import de.dhbw.softwareengineering.adapters.institution.Mapper.CreateDTOToInstitutionMapper;
-import de.dhbw.softwareengineering.adapters.institution.Mapper.InstitutionToDTOMapper;
-import de.dhbw.softwareengineering.adapters.institution.Mapper.UpdateDTOToInstitutionMapper;
-import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
-import de.dhbw.softwareengineering.enums.InstitutionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +18,10 @@ public class InstitutionApplicationService {
 
     private final CreateDTOToInstitutionMapper createDTOMapper;
 
-    private final UpdateDTOToInstitutionMapper updateDTOMapper;
-
     @Autowired
-    public InstitutionApplicationService(InstitutionRepository institutionRepository, CreateDTOToInstitutionMapper createDTOMapper, UpdateDTOToInstitutionMapper updateDTOMapper) {
+    public InstitutionApplicationService(InstitutionRepository institutionRepository, CreateDTOToInstitutionMapper createDTOMapper) {
         this.institutionRepository = institutionRepository;
         this.createDTOMapper = createDTOMapper;
-        this.updateDTOMapper = updateDTOMapper;
     }
 
     public List<Institution> getAllInstitutions(){

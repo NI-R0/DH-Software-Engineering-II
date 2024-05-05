@@ -1,7 +1,6 @@
 package de.dhbw.softwareengineering.adapters.institution.Mapper;
 
 import de.dhbw.softwareengineering.adapters.institution.InstitutionCreateDTO;
-import de.dhbw.softwareengineering.adapters.institution.InstitutionDTO;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import org.springframework.stereotype.Component;
