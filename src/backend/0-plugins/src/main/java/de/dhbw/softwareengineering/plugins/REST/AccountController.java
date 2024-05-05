@@ -4,6 +4,9 @@ import de.dhbw.softwareengineering.adapters.account.AccountCreateDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountReturnDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountUpdateDTO;
 import de.dhbw.softwareengineering.adapters.account.Mapper.AccountToReturnDTOMapper;
+import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
+import de.dhbw.softwareengineering.adapters.transaction.TransactionReturnDTO;
+import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;
 import de.dhbw.softwareengineering.application.AccountApplicationService;
 import de.dhbw.softwareengineering.domain.account.Account;
 import io.swagger.v3.oas.annotations.Operation;
@@ -56,7 +59,7 @@ public class AccountController {
     )
     @Parameters({
             @Parameter(name = "institutionName", description = "Name of institution."),
-            @Parameter(name = "name", description = "Name of account to retrieve")
+            @Parameter(name = "accountName", description = "Name of account to retrieve")
     })
     public ResponseEntity<AccountReturnDTO> getAccountByName(@PathVariable String institutionName,
                                                              @PathVariable String accountName){
@@ -167,4 +170,6 @@ public class AccountController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+
 }

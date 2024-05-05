@@ -19,11 +19,22 @@ public class TransactionRepositoryBridge implements TransactionRepository {
 
     @Override
     public List<Transaction> findByAccount(UUID accountId) {
-        return springDataRepository.findAllByAccount(accountId);
+        return this.springDataRepository.findAllByAccount(accountId);
     }
 
     @Override
     public Optional<Transaction> findByAccountAndId(UUID accountId, UUID transactionId){
-        return springDataRepository.findByAccountAndId(accountId, transactionId);
+        return this.springDataRepository.findByAccountAndId(accountId, transactionId);
     }
+
+    @Override
+    public List<Transaction> findByInstitutionAndAccount(String institutionName, String accountName){
+        return this.springDataRepository.findAllByInstitutionAndAccount(institutionName, accountName);
+    }
+
+    @Override
+    public Optional<Transaction> findByInstitutionAndAccountAndId(String institutionName, String accountName, UUID transactionId) {
+        return this.springDataRepository.findByInstitutionAndAccountAndId(institutionName, accountName, transactionId);
+    }
+
 }

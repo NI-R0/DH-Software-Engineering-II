@@ -1,7 +1,6 @@
 package de.dhbw.softwareengineering.adapters.account.Mapper;
 
 import de.dhbw.softwareengineering.adapters.account.AccountBaseDTO;
-import de.dhbw.softwareengineering.adapters.account.AccountCreateDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountUpdateDTO;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.institution.Institution;
@@ -9,7 +8,6 @@ import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.UUID;
 import java.util.function.Function;
 
 @Component

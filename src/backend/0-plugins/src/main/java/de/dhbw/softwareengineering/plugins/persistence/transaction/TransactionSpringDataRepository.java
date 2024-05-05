@@ -16,4 +16,11 @@ public interface TransactionSpringDataRepository extends JpaRepository<Transacti
     @Query(value = "SELECT * FROM TRANSACTION WHERE account_id = ?1 AND id = ?2", nativeQuery = true)
     Optional<Transaction> findByAccountAndId(UUID accountId, UUID transactionId);
 
+
+    @Query(value = "SELECT TRANSACTION.* FROM INSTITUTION JOIN ACCOUNT ON INSTITUTION.name = ACCOUNT.institution_name JOIN TRANSACTION ON ACCOUNT.id = TRANSACTION.account_id WHERE INSTITUTION.name = ?1 AND ACCOUNT.account_name = ?2", nativeQuery = true)
+    List<Transaction> findAllByInstitutionAndAccount(String institutionName, String accountName);
+
+    @Query(value = "SELECT TRANSACTION.* FROM INSTITUTION JOIN ACCOUNT ON INSTITUTION.name = ACCOUNT.institution_name JOIN TRANSACTION ON ACCOUNT.id = TRANSACTION.account_id WHERE INSTITUTION.name = ?1 AND ACCOUNT.account_name = ?2 AND TRANSACTION.id = ?3", nativeQuery = true)
+    Optional<Transaction> findByInstitutionAndAccountAndId(String institutionName, String accountName, UUID transactionId);
+
 }

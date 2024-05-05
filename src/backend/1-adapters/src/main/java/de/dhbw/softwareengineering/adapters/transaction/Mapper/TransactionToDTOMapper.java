@@ -1,5 +1,6 @@
-package de.dhbw.softwareengineering.adapters.transaction;
+package de.dhbw.softwareengineering.adapters.transaction.Mapper;
 
+import de.dhbw.softwareengineering.adapters.transaction.TransactionDTO;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import org.springframework.stereotype.Component;
 

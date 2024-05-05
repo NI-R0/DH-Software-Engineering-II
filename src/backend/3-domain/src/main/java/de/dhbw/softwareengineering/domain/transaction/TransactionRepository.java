@@ -10,4 +10,8 @@ public interface TransactionRepository {
 
     Optional<Transaction> findByAccountAndId(UUID accountId, UUID transactionId);
 
+    List<Transaction> findByInstitutionAndAccount(String institutionName, String accountName);
+
+    Optional<Transaction> findByInstitutionAndAccountAndId(String institutionName, String accountName, UUID transactionId);
+
 }

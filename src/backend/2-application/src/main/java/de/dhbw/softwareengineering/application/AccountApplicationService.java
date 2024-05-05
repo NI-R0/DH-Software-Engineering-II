@@ -52,7 +52,7 @@ public class AccountApplicationService {
             throw new IllegalArgumentException("Account with this name does already exist!");
         }
 
-        Account toCreate = createMapper.apply(dto, institution);
+        Account toCreate = this.createMapper.apply(dto, institution);
 
         if(isInputInvalid(toCreate)){
             throw new IllegalArgumentException("Wrong account input!");
