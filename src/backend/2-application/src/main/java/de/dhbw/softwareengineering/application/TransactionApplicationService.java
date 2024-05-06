@@ -8,6 +8,7 @@ import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
+import de.dhbw.softwareengineering.domain.services.CompatibilityHelper;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.domain.transaction.TransactionRepository;
 import de.dhbw.softwareengineering.enums.InstitutionType;
@@ -29,11 +30,14 @@ public class TransactionApplicationService {
 
     private final CreateDTOToTransactionMapper createMapper;
 
+    private final CompatibilityHelper domainService;
+
     @Autowired
-    public TransactionApplicationService(TransactionRepository transactionRepository, InstitutionRepository institutionRepository, CreateDTOToTransactionMapper createMapper) {
+    public TransactionApplicationService(TransactionRepository transactionRepository, InstitutionRepository institutionRepository, CreateDTOToTransactionMapper createMapper, CompatibilityHelper domainService) {
         this.transactionRepository = transactionRepository;
         this.institutionRepository = institutionRepository;
         this.createMapper = createMapper;
+        this.domainService = domainService;
     }
 
     public List<Transaction> getAllTransactions(String institutionName, String accountName){
@@ -103,7 +107,7 @@ public class TransactionApplicationService {
         if(containsId(accountTransactions, transaction.getTransactionId())){
             Transaction toUpdate = this.transactionRepository.findByAccountAndId(account.getId(), transaction.getTransactionId()).orElseThrow(IllegalArgumentException::new);
             //Check input
-            if(!isTransactionTypeCompatible(transaction.getTransaction().getTransactionType(), institution.getInstitutionType())){
+            if(!domainService.areTypesCompatible(institution.getInstitutionType(), transaction.getTransaction().getTransactionType())){
                 throw new IllegalArgumentException("Types not compatible!");
             }
 
@@ -166,7 +170,7 @@ public class TransactionApplicationService {
         if(id == null || amount.isNaN() || amount.isInfinite() || time == null){
             return true;
         }
-        if(!isTransactionTypeCompatible(type, institutionType)){
+        if(!domainService.areTypesCompatible(institutionType, type)){
             return true;
         }
         if(accountName == null || accountName.isEmpty() || accountName.isBlank()){
@@ -178,12 +182,11 @@ public class TransactionApplicationService {
         if(description.length() > Constants.DESCRIPTION_MAX_LENGTH){
             return true;
         }
-        if(unit == null || unit.isBlank() || unit.isEmpty() || unit.length() > 10){
+        if(unit == null || unit.isBlank() || unit.isEmpty() || unit.length() > Constants.UNIT_MAX_LENGTH){
             return true;
         }
         return false;
     }
-
 
     private boolean isInputInvalid(TransactionUpdateDTO dto){
         UUID id = dto.getTransactionId();
@@ -207,12 +210,4 @@ public class TransactionApplicationService {
         return false;
     }
 
-    private boolean isTransactionTypeCompatible(TransactionType transactionType, InstitutionType institutionType){
-        if(institutionType == InstitutionType.BANK){
-            return transactionType != TransactionType.BUY && transactionType != TransactionType.SELL;
-        }
-        else{
-            return transactionType != TransactionType.INCOME && transactionType != TransactionType.EXPENSE;
-        }
-    }
 }

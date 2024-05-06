@@ -30,15 +30,7 @@ public class InstitutionRepositoryBridge implements InstitutionRepository {
 
     @Override
     public Institution save(Institution newInstitution) {
-
-        /*Optional<Institution> optional = this.springDataRepository.findById(newInstitution.getName());
-        if(optional.isEmpty()){
-            return this.springDataRepository.save(newInstitution);
-        }
-
-        return deleteDifference(optional.get(), newInstitution);*/
         return this.springDataRepository.save(newInstitution);
-
     }
 
     @Override

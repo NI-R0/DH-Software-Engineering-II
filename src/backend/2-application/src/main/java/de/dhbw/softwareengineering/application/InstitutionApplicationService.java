@@ -6,6 +6,7 @@ import de.dhbw.softwareengineering.adapters.institution.Mapper.CreateDTOToInstit
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
+import de.dhbw.softwareengineering.domain.services.CompatibilityHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,13 @@ public class InstitutionApplicationService {
 
     private final CreateDTOToInstitutionMapper createDTOMapper;
 
+    private final CompatibilityHelper compatibility;
+
     @Autowired
-    public InstitutionApplicationService(InstitutionRepository institutionRepository, CreateDTOToInstitutionMapper createDTOMapper) {
+    public InstitutionApplicationService(InstitutionRepository institutionRepository, CreateDTOToInstitutionMapper createDTOMapper, CompatibilityHelper compatibility) {
         this.institutionRepository = institutionRepository;
         this.createDTOMapper = createDTOMapper;
+        this.compatibility = compatibility;
     }
 
     public List<Institution> getAllInstitutions(){
@@ -62,6 +66,14 @@ public class InstitutionApplicationService {
         if(dto.getNewName() != null){
             this.institutionRepository.findByName(dto.getNewName()).ifPresent(i -> {
                 throw new IllegalArgumentException("Institution already exists!");
+            });
+        }
+
+        if(dto.getType() != null){
+            toUpdate.getAccounts().forEach(account -> {
+                if(!compatibility.areTypesCompatible(dto.getType(), account.getTransactions())){
+                    throw new IllegalArgumentException("Types not comptatible!");
+                }
             });
         }
 
