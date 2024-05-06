@@ -1,5 +1,6 @@
 package de.dhbw.softwareengineering.domain.institution;
 
+import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.enums.InstitutionType;
 import jakarta.persistence.*;
@@ -15,8 +16,8 @@ import java.util.List;
 @Table(name = "institution")
 public class Institution {
     @Id
-    @Column(name = "name", nullable = false, length = 20)
-    @Size(max = 20, min = 3)
+    @Column(name = "name", nullable = false, length = Constants.INSTITUTION_NAME_MAX_LENGTH)
+    @Size(max = Constants.INSTITUTION_NAME_MAX_LENGTH, min = Constants.INSTITUTION_NAME_MIN_LENGTH)
     private String name;
 
     @NotNull

@@ -1,5 +1,6 @@
 package de.dhbw.softwareengineering.domain.account;
 
+import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
@@ -9,6 +10,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.Validate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +30,14 @@ public class Account {
     @NotNull
     @NotBlank
     @NotEmpty
-    @Size(max = 20, min = 3)
-    @Column(name = "account_name", nullable = false, length = 20)
+    @Size(max = Constants.ACCOUNT_NAME_MAX_LENGTH, min = Constants.ACCOUNT_NAME_MIN_LENGTH)
+    @Column(name = "account_name", nullable = false, length = Constants.ACCOUNT_NAME_MAX_LENGTH)
     private String accountName;
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "firstName", column = @Column(name = "owner_first_name", length = 15, nullable = false)),
-            @AttributeOverride(name = "lastName", column = @Column(name = "owner_last_name", length = 25, nullable = false))
+            @AttributeOverride(name = "firstName", column = @Column(name = "owner_first_name", length = Constants.OWNER_FIRST_NAME_MAX_LENGTH, nullable = false)),
+            @AttributeOverride(name = "lastName", column = @Column(name = "owner_last_name", length = Constants.OWNER_LAST_NAME_MAX_LENGTH, nullable = false))
     })
     private AccountOwnerNameValue accountOwner;
 
@@ -105,7 +107,7 @@ public class Account {
         this.institution = institution;
     }
 
-    public void setAccountName(@NotNull @NotBlank @NotEmpty @Size(max = 20, min = 3) String accountName) {
+    public void setAccountName(@NotNull @NotBlank @NotEmpty @Size(max = Constants.ACCOUNT_NAME_MAX_LENGTH, min = Constants.ACCOUNT_NAME_MIN_LENGTH) String accountName) {
         this.accountName = accountName;
     }
 

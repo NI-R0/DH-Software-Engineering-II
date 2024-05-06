@@ -1,5 +1,6 @@
 package de.dhbw.softwareengineering.domain.transaction;
 
+import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.enums.TransactionType;
 import jakarta.persistence.*;
@@ -23,7 +24,7 @@ public class Transaction {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @Size(max = 255)
+    @Size(max = Constants.DESCRIPTION_MAX_LENGTH)
     @Column(name = "description")
     private String description;
 
@@ -33,8 +34,8 @@ public class Transaction {
 
     @NotBlank
     @NotEmpty
-    @Size(max = 10, min = 2)
-    @Column(name = "unit", nullable = false, length = 10)
+    @Size(max = Constants.UNIT_MAX_LENGTH, min = Constants.UNIT_MIN_LENGTH)
+    @Column(name = "unit", nullable = false, length = Constants.UNIT_MAX_LENGTH)
     private String unit;
 
     @NotNull
@@ -107,7 +108,7 @@ public class Transaction {
         this.account = account;
     }
 
-    public void setDescription(@Size(max = 255) String description) {
+    public void setDescription(@Size(max = Constants.DESCRIPTION_MAX_LENGTH) String description) {
         this.description = description;
     }
 
@@ -115,7 +116,7 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public void setUnit(@NotBlank @NotEmpty @Size(max = 10, min = 2) String unit) {
+    public void setUnit(@NotBlank @NotEmpty @Size(max = Constants.UNIT_MAX_LENGTH, min = Constants.UNIT_MIN_LENGTH) String unit) {
         this.unit = unit;
     }
 
