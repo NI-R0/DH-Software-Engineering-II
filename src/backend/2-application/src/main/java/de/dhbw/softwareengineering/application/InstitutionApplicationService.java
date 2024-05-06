@@ -3,6 +3,7 @@ package de.dhbw.softwareengineering.application;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionCreateDTO;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionUpdateDTO;
 import de.dhbw.softwareengineering.adapters.institution.Mapper.CreateDTOToInstitutionMapper;
+import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,7 +108,7 @@ public class InstitutionApplicationService {
             return true;
         }
         if(dto.getNewName() != null){
-            if(newName.isBlank() || newName.length() > 20 || newName.length() < 3){
+            if(newName.isBlank() || newName.length() > Constants.INSTITUTION_NAME_MAX_LENGTH || newName.length() < Constants.INSTITUTION_NAME_MIN_LENGTH){
                 return true;
             }
             return false;

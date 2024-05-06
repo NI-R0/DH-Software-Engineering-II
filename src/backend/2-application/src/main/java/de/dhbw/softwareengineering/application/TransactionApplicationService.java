@@ -5,6 +5,7 @@ import de.dhbw.softwareengineering.adapters.transaction.Mapper.CreateDTOToTransa
 import de.dhbw.softwareengineering.adapters.transaction.TransactionBaseDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;
+import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.account.AccountRepository;
 import de.dhbw.softwareengineering.domain.institution.Institution;
@@ -176,7 +177,7 @@ public class TransactionApplicationService {
         if(institutionName == null || institutionName.isEmpty() || institutionName.isBlank()){
             return true;
         }
-        if(description.length() > 255){
+        if(description.length() > Constants.DESCRIPTION_MAX_LENGTH){
             return true;
         }
         if(unit == null || unit.isBlank() || unit.isEmpty() || unit.length() > 10){
@@ -193,7 +194,7 @@ public class TransactionApplicationService {
         if(id == null || institutionName == null || accountName == null || institutionName.isEmpty() || institutionName.isBlank() || accountName.isBlank() || accountName.isEmpty()){
             return true;
         }
-        if(dto.getTransaction().getDescription().length() > 255){
+        if(dto.getTransaction().getDescription().length() > Constants.DESCRIPTION_MAX_LENGTH){
             return true;
         }
         Double amount = dto.getTransaction().getAmount();

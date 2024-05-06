@@ -14,5 +14,5 @@ public final class Constants {
     public static final int INSTITUTION_NAME_MIN_LENGTH = 3;
     public static final int ACCOUNT_NAME_MIN_LENGTH = INSTITUTION_NAME_MIN_LENGTH;
     public static final int UNIT_MIN_LENGTH = INSTITUTION_NAME_MIN_LENGTH;
-    public static final int USER_FIRST_NAME_MIN_LENGTH = 2;
+    public static final int OWNER_FIRST_NAME_MIN_LENGTH = 2;
 }

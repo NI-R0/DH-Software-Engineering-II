@@ -3,6 +3,7 @@ package de.dhbw.softwareengineering.application;
 import de.dhbw.softwareengineering.adapters.account.AccountCreateDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountUpdateDTO;
 import de.dhbw.softwareengineering.adapters.account.Mapper.CreateDTOToAccountMapper;
+import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.account.AccountRepository;
 import de.dhbw.softwareengineering.domain.institution.Institution;
@@ -151,13 +152,18 @@ public class AccountApplicationService {
         String accountName = account.getAccountName();
         Double balance = account.getBalance();
         AccountOwnerNameValue owner = account.getOwner();
+        String firstName = owner.getFirstName();
+        String lastName = owner.getLastName();
         if(accountId == null || balance.isNaN() || balance.isInfinite()){
             return true;
         }
-        if(accountName.isEmpty() || accountName.length() > 20){
+        if(accountName.isEmpty() || accountName.length() > Constants.ACCOUNT_NAME_MAX_LENGTH){
             return true;
         }
-        if(owner.getFirstName().length() > 15 || owner.getLastName().length() > 25){
+        if(firstName.length() > Constants.OWNER_FIRST_NAME_MAX_LENGTH || firstName.length() < Constants.OWNER_FIRST_NAME_MIN_LENGTH){
+            return true;
+        }
+        if(lastName.length() > Constants.OWNER_LAST_NAME_MAX_LENGTH){
             return true;
         }
         if(owner.getFirstName().isBlank() || owner.getLastName().isBlank()){
@@ -178,7 +184,7 @@ public class AccountApplicationService {
             return true;
         }
         if(dto.getAccountInfo().getAccountName() != null){
-            if(name.isBlank() || name.length() > 20 || name.length() < 3){
+            if(name.isBlank() || name.length() > Constants.ACCOUNT_NAME_MAX_LENGTH || name.length() < Constants.ACCOUNT_NAME_MIN_LENGTH){
                 return true;
             }
         }
@@ -188,10 +194,10 @@ public class AccountApplicationService {
             }
         }
         if(dto.getAccountInfo().getOwner() != null){
-            if(ownerFirstName.isEmpty() || ownerFirstName.isBlank() || ownerFirstName.length() > 15){
+            if(ownerFirstName.isEmpty() || ownerFirstName.isBlank() || ownerFirstName.length() > Constants.OWNER_FIRST_NAME_MIN_LENGTH || ownerFirstName.length() < Constants.OWNER_FIRST_NAME_MIN_LENGTH){
                 return true;
             }
-            if(ownerLastName.isEmpty() || ownerLastName.isBlank() || ownerFirstName.length() > 25){
+            if(ownerLastName.isEmpty() || ownerLastName.isBlank() || ownerLastName.length() > Constants.OWNER_LAST_NAME_MAX_LENGTH){
                 return true;
             }
         }
