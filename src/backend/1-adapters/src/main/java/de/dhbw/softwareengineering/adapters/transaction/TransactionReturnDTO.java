@@ -23,6 +23,7 @@ public class TransactionReturnDTO {
 
     private final TransactionType transactionType;
 
+    @SuppressWarnings("unused")
     public TransactionReturnDTO(UUID id, String accountName, String institutionName, String description, Double amount, String unit, Timestamp timestamp, TransactionType transactionType) {
         this.id = id;
         this.accountName = accountName;

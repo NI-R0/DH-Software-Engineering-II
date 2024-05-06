@@ -2,11 +2,9 @@ package de.dhbw.softwareengineering.plugins.persistence.institution;
 
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
-import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

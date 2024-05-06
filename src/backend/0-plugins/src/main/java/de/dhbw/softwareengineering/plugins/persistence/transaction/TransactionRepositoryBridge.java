@@ -18,11 +18,6 @@ public class TransactionRepositoryBridge implements TransactionRepository {
     }
 
     @Override
-    public List<Transaction> findByAccount(UUID accountId) {
-        return this.springDataRepository.findAllByAccount(accountId);
-    }
-
-    @Override
     public Optional<Transaction> findByAccountAndId(UUID accountId, UUID transactionId){
         return this.springDataRepository.findByAccountAndId(accountId, transactionId);
     }

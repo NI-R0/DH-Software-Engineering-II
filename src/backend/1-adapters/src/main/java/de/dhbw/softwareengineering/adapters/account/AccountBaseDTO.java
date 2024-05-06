@@ -10,6 +10,7 @@ public class AccountBaseDTO {
 
     private final Double Balance;
 
+    @SuppressWarnings("unused")
     public AccountBaseDTO(String accountName, AccountOwnerNameDTO owner, Double balance) {
         this.accountName = accountName;
         this.owner = owner;

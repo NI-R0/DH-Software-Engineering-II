@@ -10,9 +10,6 @@ import java.util.UUID;
 
 public interface TransactionSpringDataRepository extends JpaRepository<Transaction, UUID> {
 
-    @Query(value = "SELECT * FROM TRANSACTION WHERE account_id = ?1", nativeQuery = true)
-    List<Transaction> findAllByAccount(UUID accountId);
-
     @Query(value = "SELECT * FROM TRANSACTION WHERE account_id = ?1 AND id = ?2", nativeQuery = true)
     Optional<Transaction> findByAccountAndId(UUID accountId, UUID transactionId);
 

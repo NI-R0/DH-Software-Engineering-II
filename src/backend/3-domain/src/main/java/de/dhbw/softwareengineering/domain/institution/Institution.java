@@ -30,12 +30,15 @@ public class Institution {
     @OneToMany(mappedBy = "institution", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Account> accounts;
 
+    @SuppressWarnings("unused")
     protected Institution(){}
 
+    @SuppressWarnings("unused")
     public Institution(final List<Account> accounts){
         this.accounts = accounts;
     }
 
+    @SuppressWarnings("unused")
     public Institution(final String name, final InstitutionType type, final List<Account> accounts){
         Validate.notBlank(name);
         Validate.notNull(type);

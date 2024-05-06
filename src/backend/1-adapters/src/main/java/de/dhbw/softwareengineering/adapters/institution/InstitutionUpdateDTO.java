@@ -10,6 +10,7 @@ public class InstitutionUpdateDTO {
 
     private final InstitutionType type;
 
+    @SuppressWarnings("unused")
     public InstitutionUpdateDTO(String name, String newName, InstitutionType type) {
         this.name = name;
         this.newName = newName;

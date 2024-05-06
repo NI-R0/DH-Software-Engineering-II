@@ -12,6 +12,7 @@ public class TransactionUpdateDTO {
 
     private final TransactionBaseDTO transaction;
 
+    @SuppressWarnings("unused")
     public TransactionUpdateDTO(String institutionName, String accountName, UUID transactionId, TransactionBaseDTO transaction) {
         this.institutionName = institutionName;
         this.accountName = accountName;

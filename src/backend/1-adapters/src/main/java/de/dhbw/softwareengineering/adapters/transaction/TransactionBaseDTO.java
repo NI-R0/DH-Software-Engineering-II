@@ -16,6 +16,7 @@ public class TransactionBaseDTO {
 
     private final TransactionType transactionType;
 
+    @SuppressWarnings("unused")
     public TransactionBaseDTO(String description, Double amount, String unit, Timestamp timestamp, TransactionType transactionType) {
         this.description = description;
         this.amount = amount;

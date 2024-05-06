@@ -46,8 +46,10 @@ public class Transaction {
     @Column(name = "transaction_type")
     private TransactionType transactionType;
 
+    @SuppressWarnings("unused")
     protected Transaction(){}
 
+    @SuppressWarnings("unused")
     public Transaction(final UUID id,
                        final Account account,
                        final String description,

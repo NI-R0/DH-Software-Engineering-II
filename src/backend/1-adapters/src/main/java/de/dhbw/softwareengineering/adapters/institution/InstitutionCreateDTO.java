@@ -7,6 +7,7 @@ public class InstitutionCreateDTO {
     private final String name;
     private final InstitutionType type;
 
+    @SuppressWarnings("unused")
     public InstitutionCreateDTO(String name, InstitutionType type) {
         this.name = name;
         this.type = type;

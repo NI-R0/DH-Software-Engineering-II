@@ -10,6 +10,7 @@ public class AccountUpdateDTO {
 
     private final AccountBaseDTO accountInfo;
 
+    @SuppressWarnings("unused")
     public AccountUpdateDTO(String institutionName, UUID accountId, AccountBaseDTO accountInfo) {
         this.institutionName = institutionName;
         this.accountId = accountId;

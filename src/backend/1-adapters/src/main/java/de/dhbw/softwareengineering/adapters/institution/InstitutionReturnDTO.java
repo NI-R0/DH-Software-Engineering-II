@@ -12,6 +12,7 @@ public class InstitutionReturnDTO {
 
     private final List<String> accountNames;
 
+    @SuppressWarnings("unused")
     public InstitutionReturnDTO(String institutionName, InstitutionType institutionType, List<String> accountNames) {
         this.institutionName = institutionName;
         this.institutionType = institutionType;

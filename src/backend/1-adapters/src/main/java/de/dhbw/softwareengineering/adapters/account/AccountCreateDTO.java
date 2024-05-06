@@ -6,6 +6,7 @@ public class AccountCreateDTO {
 
     private final AccountBaseDTO account;
 
+    @SuppressWarnings("unused")
     public AccountCreateDTO(String institutionName, AccountBaseDTO account) {
         this.institutionName = institutionName;
         this.account = account;

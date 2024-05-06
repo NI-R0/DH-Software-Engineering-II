@@ -10,9 +10,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,12 +46,15 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transactions;
 
+    @SuppressWarnings("unused")
     protected Account(){}
 
+    @SuppressWarnings("unused")
     public Account(final List<Transaction> transactions){
         this.transactions = transactions;
     }
 
+    @SuppressWarnings("unused")
     public Account(final UUID id,
                    final Institution institution,
                    final String accountName,

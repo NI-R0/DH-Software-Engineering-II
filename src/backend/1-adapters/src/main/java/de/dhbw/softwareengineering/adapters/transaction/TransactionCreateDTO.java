@@ -8,6 +8,7 @@ public class TransactionCreateDTO {
 
     private final TransactionBaseDTO transaction;
 
+    @SuppressWarnings("unused")
     public TransactionCreateDTO(String institutionName, String accountName, TransactionBaseDTO transaction) {
         this.institutionName = institutionName;
         this.accountName = accountName;

@@ -2,6 +2,7 @@ package de.dhbw.softwareengineering.constants;
 
 import org.springframework.stereotype.Component;
 
+@SuppressWarnings("unused")
 @Component
 public final class Constants {
     public static final int INSTITUTION_NAME_MAX_LENGTH = 20;

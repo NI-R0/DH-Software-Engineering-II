@@ -4,9 +4,6 @@ import de.dhbw.softwareengineering.adapters.account.AccountCreateDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountReturnDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountUpdateDTO;
 import de.dhbw.softwareengineering.adapters.account.Mapper.AccountToReturnDTOMapper;
-import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
-import de.dhbw.softwareengineering.adapters.transaction.TransactionReturnDTO;
-import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;
 import de.dhbw.softwareengineering.application.AccountApplicationService;
 import de.dhbw.softwareengineering.domain.account.Account;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
