@@ -4,7 +4,12 @@
 \contentsline {section}{\numberline {1.1}Analyse der Ubiquitous Language}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Analyse und Begründung der verwendeten Muster}{3}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Clean Architecture}{5}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Programming Principles}{6}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Refactoring}{7}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Entwurfsmuster}{8}{chapter.5}%
+\contentsline {section}{\numberline {2.1}Abstractions}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Domain}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Application}{6}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Adapters}{6}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Plugins}{6}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Programming Principles}{8}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Refactoring}{9}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Entwurfsmuster}{10}{chapter.5}%
 \contentsline {chapter}{Liste der Quellcodes}{II}{section*.3}%

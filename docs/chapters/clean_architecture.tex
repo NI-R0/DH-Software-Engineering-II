@@ -1,9 +1,24 @@
 \chapter{Clean Architecture}
-Aufgabe: Schichtarchitektur planen und begründen\\
+Die Anwendung ist in allen fünf Schichten der Clean-Architecture implementiert. Die Implementierung verfolgt dabei stets das Ziel, Äbhängigkeiten im Code immer nur von außen nach innen zu realisieren.
 
-Abhängigkeiten nur von innen nach außen\\
-4. Abtraction (Abstraktionen, nicht unbedingt nötig, ändert sich nie)\\
-3. Domain (DDD Code: Aggregates, Entities, Values)\\
-2. Application (Enthält Application Use-Cases (nicht Domain use cases))\\
-1. Adapters (Daten-Tausch-Objekte)\\
-0. Plugins (DB/GUI/..., arbeitet nur mit Adaptern)
+\section{Abstractions}
+Die Abstraktionsschicht der Clean Architecture ist in der Anwendung im Modul \q{4-abstractions} implementiert. Die Schicht stellt den innersten Kern der Anwendung dar und enthält ausschließlich diejenigen Klassen, die sich während der weiteren Entwicklung der Anwendung nicht mehr verändern werden. Zu diesen Klassen gehören unter anderem eine Klasse zur Definition aller im Programm vorkommenden Konstanten, sowie die Definitionen der verschiedenen Institutions- und Transaktionstypen.
+
+\section{Domain}
+Diese zweite Schicht der Clean-Architecture (von innen), ist die Domain-Schicht. In der Anwendung wurde die Schicht im Modul \q{3-domain} implementiert. Sie beinhaltet jegliche Geschäftslogik sowie die Implementierung aller in Kapitel \ref{chap:domainobj} vorgestellten Domain-Objekte (Aggregates, Entities, ValueObjects, DomainServices). In der Anwendung sind die Domain-Objekte gleichzeitig auch als JPA-Entities implementiert.\\
+Neben den Domain-Objekten befinden sich in dieser Schicht auch die Interfaces der in Kapitel \ref{chap:domainobj} erläuterten Repositories.
+
+\section{Application}
+Die Applikationsschicht beinhaltet Services (\q{ApplicationServices}) für alle Aggregates und Entities der Domain-Schicht. Während in den DomainServices der Domain-Schicht die Geschäftslogik implementiert ist, ist in den ApplicationServices der Application-Schicht die Applikationslogik implementiert. Innerhalb der Anwendung ist die Application-Schicht im Modul \q{2-application} implementiert.\\
+Die Services der Application-Schicht arbeiten mit sowohl Domain-Repositories als auch mit den DTOs der Adapter-Schicht zusammen. Sie können beispielsweise die DTOs zu Aggregates und Entities umwandeln (und umgekehrt) und diese im Anschluss zum Speichern an die Repositories weitergeben.
+
+\section{Adapters}
+Die Adapter-Schicht beinhaltet die DTOs (Data Transfer Objects), die beispielsweise als Eingabe für die API genutzt werden können. Die Adapter-Schicht ist in der Anwendung in Modul \q{1-adapters} implementiert. Die Schicht enthält neben den DTOs auch die nötigen DTO-Entity-Mapper, die die DTOs in Objekte der Domain-Schicht umwandeln können. Die Adapter-Schicht dient als \q{Isolationsschicht} zwischen den Domain-Objekten und der Außenwelt (bspw. der API).
+
+\section{Plugins}
+Die Plugin-Schicht ist in der Anwendung aufgeteilt in die Persistence-Schicht und die API-Schicht. Die gesamte Plugin-Schicht ist im Modul \q{0-plugins} implementiert.
+\subsection*{API}
+Für die API der Anwendung wurde die REST-Technologie genutzt. Jedes Aggregate und jede Entity der Domain-Schicht besitzt in der API-Schicht eine eigene REST-Controller Klasse, die jeweils die REST-Schnittstellen zum Verwenden der Applikation bereitstellen. 
+\subsection*{Persistence}
+Die Persistence-Schicht der Anwendung beinhaltet zum einen die Implementierung der Domain-Repositories und zum anderen die JPA-Repositories, in denen eigene SQL-Abfragen definiert sind und die einen direkten Zugriff auf die Datenbank ermöglichen. Um mit der Datenbank arbeiten zu können, greifen die Domain-Repositories auf die JPA-Repositories zu. \\
+Als Datenbank verwendet die Anwendung die in-memory-Datenbank H2.
