@@ -27,7 +27,12 @@ public class CreateDTOToAccountMapper implements Function<AccountCreateDTO, Acco
         AccountBaseDTO account = dto.getAccount();
         AccountOwnerNameValue owner = new AccountOwnerNameValue();
         owner.setFirstName(account.getOwner().getFirstName());
-        owner.setLastName(account.getOwner().getLastName());
+        if(account.getOwner().getLastName() == null){
+            owner.setLastName("");
+        }
+        else {
+            owner.setLastName(account.getOwner().getLastName());
+        }
         String accountName = account.getAccountName();
         return new Account(UUID.randomUUID(), institution, accountName, owner, account.getBalance(), new ArrayList<>());
     }

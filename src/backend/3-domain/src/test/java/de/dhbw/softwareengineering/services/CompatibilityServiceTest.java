@@ -4,6 +4,8 @@ import de.dhbw.softwareengineering.domain.services.CompatibilityService;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.enums.InstitutionType;
 import de.dhbw.softwareengineering.enums.TransactionType;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -16,7 +18,12 @@ import static org.mockito.Mockito.when;
 
 public class CompatibilityServiceTest {
 
-    CompatibilityService classUnderTest = new CompatibilityService();
+    private CompatibilityService classUnderTest;
+
+    @BeforeEach
+    public void setUp(){
+        classUnderTest = new CompatibilityService();
+    }
 
     @Test
     public void testAreInstitutionTypesCompatibleWithTransactionList() {

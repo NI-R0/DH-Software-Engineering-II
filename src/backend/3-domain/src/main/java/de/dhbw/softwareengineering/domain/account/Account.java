@@ -1,5 +1,6 @@
 package de.dhbw.softwareengineering.domain.account;
 
+import de.dhbw.softwareengineering.annotations.ValidAccountName;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
@@ -25,10 +26,7 @@ public class Account {
     @JoinColumn(name = "institution_name")
     private Institution institution;
 
-    @NotNull
-    @NotBlank
-    @NotEmpty
-    @Size(max = Constants.ACCOUNT_NAME_MAX_LENGTH, min = Constants.ACCOUNT_NAME_MIN_LENGTH)
+    @ValidAccountName
     @Column(name = "account_name", nullable = false, length = Constants.ACCOUNT_NAME_MAX_LENGTH)
     private String accountName;
 
@@ -108,7 +106,7 @@ public class Account {
         this.institution = institution;
     }
 
-    public void setAccountName(@NotNull @NotBlank @NotEmpty @Size(max = Constants.ACCOUNT_NAME_MAX_LENGTH, min = Constants.ACCOUNT_NAME_MIN_LENGTH) String accountName) {
+    public void setAccountName(@ValidAccountName String accountName) {
         this.accountName = accountName;
     }
 

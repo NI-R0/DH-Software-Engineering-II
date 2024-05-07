@@ -1,26 +1,28 @@
 package de.dhbw.softwareengineering.domain.values;
 
+import de.dhbw.softwareengineering.annotations.ValidFirstName;
+import de.dhbw.softwareengineering.annotations.ValidOwnerLastName;
+import de.dhbw.softwareengineering.constants.Constants;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import org.apache.commons.lang3.Validate;
 
 @Embeddable
 public final class AccountOwnerNameValue {
 
-    @Size(max = 15, min = 2)
-    @NotNull
-    @NotBlank
-    @NotEmpty
+    @ValidFirstName
     private String firstName;
 
-    @Size(max = 25)
-    @NotNull
-    @NotBlank
+    @ValidOwnerLastName
     private String lastName;
 
-    /*public AccountOwnerNameValue(final String firstName, final String lastName) {
+    public AccountOwnerNameValue(){}
+
+    public AccountOwnerNameValue(final String firstName, final String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-    }*/
+    }
 
     public String getFirstName() {
         return firstName;
@@ -34,11 +36,11 @@ public final class AccountOwnerNameValue {
         return firstName + " " + lastName;
     }
 
-    public void setFirstName(@Size(max = 15, min = 2) @NotNull @NotBlank @NotEmpty String firstName) {
+    public void setFirstName(@ValidFirstName String firstName) {
         this.firstName = firstName;
     }
 
-    public void setLastName(@Size(max = 25) @NotNull @NotBlank String lastName) {
+    public void setLastName(@ValidOwnerLastName String lastName) {
         this.lastName = lastName;
     }
 }

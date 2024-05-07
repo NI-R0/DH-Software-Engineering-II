@@ -1,5 +1,7 @@
 package de.dhbw.softwareengineering.domain.institution;
 
+import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
+import de.dhbw.softwareengineering.annotations.ValidInstitutionType;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.enums.InstitutionType;
@@ -16,13 +18,11 @@ import java.util.List;
 @Table(name = "institution")
 public class Institution {
     @Id
+    @ValidInstitutionName
     @Column(name = "name", nullable = false, length = Constants.INSTITUTION_NAME_MAX_LENGTH)
-    @Size(max = Constants.INSTITUTION_NAME_MAX_LENGTH, min = Constants.INSTITUTION_NAME_MIN_LENGTH)
     private String name;
 
-    @NotNull
-    @NotBlank
-    @NotEmpty
+    @ValidInstitutionType
     @Enumerated(EnumType.STRING)
     @Column(name = "institution_type", nullable = false)
     private InstitutionType institutionType;
@@ -61,11 +61,11 @@ public class Institution {
         return accounts;
     }
 
-    public void updateName(@Size(max = 20, min = 3) String name) {
+    public void updateName(@ValidInstitutionName String name) {
         this.name = name;
     }
 
-    public void updateInstitutionType(@NotNull @NotBlank @NotEmpty InstitutionType institutionType) {
+    public void updateInstitutionType(@ValidInstitutionType InstitutionType institutionType) {
         this.institutionType = institutionType;
     }
 

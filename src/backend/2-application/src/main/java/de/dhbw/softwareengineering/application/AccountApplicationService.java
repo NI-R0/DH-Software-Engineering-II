@@ -163,10 +163,10 @@ public class AccountApplicationService {
         if(firstName.length() > Constants.OWNER_FIRST_NAME_MAX_LENGTH || firstName.length() < Constants.OWNER_FIRST_NAME_MIN_LENGTH){
             return true;
         }
-        if(lastName.length() > Constants.OWNER_LAST_NAME_MAX_LENGTH){
+        if(lastName != "" && (lastName.length() > Constants.OWNER_LAST_NAME_MAX_LENGTH)){
             return true;
         }
-        if(owner.getFirstName().isBlank() || owner.getLastName().isBlank()){
+        if(owner.getFirstName().isBlank()){
             return true;
         }
         return false;

@@ -1,5 +1,7 @@
 package de.dhbw.softwareengineering.domain.transaction;
 
+import de.dhbw.softwareengineering.annotations.ValidTransactionDescription;
+import de.dhbw.softwareengineering.annotations.ValidTransactionUnit;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.enums.TransactionType;
@@ -24,17 +26,15 @@ public class Transaction {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @Size(max = Constants.DESCRIPTION_MAX_LENGTH)
-    @Column(name = "description")
+    @ValidTransactionDescription
+    @Column(name = "description", length = Constants.DESCRIPTION_MAX_LENGTH)
     private String description;
 
     @NotNull
     @Column(name = "amount", nullable = false)
     private Double amount;
 
-    @NotBlank
-    @NotEmpty
-    @Size(max = Constants.UNIT_MAX_LENGTH, min = Constants.UNIT_MIN_LENGTH)
+    @ValidTransactionUnit
     @Column(name = "unit", nullable = false, length = Constants.UNIT_MAX_LENGTH)
     private String unit;
 
@@ -110,7 +110,7 @@ public class Transaction {
         this.account = account;
     }
 
-    public void setDescription(@Size(max = Constants.DESCRIPTION_MAX_LENGTH) String description) {
+    public void setDescription(@ValidTransactionDescription String description) {
         this.description = description;
     }
 
@@ -118,7 +118,7 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public void setUnit(@NotBlank @NotEmpty @Size(max = Constants.UNIT_MAX_LENGTH, min = Constants.UNIT_MIN_LENGTH) String unit) {
+    public void setUnit(@ValidTransactionUnit String unit) {
         this.unit = unit;
     }
 
