@@ -41,7 +41,7 @@ public class InstitutionApplicationService {
         Institution toCreate = this.createDTOMapper.apply(institution);
 
         if(isInputInvalid(toCreate)){
-            throw new IllegalAccessException("Wrong input!");
+            throw new IllegalArgumentException("Wrong input!");
         }
 
         this.institutionRepository.findByName(toCreate.getName()).ifPresent(i -> {
@@ -101,7 +101,7 @@ public class InstitutionApplicationService {
     }
 
 
-    private boolean isInputInvalid(Institution institution){
+    public boolean isInputInvalid(Institution institution){
         String institutionName = institution.getName();
         if(institutionName.isBlank() || institutionName.isEmpty()){
             return true;

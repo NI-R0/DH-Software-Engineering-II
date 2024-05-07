@@ -12,10 +12,7 @@ import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class AccountApplicationService {
@@ -49,7 +46,7 @@ public class AccountApplicationService {
         Institution institution = this.institutionRepository.findByName(dto.getInstitutionName()).orElseThrow(IllegalArgumentException::new);
 
         //Check if acc w/ name already exists
-        if(containsName(institution.getAccounts(), dto.getInstitutionName())){
+        if(containsName(institution.getAccounts(), dto.getAccount().getAccountName())){
             throw new IllegalArgumentException("Account with this name does already exist!");
         }
 
@@ -60,6 +57,7 @@ public class AccountApplicationService {
         }
 
         List<Account> institutionAccounts = institution.getAccounts();
+        //List<Account> institutionAccounts = new ArrayList<>(institution.getAccounts());
         institutionAccounts.add(toCreate);
         institution.setAccounts(institutionAccounts);
 
@@ -204,11 +202,11 @@ public class AccountApplicationService {
         return false;
     }
 
-    private boolean containsName(List<Account> accounts, String name){
+    public boolean containsName(List<Account> accounts, String name){
         return accounts.stream().anyMatch(account -> account.getAccountName().equals(name));
     }
 
-    private boolean containsId(List<Account> accounts, UUID id){
+    public boolean containsId(List<Account> accounts, UUID id){
         return accounts.stream().anyMatch(account -> account.getId().equals(id));
     }
 }

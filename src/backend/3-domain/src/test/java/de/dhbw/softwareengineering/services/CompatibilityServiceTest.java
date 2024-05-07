@@ -4,7 +4,6 @@ import de.dhbw.softwareengineering.domain.services.CompatibilityService;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.enums.InstitutionType;
 import de.dhbw.softwareengineering.enums.TransactionType;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +25,7 @@ public class CompatibilityServiceTest {
     }
 
     @Test
-    public void testAreInstitutionTypesCompatibleWithTransactionList() {
+    public void test_AreInstitutionTypesCompatibleWithTransactionList() {
 
         Transaction mockTransaction1 = mock(Transaction.class);
         Transaction mockTransaction2 = mock(Transaction.class);
@@ -45,7 +44,7 @@ public class CompatibilityServiceTest {
     }
 
     @Test
-    public void testAreInstitutionTypesCompatibleWithTransactionType() {
+    public void test_AreInstitutionTypesCompatibleWithTransactionType() {
 
         assertFalse(classUnderTest.isInstitutionTypeCompatibleWithTransactionType(InstitutionType.BANK, TransactionType.BUY));
         assertFalse(classUnderTest.isInstitutionTypeCompatibleWithTransactionType(InstitutionType.BANK, TransactionType.SELL));

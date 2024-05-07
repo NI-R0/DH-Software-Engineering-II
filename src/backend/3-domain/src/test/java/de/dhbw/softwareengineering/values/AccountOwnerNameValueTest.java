@@ -1,4 +1,4 @@
-package de.dhbw.softwareengineering.AccountOwnerNameValueTest;
+package de.dhbw.softwareengineering.values;
 
 import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import jakarta.validation.ConstraintViolation;
@@ -10,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.springframework.data.repository.query.Param;
 
 import java.util.Set;
 
