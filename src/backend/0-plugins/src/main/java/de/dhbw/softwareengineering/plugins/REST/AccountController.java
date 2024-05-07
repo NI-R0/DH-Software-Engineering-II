@@ -3,7 +3,7 @@ package de.dhbw.softwareengineering.plugins.REST;
 import de.dhbw.softwareengineering.adapters.account.AccountCreateDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountReturnDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountUpdateDTO;
-import de.dhbw.softwareengineering.adapters.account.Mapper.AccountToReturnDTOMapper;
+import de.dhbw.softwareengineering.adapters.account.mapper.AccountToReturnDTOMapper;
 import de.dhbw.softwareengineering.application.AccountApplicationService;
 import de.dhbw.softwareengineering.domain.account.Account;
 import io.swagger.v3.oas.annotations.Operation;

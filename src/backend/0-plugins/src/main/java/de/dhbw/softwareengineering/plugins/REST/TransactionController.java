@@ -1,6 +1,6 @@
 package de.dhbw.softwareengineering.plugins.REST;
 
-import de.dhbw.softwareengineering.adapters.transaction.Mapper.TransactionToReturnDTOMapper;
+import de.dhbw.softwareengineering.adapters.transaction.mapper.TransactionToReturnDTOMapper;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionReturnDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;

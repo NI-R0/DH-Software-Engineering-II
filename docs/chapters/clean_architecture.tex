@@ -1,2 +1,9 @@
 \chapter{Clean Architecture}
-Aufgabe: Schichtarchitektur planen und begründen
+Aufgabe: Schichtarchitektur planen und begründen\\
+
+Abhängigkeiten nur von innen nach außen\\
+4. Abtraction (Abstraktionen, nicht unbedingt nötig, ändert sich nie)\\
+3. Domain (DDD Code: Aggregates, Entities, Values)\\
+2. Application (Enthält Application Use-Cases (nicht Domain use cases))\\
+1. Adapters (Daten-Tausch-Objekte)\\
+0. Plugins (DB/GUI/..., arbeitet nur mit Adaptern)

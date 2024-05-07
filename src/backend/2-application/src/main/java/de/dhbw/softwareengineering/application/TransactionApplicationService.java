@@ -1,6 +1,6 @@
 package de.dhbw.softwareengineering.application;
 
-import de.dhbw.softwareengineering.adapters.transaction.Mapper.CreateDTOToTransactionMapper;
+import de.dhbw.softwareengineering.adapters.transaction.mapper.CreateDTOToTransactionMapper;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionBaseDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;
@@ -8,7 +8,7 @@ import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
-import de.dhbw.softwareengineering.domain.services.CompatibilityHelper;
+import de.dhbw.softwareengineering.domain.services.CompatibilityService;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.domain.transaction.TransactionRepository;
 import de.dhbw.softwareengineering.enums.InstitutionType;
@@ -30,10 +30,10 @@ public class TransactionApplicationService {
 
     private final CreateDTOToTransactionMapper createMapper;
 
-    private final CompatibilityHelper domainService;
+    private final CompatibilityService domainService;
 
     @Autowired
-    public TransactionApplicationService(TransactionRepository transactionRepository, InstitutionRepository institutionRepository, CreateDTOToTransactionMapper createMapper, CompatibilityHelper domainService) {
+    public TransactionApplicationService(TransactionRepository transactionRepository, InstitutionRepository institutionRepository, CreateDTOToTransactionMapper createMapper, CompatibilityService domainService) {
         this.transactionRepository = transactionRepository;
         this.institutionRepository = institutionRepository;
         this.createMapper = createMapper;
@@ -107,7 +107,7 @@ public class TransactionApplicationService {
         if(containsId(accountTransactions, transaction.getTransactionId())){
             Transaction toUpdate = this.transactionRepository.findByAccountAndId(account.getId(), transaction.getTransactionId()).orElseThrow(IllegalArgumentException::new);
             //Check input
-            if(!domainService.areTypesCompatible(institution.getInstitutionType(), transaction.getTransaction().getTransactionType())){
+            if(!domainService.isInstitutionTypeCompatibleWithTransactionType(institution.getInstitutionType(), transaction.getTransaction().getTransactionType())){
                 throw new IllegalArgumentException("Types not compatible!");
             }
 
@@ -170,7 +170,7 @@ public class TransactionApplicationService {
         if(id == null || amount.isNaN() || amount.isInfinite() || time == null){
             return true;
         }
-        if(!domainService.areTypesCompatible(institutionType, type)){
+        if(!domainService.isInstitutionTypeCompatibleWithTransactionType(institutionType, type)){
             return true;
         }
         if(accountName == null || accountName.isEmpty() || accountName.isBlank()){

@@ -1,4 +1,4 @@
-package de.dhbw.softwareengineering.adapters.account.Mapper;
+package de.dhbw.softwareengineering.adapters.account.mapper;
 
 import de.dhbw.softwareengineering.adapters.account.AccountBaseDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountCreateDTO;

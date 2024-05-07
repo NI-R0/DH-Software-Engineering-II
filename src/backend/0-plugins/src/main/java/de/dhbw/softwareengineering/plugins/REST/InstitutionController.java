@@ -3,7 +3,7 @@ package de.dhbw.softwareengineering.plugins.REST;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionCreateDTO;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionReturnDTO;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionUpdateDTO;
-import de.dhbw.softwareengineering.adapters.institution.Mapper.InstitutionToReturnDTOMapper;
+import de.dhbw.softwareengineering.adapters.institution.mapper.InstitutionToReturnDTOMapper;
 import de.dhbw.softwareengineering.application.InstitutionApplicationService;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import io.swagger.v3.oas.annotations.Operation;

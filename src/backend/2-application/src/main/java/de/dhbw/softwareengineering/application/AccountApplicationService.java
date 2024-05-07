@@ -2,7 +2,7 @@ package de.dhbw.softwareengineering.application;
 
 import de.dhbw.softwareengineering.adapters.account.AccountCreateDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountUpdateDTO;
-import de.dhbw.softwareengineering.adapters.account.Mapper.CreateDTOToAccountMapper;
+import de.dhbw.softwareengineering.adapters.account.mapper.CreateDTOToAccountMapper;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.account.AccountRepository;

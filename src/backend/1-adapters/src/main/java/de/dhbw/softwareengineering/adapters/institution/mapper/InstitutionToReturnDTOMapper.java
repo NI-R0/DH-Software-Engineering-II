@@ -1,4 +1,4 @@
-package de.dhbw.softwareengineering.adapters.institution.Mapper;
+package de.dhbw.softwareengineering.adapters.institution.mapper;
 
 import de.dhbw.softwareengineering.adapters.institution.InstitutionReturnDTO;
 import de.dhbw.softwareengineering.domain.account.Account;

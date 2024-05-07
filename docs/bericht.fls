@@ -1494,14 +1494,6 @@ INPUT .\chapters\entwurfsmuster.tex
 INPUT chapters\entwurfsmuster.tex
 INPUT .\chapters\entwurfsmuster.tex
 INPUT chapters\entwurfsmuster.tex
-INPUT .\includes\acronyms.tex
-INPUT includes\acronyms.tex
-INPUT .\includes\acronyms.tex
-INPUT includes\acronyms.tex
-INPUT .\bericht.lof
-INPUT bericht.lof
-INPUT bericht.lof
-OUTPUT bericht.lof
 INPUT .\bericht.lol
 INPUT bericht.lol
 INPUT bericht.lol

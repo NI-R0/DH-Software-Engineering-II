@@ -2,11 +2,11 @@ package de.dhbw.softwareengineering.application;
 
 import de.dhbw.softwareengineering.adapters.institution.InstitutionCreateDTO;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionUpdateDTO;
-import de.dhbw.softwareengineering.adapters.institution.Mapper.CreateDTOToInstitutionMapper;
+import de.dhbw.softwareengineering.adapters.institution.mapper.CreateDTOToInstitutionMapper;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
-import de.dhbw.softwareengineering.domain.services.CompatibilityHelper;
+import de.dhbw.softwareengineering.domain.services.CompatibilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +20,10 @@ public class InstitutionApplicationService {
 
     private final CreateDTOToInstitutionMapper createDTOMapper;
 
-    private final CompatibilityHelper compatibility;
+    private final CompatibilityService compatibility;
 
     @Autowired
-    public InstitutionApplicationService(InstitutionRepository institutionRepository, CreateDTOToInstitutionMapper createDTOMapper, CompatibilityHelper compatibility) {
+    public InstitutionApplicationService(InstitutionRepository institutionRepository, CreateDTOToInstitutionMapper createDTOMapper, CompatibilityService compatibility) {
         this.institutionRepository = institutionRepository;
         this.createDTOMapper = createDTOMapper;
         this.compatibility = compatibility;
@@ -71,7 +71,7 @@ public class InstitutionApplicationService {
 
         if(dto.getType() != null){
             toUpdate.getAccounts().forEach(account -> {
-                if(!compatibility.areTypesCompatible(dto.getType(), account.getTransactions())){
+                if(!compatibility.isInstitutionTypeCompatibleWithTransactionList(dto.getType(), account.getTransactions())){
                     throw new IllegalArgumentException("Types not comptatible!");
                 }
             });

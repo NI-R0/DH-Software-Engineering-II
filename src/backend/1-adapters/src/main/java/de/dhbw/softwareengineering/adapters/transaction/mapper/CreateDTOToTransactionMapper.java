@@ -1,4 +1,4 @@
-package de.dhbw.softwareengineering.adapters.transaction.Mapper;
+package de.dhbw.softwareengineering.adapters.transaction.mapper;
 
 import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
 import de.dhbw.softwareengineering.domain.account.Account;

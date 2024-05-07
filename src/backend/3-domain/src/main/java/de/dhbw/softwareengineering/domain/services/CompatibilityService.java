@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class CompatibilityHelper {
+public class CompatibilityService {
 
-    public boolean areTypesCompatible(InstitutionType institutionType, List<Transaction> transactionList){
+    public boolean isInstitutionTypeCompatibleWithTransactionList(InstitutionType institutionType, List<Transaction> transactionList){
 
         if(institutionType == InstitutionType.BANK){
             return !transactionList.stream().anyMatch(t -> t.getTransactionType() == TransactionType.BUY || t.getTransactionType() == TransactionType.SELL);
@@ -18,12 +18,10 @@ public class CompatibilityHelper {
         return !transactionList.stream().anyMatch(t -> t.getTransactionType() == TransactionType.EXPENSE || t.getTransactionType() == TransactionType.INCOME);
     }
 
-    public boolean areTypesCompatible(InstitutionType institutionType, TransactionType transactionType){
+    public boolean isInstitutionTypeCompatibleWithTransactionType(InstitutionType institutionType, TransactionType transactionType){
         if(institutionType == InstitutionType.BANK){
             return (transactionType != TransactionType.BUY && transactionType != TransactionType.SELL);
         }
         return (transactionType != TransactionType.INCOME && transactionType != TransactionType.EXPENSE);
     }
-
-
 }
