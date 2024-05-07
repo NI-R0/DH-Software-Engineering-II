@@ -19,11 +19,6 @@ public final class AccountOwnerNameValue {
 
     public AccountOwnerNameValue(){}
 
-    public AccountOwnerNameValue(final String firstName, final String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
     public String getFirstName() {
         return firstName;
     }

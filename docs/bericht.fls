@@ -1263,6 +1263,7 @@ INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\titlesec\titlesec.
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\titlesec\titlesec.sty
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\titlesec\titlesec.sty
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\titlesec\titlesec.sty
+INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\url\url.sty
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\tocloft\tocloft.sty
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\tocloft\tocloft.sty
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\tocloft\tocloft.sty
@@ -1436,6 +1437,11 @@ INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-msb.c
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-msb.cfg
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt12.tfm
 INPUT C:\Users\Niklas\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
 INPUT .\bericht.toc
@@ -1454,6 +1460,13 @@ INPUT chapters\ddd.tex
 INPUT .\chapters\ddd.tex
 INPUT chapters\ddd.tex
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
+INPUT .\images\domainservice.png
+INPUT .\images\domainservice.png
+INPUT images\domainservice.png
+INPUT .\images\domainservice.png
+INPUT .\images\domainservice.png
+INPUT .\images\domainservice.png
+INPUT .\images\domainservice.png
 INPUT .\chapters\clean_architecture.tex
 INPUT .\chapters\clean_architecture.tex
 INPUT .\chapters\clean_architecture.tex
@@ -1525,3 +1538,5 @@ INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr12.
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr12.pfb
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr17.pfb
 INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr17.pfb
+INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtt12.pfb
+INPUT C:\Users\Niklas\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtt12.pfb

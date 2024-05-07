@@ -10,15 +10,22 @@ import java.util.List;
 @Component
 public class CompatibilityService {
 
-    public boolean isInstitutionTypeCompatibleWithTransactionList(InstitutionType institutionType, List<Transaction> transactionList){
+    public boolean isInstitutionTypeCompatibleWithTransactionList
+            (InstitutionType institutionType, List<Transaction> transactionList){
 
         if(institutionType == InstitutionType.BANK){
-            return !transactionList.stream().anyMatch(t -> t.getTransactionType() == TransactionType.BUY || t.getTransactionType() == TransactionType.SELL);
+            return !transactionList.stream().anyMatch(
+                    t -> t.getTransactionType() == TransactionType.BUY ||
+                         t.getTransactionType() == TransactionType.SELL);
         }
-        return !transactionList.stream().anyMatch(t -> t.getTransactionType() == TransactionType.EXPENSE || t.getTransactionType() == TransactionType.INCOME);
+        return !transactionList.stream().anyMatch(
+                t -> t.getTransactionType() == TransactionType.EXPENSE ||
+                     t.getTransactionType() == TransactionType.INCOME);
     }
 
-    public boolean isInstitutionTypeCompatibleWithTransactionType(InstitutionType institutionType, TransactionType transactionType){
+    public boolean isInstitutionTypeCompatibleWithTransactionType
+            (InstitutionType institutionType, TransactionType transactionType){
+
         if(institutionType == InstitutionType.BANK){
             return (transactionType != TransactionType.BUY && transactionType != TransactionType.SELL);
         }
