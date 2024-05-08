@@ -6,6 +6,7 @@ import de.dhbw.softwareengineering.adapters.transaction.TransactionReturnDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;
 import de.dhbw.softwareengineering.application.TransactionApplicationService;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
+import de.dhbw.softwareengineering.exceptions.ObjectNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -42,10 +43,14 @@ public class TransactionController {
             @Parameter(name = "accountName" ,description = "Name of account")
     })
     public ResponseEntity<List<TransactionReturnDTO>> getAllTransactions(@PathVariable String institutionName, @PathVariable String accountName){
-        return ResponseEntity.ok(this.transactionService.getAllTransactions(institutionName, accountName)
+        List<TransactionReturnDTO> transactions = this.transactionService.getAllTransactions(institutionName, accountName)
                 .stream()
                 .map(transactionMapper)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+        if(!transactions.isEmpty()){
+            return ResponseEntity.ok(transactions);
+        }
+        throw new ObjectNotFoundException("No transactions could be found for Account " + accountName + " at Institution " + institutionName);
     }
 
     @GetMapping("/get/{institutionName}/{accountName}/id={id}")
@@ -60,14 +65,8 @@ public class TransactionController {
             @Parameter(name = "id", description = "ID of transaction to retrieve")
     })
     public ResponseEntity<TransactionReturnDTO> getTransactionById(@PathVariable String institutionName, @PathVariable String accountName, @PathVariable("id") UUID transactionId){
-        try{
-            Transaction transaction = this.transactionService.getTransactionById(institutionName, accountName, transactionId).orElseThrow(IllegalArgumentException::new);
-            return ResponseEntity.ok(this.transactionMapper.apply(transaction));
-        }
-        catch(Exception e){
-            System.out.println("TransactionController: " + e.toString());
-            return ResponseEntity.notFound().build();
-        }
+        Transaction transaction = this.transactionService.getTransactionById(institutionName, accountName, transactionId).orElseThrow(() -> new ObjectNotFoundException("No transaction could be found for Institution " + institutionName + ", Account " + accountName + " and ID " + transactionId));
+        return ResponseEntity.ok(this.transactionMapper.apply(transaction));
     }
 
     @DeleteMapping("/delete/{institutionName}/{accountName}/id={id}")
@@ -81,17 +80,10 @@ public class TransactionController {
             @Parameter(name = "accountName" ,description = "Name of account"),
             @Parameter(name = "id", description = "ID of transaction to delete")
     })
-    public ResponseEntity<Void> deleteTransaction(@PathVariable String institutionName, @PathVariable String accountName, @PathVariable("id") UUID transactionId){
-        try{
-            this.transactionService.deleteTransaction(institutionName,accountName,transactionId);
-            return ResponseEntity.ok().build();
-        }
-        catch(Exception e){
-            System.out.println("TransactionController: " + e.toString());
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Void> deleteTransaction(@PathVariable String institutionName, @PathVariable String accountName, @PathVariable("id") UUID transactionId) throws Exception{
+        this.transactionService.deleteTransaction(institutionName,accountName,transactionId);
+        return ResponseEntity.ok().build();
     }
-
 
     @PostMapping("/create")
     @Operation(
@@ -99,15 +91,9 @@ public class TransactionController {
             description = "Create a new transaction.",
             tags = {"Transaction Controller"}
     )
-    public ResponseEntity<TransactionReturnDTO> createTransaction(@RequestBody TransactionCreateDTO transaction){
-        try{
-            Transaction body = this.transactionService.createTransaction(transaction);
-            return ResponseEntity.ok(this.transactionMapper.apply(body));
-        }
-        catch(Exception e){
-            System.out.println("AccountController: " + e.toString());
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<TransactionReturnDTO> createTransaction(@RequestBody TransactionCreateDTO transaction) throws Exception{
+        Transaction body = this.transactionService.createTransaction(transaction);
+        return ResponseEntity.ok(this.transactionMapper.apply(body));
     }
 
     @PutMapping("/update")
@@ -116,14 +102,8 @@ public class TransactionController {
             description = "Updates a transaction. ID must match to an existing transaction.",
             tags = {"Transaction Controller"}
     )
-    public ResponseEntity<TransactionReturnDTO> updateTransaction(@RequestBody TransactionUpdateDTO transaction){
-        try{
-            Transaction body = this.transactionService.updateTransaction(transaction);
-            return ResponseEntity.ok(this.transactionMapper.apply(body));
-        }
-        catch(Exception e){
-            System.out.println("AccountController: " + e.toString());
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<TransactionReturnDTO> updateTransaction(@RequestBody TransactionUpdateDTO transaction) throws Exception{
+        Transaction body = this.transactionService.updateTransaction(transaction);
+        return ResponseEntity.ok(this.transactionMapper.apply(body));
     }
 }

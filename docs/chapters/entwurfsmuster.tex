@@ -1,2 +1,31 @@
 \chapter{Entwurfsmuster}
-Aufgabe: Einsatz von Entwurfsmustern ausführlich begründen.
+https://refactoring.guru/design-patterns/catalog
+Aufgabe: Einsatz von Entwurfsmustern ausführlich begründen.\\
+
+https://refactoring.guru/design-patterns/iterator\\
+https://refactoring.guru/design-patterns/chain-of-responsibility\\
+https://refactoring.guru/design-patterns/adapter\\
+https://refactoring.guru/design-patterns/bridge
+
+
+% Das Chain of Responsibility (CoR) Entwurfsmuster bietet eine geeignete Lösung für die
+% Strukturierung und Verarbeitung von Anfragen in einem hierarchischen Kontext, wie er in
+% einem Writing Organizer vorliegt. Die Anpassungsfähigkeit des CoR-Musters ermöglicht
+% die flexible Verarbeitung von Anfragen durch eine Reihe von Handler-Objekten, wodurch
+% eine klare Trennung der Verantwortlichkeiten für verschiedene Aufgabenbereiche erreicht
+% wird. Jeder Handler ist dabei auf die Verarbeitung bestimmter Arten von Anfragen und
+% verschiedener Teilaspekte der Anfragen verantwortlich, was eine klar definierte Strukturierung
+% der Verarbeitungslogik ermöglicht. Die Entkopplung von Sender und Empfänger in
+% einem CoR-System gewährleistet eine hohe Modularität und Erweiterbarkeit. Neue Handler
+% können problemlos hinzugefügt oder bestehende geändert werden, ohne die Gesamtfunktionalität
+% des Systems zu beeinträchtigen. Diese Flexibilität ist besonders wichtig für Systeme
+% wie den Writing Organizer, in denen sich Anforderungen und Anfragen im Laufe der
+% Zeit ändern können. Die Möglichkeit zur dynamischen Kettenbildung ermöglicht es, die
+% Reihenfolge der Anfrageverarbeitung an die spezifischen Bedürfnisse und Konfigurationen
+% anzupassen. Ein Beispiel dafür ist der Weg vom Rest-Controller, über den Application Service
+% und die Domain Entities und zur Persistence-Repository-Implementierung und zurück.
+% Dies ist von Vorteil, wenn unterschiedliche Abläufe oder Prozesse je nach Kontext oder
+% Benutzereingabe erforderlich sind. Durch die klare Definition der Verantwortlichkeiten in
+% einzelnen Handler-Klassen wird die Wartbarkeit und Lesbarkeit des Codes verbessert. Dies
+% fördert eine saubere und strukturierte Implementierung, was wiederum die Skalierbarkeit
+% und Wiederverwendbarkeit des Systems erhöht.

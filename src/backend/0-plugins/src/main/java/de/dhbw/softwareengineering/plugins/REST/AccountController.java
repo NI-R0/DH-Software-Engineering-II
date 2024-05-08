@@ -6,6 +6,7 @@ import de.dhbw.softwareengineering.adapters.account.AccountUpdateDTO;
 import de.dhbw.softwareengineering.adapters.account.mapper.AccountToReturnDTOMapper;
 import de.dhbw.softwareengineering.application.AccountApplicationService;
 import de.dhbw.softwareengineering.domain.account.Account;
+import de.dhbw.softwareengineering.exceptions.ObjectNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -41,10 +42,14 @@ public class AccountController {
             @Parameter(name = "institutionName", description = "Name of institution.")
     })
     public ResponseEntity<List<AccountReturnDTO>> getAllAccounts(@PathVariable String institutionName){
-        return ResponseEntity.ok(this.accountService.getAllAccounts(institutionName)
+        List<AccountReturnDTO> accounts = this.accountService.getAllAccounts(institutionName)
                 .stream()
                 .map(accountMapper)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+        if(!accounts.isEmpty()){
+            return ResponseEntity.ok(accounts);
+        }
+        throw new ObjectNotFoundException("No accounts could be found for Institution " + institutionName);
     }
 
     @GetMapping("/get/{institutionName}/name={accountName}")
@@ -59,14 +64,8 @@ public class AccountController {
     })
     public ResponseEntity<AccountReturnDTO> getAccountByName(@PathVariable String institutionName,
                                                              @PathVariable String accountName){
-        try{
-            Account account = this.accountService.getAccountByName(institutionName, accountName).orElseThrow(IllegalArgumentException::new);
-            return ResponseEntity.ok(this.accountMapper.apply(account));
-        }
-        catch(Exception e){
-            System.out.println("AccountController: " + e.toString());
-            return ResponseEntity.notFound().build();
-        }
+        Account account = this.accountService.getAccountByName(institutionName, accountName).orElseThrow(() -> new ObjectNotFoundException("Account with name " + accountName + " could not be found."));
+        return ResponseEntity.ok(this.accountMapper.apply(account));
     }
 
     @GetMapping("/get/{institutionName}/id={accountId}")
@@ -80,15 +79,10 @@ public class AccountController {
             @Parameter(name = "accountId", description = "ID of account to retrieve.")
     })
     public ResponseEntity<AccountReturnDTO> getAccountById(@PathVariable String institutionName,
-                                                           @PathVariable UUID accountId){
-        try{
-            Account account = this.accountService.getAccountById(institutionName, accountId).orElseThrow(IllegalArgumentException::new);
-            return ResponseEntity.ok(this.accountMapper.apply(account));
-        }
-        catch(Exception e){
-            System.out.println("AccountController: " + e.toString());
-            return ResponseEntity.notFound().build();
-        }
+                                                           @PathVariable UUID accountId) throws Exception{
+        Account account = this.accountService.getAccountById(institutionName, accountId).orElseThrow(() -> new ObjectNotFoundException("Account with ID " + accountId + " could not be found."));
+        return ResponseEntity.ok(this.accountMapper.apply(account));
+
     }
 
     @PostMapping("/create")
@@ -97,15 +91,9 @@ public class AccountController {
             description = "Create a new account.",
             tags = {"Account Controller"}
     )
-    public ResponseEntity<AccountReturnDTO> createAccount(@RequestBody AccountCreateDTO account){
-        try{
-            Account body = this.accountService.createAccount(account);
-            return ResponseEntity.ok(this.accountMapper.apply(body));
-        }
-        catch(Exception e){
-            System.out.println("AccountController: " + e.toString());
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<AccountReturnDTO> createAccount(@RequestBody AccountCreateDTO account) throws Exception{
+        Account body = this.accountService.createAccount(account);
+        return ResponseEntity.ok(this.accountMapper.apply(body));
     }
 
     @PutMapping("/update")
@@ -114,15 +102,9 @@ public class AccountController {
             description = "Update an account. Name or ID must match an existing account.",
             tags = {"Account Controller"}
     )
-    public ResponseEntity<AccountReturnDTO> updateAccount(@RequestBody AccountUpdateDTO account){
-        try{
-            Account body = this.accountService.updateAccount(account);
-            return ResponseEntity.ok(this.accountMapper.apply(body));
-        }
-        catch(Exception e){
-            System.out.println("AccountController: " + e.toString());
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<AccountReturnDTO> updateAccount(@RequestBody AccountUpdateDTO account) throws Exception{
+        Account body = this.accountService.updateAccount(account);
+        return ResponseEntity.ok(this.accountMapper.apply(body));
     }
 
     @DeleteMapping("/delete/{institutionName}/name={name}")
@@ -135,15 +117,9 @@ public class AccountController {
             @Parameter(name = "institutionName", description = "Name of institution"),
             @Parameter(name = "name" ,description = "Name of account to delete")
     })
-    public ResponseEntity<Void> deleteByName(@PathVariable String institutionName, @PathVariable("name") String accountName){
-        try{
-            this.accountService.deleteAccountByName(institutionName, accountName);
-            return ResponseEntity.ok().build();
-        }
-        catch(Exception e){
-            System.out.println("AccountController: " + e.toString());
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<Void> deleteByName(@PathVariable String institutionName, @PathVariable("name") String accountName) throws Exception{
+        this.accountService.deleteAccountByName(institutionName, accountName);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("delete/{institutionName}/id={id}")
@@ -156,16 +132,9 @@ public class AccountController {
             @Parameter(name = "institutionName", description = "Name of institution"),
             @Parameter(name = "id" ,description = "ID of account to delete")
     })
-    public ResponseEntity<Void> deleteById(@PathVariable String institutionName, @PathVariable("id") UUID accountId){
-        try{
-            this.accountService.deleteAccountById(institutionName, accountId);
-            return ResponseEntity.ok().build();
-        }
-        catch(Exception e){
-            System.out.println("AccountController: " + e.toString());
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<Void> deleteById(@PathVariable String institutionName, @PathVariable("id") UUID accountId) throws Exception{
+        this.accountService.deleteAccountById(institutionName, accountId);
+        return ResponseEntity.ok().build();
     }
-
 
 }

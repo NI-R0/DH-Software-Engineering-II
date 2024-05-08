@@ -6,6 +6,7 @@ import de.dhbw.softwareengineering.adapters.institution.InstitutionUpdateDTO;
 import de.dhbw.softwareengineering.adapters.institution.mapper.InstitutionToReturnDTOMapper;
 import de.dhbw.softwareengineering.application.InstitutionApplicationService;
 import de.dhbw.softwareengineering.domain.institution.Institution;
+import de.dhbw.softwareengineering.exceptions.ObjectNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -38,10 +39,14 @@ public class InstitutionController {
             deprecated = false
     )
     public ResponseEntity<List<InstitutionReturnDTO>> getAllInstitutions(){
-        return ResponseEntity.ok(this.institutionService.getAllInstitutions()
+        List<InstitutionReturnDTO> institutions = this.institutionService.getAllInstitutions()
                 .stream()
                 .map(institutionMapper)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+        if(!institutions.isEmpty()){
+            return ResponseEntity.ok(institutions);
+        }
+        throw new ObjectNotFoundException("No institutions could be found.");
     }
 
     @GetMapping("/get/name={name}")
@@ -54,14 +59,8 @@ public class InstitutionController {
             @Parameter(name = "name", description = "Name of institution to retrieve")
     })
     public ResponseEntity<InstitutionReturnDTO> getInstitutionByName(@PathVariable String name){
-        try{
-            Institution institution = this.institutionService.getInstitution(name).orElseThrow(IllegalArgumentException::new);
-            return ResponseEntity.ok(this.institutionMapper.apply(institution));
-        }
-        catch(Exception e){
-            System.out.println("InstitutionController: " + e.toString());
-            return ResponseEntity.notFound().build();
-        }
+        Institution institution = this.institutionService.getInstitution(name).orElseThrow(() -> new ObjectNotFoundException("Institution with name " + name + "could not be found."));
+        return ResponseEntity.ok(this.institutionMapper.apply(institution));
     }
 
     @PostMapping("/create")
@@ -71,15 +70,9 @@ public class InstitutionController {
             tags = {"Institution Controller"},
             deprecated = false
     )
-    public ResponseEntity<InstitutionReturnDTO> createInstitution(@RequestBody InstitutionCreateDTO institution){
-        try{
-            Institution created = this.institutionService.createInstitution(institution);
-            return ResponseEntity.ok(this.institutionMapper.apply(created));
-        }
-        catch(Exception e){
-            System.out.println("InstitutionController: " + e.toString());
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<InstitutionReturnDTO> createInstitution(@RequestBody InstitutionCreateDTO institution) throws Exception{
+        Institution created = this.institutionService.createInstitution(institution);
+        return ResponseEntity.ok(this.institutionMapper.apply(created));
     }
 
     @PutMapping("/update")
@@ -89,15 +82,9 @@ public class InstitutionController {
             tags = {"Institution Controller"},
             deprecated = false
     )
-    public ResponseEntity<InstitutionReturnDTO> updateInstitution(@RequestBody InstitutionUpdateDTO institution){
-        try{
-            Institution updated = this.institutionService.updateInstitution(institution);
-            return ResponseEntity.ok(this.institutionMapper.apply(updated));
-        }
-        catch(Exception e){
-            System.out.println("InstitutionController: " + e.toString());
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<InstitutionReturnDTO> updateInstitution(@RequestBody InstitutionUpdateDTO institution) throws Exception{
+        Institution updated = this.institutionService.updateInstitution(institution);
+        return ResponseEntity.ok(this.institutionMapper.apply(updated));
     }
 
     @DeleteMapping("/delete/name={name}")
@@ -110,17 +97,9 @@ public class InstitutionController {
     @Parameters({
             @Parameter(name = "name", description = "Name of institution to delete")
     })
-    public ResponseEntity<Void> deleteByName(@PathVariable(value = "name") String institutionName){
-        try{
-            this.institutionService.deleteInstitution(institutionName);
-            return ResponseEntity.ok().build();
-        }
-        catch(Exception e){
-            System.out.println("InstitutionController: " + e.toString());
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Void> deleteByName(@PathVariable(value = "name") String institutionName) throws Exception{
+        this.institutionService.deleteInstitution(institutionName);
+        return ResponseEntity.ok().build();
     }
-
-
 
 }

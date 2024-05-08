@@ -16,4 +16,8 @@
 \contentsline {section}{\numberline {3.4}Indirection}{9}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Controller}{9}{section.3.5}%
 \contentsline {chapter}{\numberline {4}Refactoring}{11}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Entwurfsmuster}{12}{chapter.5}%
+\contentsline {section}{\numberline {4.1}Code-Smells}{11}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Refactoring}{12}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Magic-Numbers}{12}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}\href {https://refactoring.guru/remove-setting-method}{Setter-Methoden}}{12}{subsection.4.2.2}%
+\contentsline {chapter}{\numberline {5}Entwurfsmuster}{13}{chapter.5}%
