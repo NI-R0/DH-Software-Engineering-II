@@ -20,11 +20,10 @@ import java.lang.annotation.Target;
         validatedBy = {}
 )
 @Valid
-@NotNull
-@NotBlank
-@NotEmpty
-@Size(max = Constants.INSTITUTION_NAME_MAX_LENGTH)
-@Size(min = Constants.INSTITUTION_NAME_MIN_LENGTH)
+@NotNull(message = "'InstitutionName' must not be null.")
+@NotBlank(message = "'InstitutionName' must not be blank.")
+@NotEmpty(message = "'InstitutionName' must not be empty.")
+@Size(min = Constants.INSTITUTION_NAME_MIN_LENGTH, max = Constants.INSTITUTION_NAME_MAX_LENGTH, message = "Length of 'InstitutionName' must be between {min} and {max}.")
 public @interface ValidInstitutionName {
     String message() default "INSTITUTION_NAME: String format invalid!";
 

@@ -1,5 +1,6 @@
-package de.dhbw.softwareengineering.adapters.values;
+package de.dhbw.softwareengineering.adapters.values.mapper;
 
+import de.dhbw.softwareengineering.adapters.values.AccountOwnerNameDTO;
 import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import org.springframework.stereotype.Component;
 

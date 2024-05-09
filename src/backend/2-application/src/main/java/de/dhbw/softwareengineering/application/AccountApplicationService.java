@@ -3,18 +3,24 @@ package de.dhbw.softwareengineering.application;
 import de.dhbw.softwareengineering.adapters.account.AccountCreateDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountUpdateDTO;
 import de.dhbw.softwareengineering.adapters.account.mapper.CreateDTOToAccountMapper;
+import de.dhbw.softwareengineering.annotations.ValidAccountName;
+import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.account.AccountRepository;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
 import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.*;
 
 @Service
+@Validated
 public class AccountApplicationService {
 
     private final AccountRepository accountRepository;
@@ -30,19 +36,21 @@ public class AccountApplicationService {
         this.createMapper = createMapper;
     }
 
-    public List<Account> getAllAccounts(String institutionName){
+    public List<Account> getAllAccounts(@ValidInstitutionName String institutionName){
         return this.accountRepository.findByInstitution(institutionName);
     }
 
-    public Optional<Account> getAccountByName(String institutionName, String accountName){
+    public Optional<Account> getAccountByName(@ValidInstitutionName String institutionName,
+                                              @ValidAccountName String accountName){
         return this.accountRepository.findByInstitutionAndName(institutionName, accountName);
     }
 
-    public Optional<Account> getAccountById(String institutionName, UUID accountId){
+    public Optional<Account> getAccountById(@ValidInstitutionName String institutionName,
+                                            @NotNull UUID accountId){
         return this.accountRepository.findByInstitutionAndId(institutionName, accountId);
     }
 
-    public Account createAccount(AccountCreateDTO dto) throws Exception{
+    public Account createAccount(@Valid AccountCreateDTO dto) throws Exception{
         Institution institution = this.institutionRepository.findByName(dto.getInstitutionName()).orElseThrow(IllegalArgumentException::new);
 
         //Check if acc w/ name already exists
@@ -65,7 +73,7 @@ public class AccountApplicationService {
         return toCreate;
     }
 
-    public Account updateAccount(AccountUpdateDTO dto) throws Exception{
+    public Account updateAccount(@Valid AccountUpdateDTO dto) throws Exception{
 
         if(isInputInvalid(dto)){
             throw new IllegalArgumentException("Wrong input!");
@@ -97,7 +105,8 @@ public class AccountApplicationService {
         throw new IllegalArgumentException("Account with new name already exists!");
     }
 
-    public void deleteAccountByName(String institutionName, String accountName) throws Exception{
+    public void deleteAccountByName(@ValidInstitutionName String institutionName,
+                                    @ValidAccountName String accountName) throws Exception{
         Institution institution = this.institutionRepository.findByName(institutionName).orElseThrow(IllegalArgumentException::new);
         List<Account> accounts = institution.getAccounts();
 
@@ -110,7 +119,8 @@ public class AccountApplicationService {
         throw new IllegalArgumentException("Account does not exists!");
     }
 
-    public void deleteAccountById(String institutionName, UUID accountId) throws Exception{
+    public void deleteAccountById(@ValidInstitutionName String institutionName,
+                                  @NotNull UUID accountId) throws Exception{
         Institution institution = this.institutionRepository.findByName(institutionName).orElseThrow(IllegalArgumentException::new);
         List<Account> accounts = institution.getAccounts();
 

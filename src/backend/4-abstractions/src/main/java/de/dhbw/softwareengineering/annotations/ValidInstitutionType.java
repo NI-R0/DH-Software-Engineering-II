@@ -18,9 +18,9 @@ import java.lang.annotation.Target;
         validatedBy = {}
 )
 @Valid
-@NotNull
-@NotBlank
-@NotEmpty
+@NotNull(message = "'InstitutionType' must not be null.")
+@NotBlank(message = "'InstitutionType' must not be blank.")
+@NotEmpty(message = "'InstitutionType' must not be empty.")
 public @interface ValidInstitutionType {
     String message() default "INSTITUTION_TYPE: Format invalid!";
 

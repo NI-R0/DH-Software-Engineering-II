@@ -17,11 +17,10 @@ import java.lang.annotation.Target;
         validatedBy = {}
 )
 @Valid
-@NotBlank
-@NotEmpty
-@NotNull
-@Size(max = Constants.UNIT_MAX_LENGTH)
-@Size(min = Constants.UNIT_MIN_LENGTH)
+@NotBlank(message = "'TransactionUnit' must not be blank.")
+@NotEmpty(message = "'TransactionUnit' must not be empty.")
+@NotNull(message = "'TransactionUnit' must not be null.")
+@Size(min = Constants.UNIT_MIN_LENGTH, max = Constants.UNIT_MAX_LENGTH, message = "Length of 'TransactionUnit' must be between {min} and {max}.")
 public @interface ValidTransactionUnit {
     String message() default "TRANSACTION_UNIT: String format invalid!";
 

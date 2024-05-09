@@ -3,17 +3,21 @@ package de.dhbw.softwareengineering.application;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionCreateDTO;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionUpdateDTO;
 import de.dhbw.softwareengineering.adapters.institution.mapper.CreateDTOToInstitutionMapper;
+import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
 import de.dhbw.softwareengineering.domain.services.CompatibilityService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Validated
 public class InstitutionApplicationService {
 
     private final InstitutionRepository institutionRepository;
@@ -33,11 +37,11 @@ public class InstitutionApplicationService {
         return this.institutionRepository.findAllInstitutions();
     }
 
-    public Optional<Institution> getInstitution(String name){
+    public Optional<Institution> getInstitution(@ValidInstitutionName String name){
         return this.institutionRepository.findByName(name);
     }
 
-    public Institution createInstitution(InstitutionCreateDTO institution) throws Exception{
+    public Institution createInstitution(@Valid InstitutionCreateDTO institution) throws Exception{
         Institution toCreate = this.createDTOMapper.apply(institution);
 
         if(isInputInvalid(toCreate)){
@@ -51,7 +55,7 @@ public class InstitutionApplicationService {
         return this.institutionRepository.save(toCreate);
     }
 
-    public Institution updateInstitution(InstitutionUpdateDTO dto) throws Exception{
+    public Institution updateInstitution(@Valid InstitutionUpdateDTO dto) throws Exception{
 
         if(isInputInvalid(dto)){
             throw new IllegalArgumentException("Institution name is illegal!");
@@ -92,7 +96,7 @@ public class InstitutionApplicationService {
     }
 
 
-    public void deleteInstitution(String name) throws Exception{
+    public void deleteInstitution(@ValidInstitutionName String name) throws Exception{
         Institution institution = this.institutionRepository.findByName(name)
                 .orElseThrow(IllegalArgumentException::new);
         this.institutionRepository.delete(institution);

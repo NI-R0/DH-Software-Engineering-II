@@ -14,11 +14,10 @@ import java.lang.annotation.*;
         validatedBy = {}
 )
 @Valid
-@NotNull
-@NotEmpty
-@NotBlank
-@Size(min = Constants.OWNER_FIRST_NAME_MIN_LENGTH)
-@Size(max = Constants.OWNER_FIRST_NAME_MAX_LENGTH)
+@NotNull(message = "'FirstName' must not be null.")
+@NotEmpty(message = "'FirstName' must not be empty.")
+@NotBlank(message = "'FirstName' must not be blank.")
+@Size(min = Constants.OWNER_FIRST_NAME_MIN_LENGTH, max = Constants.OWNER_FIRST_NAME_MAX_LENGTH, message = "Length of 'FirstName' must be between {min} and {max}.")
 public @interface ValidFirstName {
     String message() default "OWNER_FIRST_NAME: String format invalid!";
 

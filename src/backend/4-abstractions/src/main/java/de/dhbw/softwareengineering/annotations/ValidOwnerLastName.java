@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
         validatedBy = {}
 )
 @Valid
-@Size(max = Constants.OWNER_LAST_NAME_MAX_LENGTH)
+@Size(max = Constants.OWNER_LAST_NAME_MAX_LENGTH, message = "Length of 'LastName' must be between {min} and {max}.")
 public @interface ValidOwnerLastName {
     String message() default "OWNER_LAST_NAME: String format invalid!";
 

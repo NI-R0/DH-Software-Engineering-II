@@ -4,12 +4,15 @@ import de.dhbw.softwareengineering.adapters.transaction.mapper.TransactionToRetu
 import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionReturnDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;
+import de.dhbw.softwareengineering.annotations.ValidAccountName;
+import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
 import de.dhbw.softwareengineering.application.TransactionApplicationService;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.exceptions.ObjectNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +45,8 @@ public class TransactionController {
             @Parameter(name = "institutionName", description = "Name of institution"),
             @Parameter(name = "accountName" ,description = "Name of account")
     })
-    public ResponseEntity<List<TransactionReturnDTO>> getAllTransactions(@PathVariable String institutionName, @PathVariable String accountName){
+    public ResponseEntity<List<TransactionReturnDTO>> getAllTransactions(@PathVariable String institutionName,
+                                                                         @PathVariable String accountName){
         List<TransactionReturnDTO> transactions = this.transactionService.getAllTransactions(institutionName, accountName)
                 .stream()
                 .map(transactionMapper)
@@ -64,7 +68,9 @@ public class TransactionController {
             @Parameter(name = "accountName" ,description = "Name of account"),
             @Parameter(name = "id", description = "ID of transaction to retrieve")
     })
-    public ResponseEntity<TransactionReturnDTO> getTransactionById(@PathVariable String institutionName, @PathVariable String accountName, @PathVariable("id") UUID transactionId){
+    public ResponseEntity<TransactionReturnDTO> getTransactionById(@PathVariable String institutionName,
+                                                                   @PathVariable String accountName,
+                                                                   @PathVariable("id") UUID transactionId){
         Transaction transaction = this.transactionService.getTransactionById(institutionName, accountName, transactionId).orElseThrow(() -> new ObjectNotFoundException("No transaction could be found for Institution " + institutionName + ", Account " + accountName + " and ID " + transactionId));
         return ResponseEntity.ok(this.transactionMapper.apply(transaction));
     }
@@ -80,7 +86,9 @@ public class TransactionController {
             @Parameter(name = "accountName" ,description = "Name of account"),
             @Parameter(name = "id", description = "ID of transaction to delete")
     })
-    public ResponseEntity<Void> deleteTransaction(@PathVariable String institutionName, @PathVariable String accountName, @PathVariable("id") UUID transactionId) throws Exception{
+    public ResponseEntity<Void> deleteTransaction(@PathVariable String institutionName,
+                                                  @PathVariable String accountName,
+                                                  @PathVariable("id") UUID transactionId) throws Exception{
         this.transactionService.deleteTransaction(institutionName,accountName,transactionId);
         return ResponseEntity.ok().build();
     }

@@ -1,15 +1,14 @@
 package de.dhbw.softwareengineering.domain.account;
 
 import de.dhbw.softwareengineering.annotations.ValidAccountName;
+import de.dhbw.softwareengineering.annotations.ValidId;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.Validate;
 
 import java.util.List;
@@ -19,6 +18,7 @@ import java.util.UUID;
 @Table(name = "account")
 public class Account {
     @Id
+    @ValidId
     @Column(name = "id", nullable = false)
     private UUID id;
 
@@ -30,6 +30,7 @@ public class Account {
     @Column(name = "account_name", nullable = false, length = Constants.ACCOUNT_NAME_MAX_LENGTH)
     private String accountName;
 
+    @Valid
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "firstName", column = @Column(name = "owner_first_name", length = Constants.OWNER_FIRST_NAME_MAX_LENGTH, nullable = false)),
@@ -98,7 +99,7 @@ public class Account {
         return transactions;
     }
 
-    public void setId(UUID id) {
+    public void setId(@ValidId UUID id) {
         this.id = id;
     }
 
@@ -110,7 +111,7 @@ public class Account {
         this.accountName = accountName;
     }
 
-    public void setAccountOwner(AccountOwnerNameValue accountOwner) {
+    public void setAccountOwner(@Valid AccountOwnerNameValue accountOwner) {
         this.accountOwner = accountOwner;
     }
 

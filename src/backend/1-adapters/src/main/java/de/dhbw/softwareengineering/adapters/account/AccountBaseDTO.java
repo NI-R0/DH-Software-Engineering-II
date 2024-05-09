@@ -1,13 +1,17 @@
 package de.dhbw.softwareengineering.adapters.account;
 
 import de.dhbw.softwareengineering.adapters.values.AccountOwnerNameDTO;
+import de.dhbw.softwareengineering.annotations.ValidAccountName;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 public class AccountBaseDTO {
 
+    @ValidAccountName
     private final String accountName;
-
+    @Valid
     private final AccountOwnerNameDTO owner;
-
+    @NotNull
     private final Double Balance;
 
     @SuppressWarnings("unused")

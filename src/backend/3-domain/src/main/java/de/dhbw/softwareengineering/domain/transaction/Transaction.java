@@ -1,11 +1,11 @@
 package de.dhbw.softwareengineering.domain.transaction;
 
-import de.dhbw.softwareengineering.annotations.ValidTransactionDescription;
-import de.dhbw.softwareengineering.annotations.ValidTransactionUnit;
+import de.dhbw.softwareengineering.annotations.*;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.enums.TransactionType;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -19,6 +19,7 @@ import java.util.UUID;
 @Table(name = "transaction")
 public class Transaction {
     @Id
+    @ValidId
     @Column(name = "id", nullable = false)
     private UUID id;
 
@@ -44,6 +45,7 @@ public class Transaction {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type")
+    @ValidTransactionType
     private TransactionType transactionType;
 
     @SuppressWarnings("unused")
@@ -102,7 +104,7 @@ public class Transaction {
         return transactionType;
     }
 
-    public void setId(UUID id) {
+    public void setId(@ValidId UUID id) {
         this.id = id;
     }
 
@@ -126,7 +128,7 @@ public class Transaction {
         this.timestamp = timestamp;
     }
 
-    public void setTransactionType(TransactionType transactionType) {
+    public void setTransactionType(@ValidInstitutionType TransactionType transactionType) {
         this.transactionType = transactionType;
     }
 }

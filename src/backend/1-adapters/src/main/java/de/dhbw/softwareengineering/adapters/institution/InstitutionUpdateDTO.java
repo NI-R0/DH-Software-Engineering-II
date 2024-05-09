@@ -1,13 +1,18 @@
 package de.dhbw.softwareengineering.adapters.institution;
 
+import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
+import de.dhbw.softwareengineering.annotations.ValidInstitutionType;
 import de.dhbw.softwareengineering.enums.InstitutionType;
 
 public class InstitutionUpdateDTO {
 
+    @ValidInstitutionName
     private final String name;
 
+    @ValidInstitutionName
     private final String newName;
 
+    //DO NOT VALIDATE ON UPDATE
     private final InstitutionType type;
 
     @SuppressWarnings("unused")

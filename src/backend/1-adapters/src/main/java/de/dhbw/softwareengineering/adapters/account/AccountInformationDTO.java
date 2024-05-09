@@ -1,6 +1,9 @@
 package de.dhbw.softwareengineering.adapters.account;
 
 import de.dhbw.softwareengineering.adapters.values.AccountOwnerNameDTO;
+import de.dhbw.softwareengineering.annotations.ValidAccountName;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 import java.util.UUID;

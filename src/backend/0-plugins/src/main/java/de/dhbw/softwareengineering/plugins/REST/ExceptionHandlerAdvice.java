@@ -35,7 +35,7 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-     protected ResponseEntity<ProblemDetail> handleConstraintViolationException(ConstraintViolationException e) {
+     ResponseEntity<ProblemDetail> handleConstraintViolationException(ConstraintViolationException e) {
         Set<ConstraintViolation<?>> errors = e.getConstraintViolations();
         List<InvalidatedParams> validationResponse = errors.stream()
                 .map(err -> InvalidatedParams.builder()
@@ -44,7 +44,7 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
                         .build()
                 ).toList();
 
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(BAD_REQUEST, "Request validation failed (bean validation)");
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(BAD_REQUEST, "Request validation failed (bean)");
         problemDetail.setTitle("Constraint Validation Failed");
         problemDetail.setType(URI.create("ConstraintViolation"));
         problemDetail.setProperty("invalidParameters", validationResponse);
@@ -62,7 +62,7 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
                         .build()
                 ).toList();
 
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(BAD_REQUEST, "Request validation failed (method annotation)");
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(BAD_REQUEST, "Request validation failed (method)");
         problemDetail.setTitle("Method Argument Validation Failed");
         problemDetail.setType(URI.create("MethodArgumentNotValid"));
         problemDetail.setProperty("invalidParameters", validationResponse);
@@ -74,6 +74,15 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(NOT_FOUND, "Object not found");
         problemDetail.setType(URI.create("ObjectNotFound"));
         problemDetail.setTitle("Object Not Found");
+        problemDetail.setProperty("Message", e.getMessage());
+        return ResponseEntity.badRequest().body(problemDetail);
+    }
+
+    @ExceptionHandler(Exception.class)
+    protected ResponseEntity<ProblemDetail> handleException(Exception e){
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(BAD_REQUEST, "EXCEPTION");
+        problemDetail.setType(URI.create(""));
+        problemDetail.setTitle("Exception");
         problemDetail.setProperty("Message", e.getMessage());
         return ResponseEntity.badRequest().body(problemDetail);
     }

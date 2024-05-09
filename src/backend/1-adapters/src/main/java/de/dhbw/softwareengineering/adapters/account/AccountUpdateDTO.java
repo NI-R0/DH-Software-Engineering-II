@@ -1,13 +1,21 @@
 package de.dhbw.softwareengineering.adapters.account;
 
+import de.dhbw.softwareengineering.annotations.ValidId;
+import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.UUID;
 
 public class AccountUpdateDTO {
 
+    @ValidInstitutionName
     private final String institutionName;
 
+    @ValidId
     private final UUID accountId;
 
+    //DO NOT VALIDATE ON UPDATE
     private final AccountBaseDTO accountInfo;
 
     @SuppressWarnings("unused")

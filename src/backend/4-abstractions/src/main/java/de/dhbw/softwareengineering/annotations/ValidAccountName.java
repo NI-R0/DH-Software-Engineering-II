@@ -20,11 +20,10 @@ import java.lang.annotation.Target;
         validatedBy = {}
 )
 @Valid
-@NotNull
-@NotBlank
-@NotEmpty
-@Size(max = Constants.ACCOUNT_NAME_MAX_LENGTH)
-@Size(min = Constants.ACCOUNT_NAME_MIN_LENGTH)
+@NotNull(message = "'AccountName' must not be null.")
+@NotBlank(message = "'AccountName' must not be blank.")
+@NotEmpty(message = "'AccountName' must not be empty.")
+@Size(min = Constants.ACCOUNT_NAME_MIN_LENGTH, max = Constants.ACCOUNT_NAME_MAX_LENGTH, message = "Length of 'AccountName' must be between {min} and {max}.")
 public @interface ValidAccountName {
     String message() default "ACCOUNT_NAME: String format invalid!";
 

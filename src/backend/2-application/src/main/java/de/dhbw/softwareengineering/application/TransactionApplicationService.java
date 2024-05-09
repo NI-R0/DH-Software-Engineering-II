@@ -4,6 +4,8 @@ import de.dhbw.softwareengineering.adapters.transaction.mapper.CreateDTOToTransa
 import de.dhbw.softwareengineering.adapters.transaction.TransactionBaseDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;
+import de.dhbw.softwareengineering.annotations.ValidAccountName;
+import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.institution.Institution;
@@ -13,8 +15,11 @@ import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.domain.transaction.TransactionRepository;
 import de.dhbw.softwareengineering.enums.InstitutionType;
 import de.dhbw.softwareengineering.enums.TransactionType;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -23,6 +28,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Validated
 public class TransactionApplicationService {
     private final TransactionRepository transactionRepository;
 
@@ -40,15 +46,20 @@ public class TransactionApplicationService {
         this.domainService = domainService;
     }
 
-    public List<Transaction> getAllTransactions(String institutionName, String accountName){
+    public List<Transaction> getAllTransactions(@ValidInstitutionName String institutionName,
+                                                @ValidAccountName String accountName){
         return this.transactionRepository.findByInstitutionAndAccount(institutionName, accountName);
     }
 
-    public Optional<Transaction> getTransactionById(String institutionName, String accountName, UUID transactionId){
+    public Optional<Transaction> getTransactionById(@ValidInstitutionName String institutionName,
+                                                    @ValidAccountName String accountName,
+                                                    @NotNull UUID transactionId){
         return this.transactionRepository.findByInstitutionAndAccountAndId(institutionName, accountName, transactionId);
     }
 
-    public void deleteTransaction(String institutionName, String accountName, UUID transactionId) throws Exception{
+    public void deleteTransaction(@ValidInstitutionName String institutionName,
+                                  @ValidAccountName String accountName,
+                                  @NotNull UUID transactionId) throws Exception{
         Institution institution = this.institutionRepository.findByName(institutionName).orElseThrow(IllegalArgumentException::new);
         List<Account> accounts = institution.getAccounts();
         Account account = accounts.stream().filter(a -> a.getAccountName().equals(accountName)).findFirst().orElseThrow(IllegalArgumentException::new);
@@ -68,7 +79,7 @@ public class TransactionApplicationService {
     }
 
 
-    public Transaction createTransaction(TransactionCreateDTO transaction) throws Exception{
+    public Transaction createTransaction(@Valid TransactionCreateDTO transaction) throws Exception{
 
         Institution institution = this.institutionRepository.findByName(transaction.getInstitutionName()).orElseThrow(IllegalArgumentException::new);
         List<Account> institutionAccounts = institution.getAccounts();
@@ -90,7 +101,7 @@ public class TransactionApplicationService {
         return toCreate;
     }
 
-    public Transaction updateTransaction(TransactionUpdateDTO transaction) throws Exception{
+    public Transaction updateTransaction(@Valid TransactionUpdateDTO transaction) throws Exception{
 
         if(isInputInvalid(transaction)){
             throw new IllegalArgumentException("Wrong transaction input!");
