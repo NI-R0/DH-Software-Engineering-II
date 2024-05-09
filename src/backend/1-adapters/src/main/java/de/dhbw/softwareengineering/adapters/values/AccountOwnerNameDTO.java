@@ -1,11 +1,12 @@
 package de.dhbw.softwareengineering.adapters.values;
 
-import de.dhbw.softwareengineering.annotations.ValidFirstName;
-import de.dhbw.softwareengineering.annotations.ValidOwnerLastName;
+import de.dhbw.softwareengineering.validation.annotations.ValidFirstName;
+import de.dhbw.softwareengineering.validation.annotations.ValidOwnerLastName;
 
 public class AccountOwnerNameDTO {
     @ValidFirstName
     private final String firstName;
+
     @ValidOwnerLastName
     private final String lastName;
 

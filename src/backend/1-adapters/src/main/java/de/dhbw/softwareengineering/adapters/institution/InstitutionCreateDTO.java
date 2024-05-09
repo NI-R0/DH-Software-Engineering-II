@@ -1,7 +1,7 @@
 package de.dhbw.softwareengineering.adapters.institution;
 
-import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
-import de.dhbw.softwareengineering.annotations.ValidInstitutionType;
+import de.dhbw.softwareengineering.validation.annotations.ValidInstitutionName;
+import de.dhbw.softwareengineering.validation.annotations.ValidInstitutionType;
 import de.dhbw.softwareengineering.enums.InstitutionType;
 
 public class InstitutionCreateDTO {
@@ -11,7 +11,6 @@ public class InstitutionCreateDTO {
     @ValidInstitutionType
     private final InstitutionType type;
 
-    @SuppressWarnings("unused")
     public InstitutionCreateDTO(String name, InstitutionType type) {
         this.name = name;
         this.type = type;

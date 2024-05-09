@@ -1,15 +1,12 @@
 package de.dhbw.softwareengineering.domain.transaction;
 
-import de.dhbw.softwareengineering.annotations.*;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.enums.TransactionType;
+import de.dhbw.softwareengineering.validation.annotations.*;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.Validate;
 
 import java.sql.Timestamp;
@@ -23,6 +20,7 @@ public class Transaction {
     @Column(name = "id", nullable = false)
     private UUID id;
 
+    @Valid
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
@@ -39,7 +37,7 @@ public class Transaction {
     @Column(name = "unit", nullable = false, length = Constants.UNIT_MAX_LENGTH)
     private String unit;
 
-    @NotNull
+    @ValidTransactionTimestamp
     @Column(name = "timestamp")
     private Timestamp timestamp;
 
@@ -124,7 +122,7 @@ public class Transaction {
         this.unit = unit;
     }
 
-    public void setTimestamp(@NotNull Timestamp timestamp) {
+    public void setTimestamp(@ValidTransactionTimestamp Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 

@@ -3,8 +3,9 @@ package de.dhbw.softwareengineering.application;
 import de.dhbw.softwareengineering.adapters.account.AccountCreateDTO;
 import de.dhbw.softwareengineering.adapters.account.AccountUpdateDTO;
 import de.dhbw.softwareengineering.adapters.account.mapper.CreateDTOToAccountMapper;
-import de.dhbw.softwareengineering.annotations.ValidAccountName;
-import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
+import de.dhbw.softwareengineering.domain.services.ValidationService;
+import de.dhbw.softwareengineering.validation.annotations.ValidAccountName;
+import de.dhbw.softwareengineering.validation.annotations.ValidInstitutionName;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.account.AccountRepository;
@@ -29,11 +30,14 @@ public class AccountApplicationService {
 
     private final CreateDTOToAccountMapper createMapper;
 
+    private final ValidationService validationService;
+
     @Autowired
-    public AccountApplicationService(AccountRepository accountRepository, InstitutionRepository institutionRepository, CreateDTOToAccountMapper createMapper) {
+    public AccountApplicationService(AccountRepository accountRepository, InstitutionRepository institutionRepository, CreateDTOToAccountMapper createMapper, ValidationService validationService) {
         this.accountRepository = accountRepository;
         this.institutionRepository = institutionRepository;
         this.createMapper = createMapper;
+        this.validationService = validationService;
     }
 
     public List<Account> getAllAccounts(@ValidInstitutionName String institutionName){

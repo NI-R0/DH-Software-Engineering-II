@@ -1,12 +1,8 @@
 package de.dhbw.softwareengineering.domain.values;
 
-import de.dhbw.softwareengineering.annotations.ValidFirstName;
-import de.dhbw.softwareengineering.annotations.ValidOwnerLastName;
-import de.dhbw.softwareengineering.constants.Constants;
+import de.dhbw.softwareengineering.validation.annotations.ValidFirstName;
+import de.dhbw.softwareengineering.validation.annotations.ValidOwnerLastName;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
-import org.apache.commons.lang3.Validate;
 
 @Embeddable
 public final class AccountOwnerNameValue {

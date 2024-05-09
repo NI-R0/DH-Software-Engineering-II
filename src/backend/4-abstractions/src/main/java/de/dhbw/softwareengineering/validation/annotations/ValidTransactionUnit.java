@@ -1,4 +1,4 @@
-package de.dhbw.softwareengineering.annotations;
+package de.dhbw.softwareengineering.validation.annotations;
 
 import de.dhbw.softwareengineering.constants.Constants;
 import jakarta.validation.Constraint;

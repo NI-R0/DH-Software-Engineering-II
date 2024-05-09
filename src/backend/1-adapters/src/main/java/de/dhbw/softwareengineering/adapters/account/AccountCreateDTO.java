@@ -1,7 +1,8 @@
 package de.dhbw.softwareengineering.adapters.account;
 
-import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
+import de.dhbw.softwareengineering.validation.annotations.ValidInstitutionName;
 import jakarta.validation.Valid;
+import org.springframework.validation.annotation.Validated;
 
 public class AccountCreateDTO {
 
@@ -10,7 +11,6 @@ public class AccountCreateDTO {
     @Valid
     private final AccountBaseDTO account;
 
-    @SuppressWarnings("unused")
     public AccountCreateDTO(String institutionName, AccountBaseDTO account) {
         this.institutionName = institutionName;
         this.account = account;

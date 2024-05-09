@@ -1,17 +1,19 @@
 package de.dhbw.softwareengineering.domain.account;
 
-import de.dhbw.softwareengineering.annotations.ValidAccountName;
-import de.dhbw.softwareengineering.annotations.ValidId;
+import de.dhbw.softwareengineering.validation.annotations.ValidAccountName;
+import de.dhbw.softwareengineering.validation.annotations.ValidId;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
+import jakarta.validation.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.apache.commons.lang3.Validate;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -22,6 +24,7 @@ public class Account {
     @Column(name = "id", nullable = false)
     private UUID id;
 
+    @Valid
     @ManyToOne
     @JoinColumn(name = "institution_name")
     private Institution institution;
@@ -38,22 +41,22 @@ public class Account {
     })
     private AccountOwnerNameValue accountOwner;
 
-    @NotNull
+    @PositiveOrZero
     @Column(name = "balance", nullable = false)
     private Double balance;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Transaction> transactions;
+    private List<@Valid Transaction> transactions;
 
-    @SuppressWarnings("unused")
+
     protected Account(){}
 
-    @SuppressWarnings("unused")
+
     public Account(final List<Transaction> transactions){
         this.transactions = transactions;
     }
 
-    @SuppressWarnings("unused")
+
     public Account(final UUID id,
                    final Institution institution,
                    final String accountName,
@@ -115,11 +118,12 @@ public class Account {
         this.accountOwner = accountOwner;
     }
 
-    public void setBalance(@NotNull Double balance) {
+    public void setBalance(@PositiveOrZero Double balance) {
         this.balance = balance;
     }
 
-    public void setTransactions(List<Transaction> transactions) {
+    public void setTransactions(List<@Valid Transaction> transactions) {
         this.transactions = transactions;
     }
+
 }

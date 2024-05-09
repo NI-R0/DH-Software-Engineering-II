@@ -1,9 +1,11 @@
-package de.dhbw.softwareengineering.annotations;
+package de.dhbw.softwareengineering.validation.annotations;
 
 import de.dhbw.softwareengineering.constants.Constants;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 
 import java.lang.annotation.ElementType;
@@ -17,8 +19,9 @@ import java.lang.annotation.Target;
         validatedBy = {}
 )
 @Valid
-@Size(max = Constants.DESCRIPTION_MAX_LENGTH, message = "Length of 'Description' must be between {min} and {max}.")
-public @interface ValidTransactionDescription {
+@PastOrPresent(message = "'Timestamp' must not be in the future.")
+@NotNull
+public @interface ValidTransactionTimestamp {
     String message() default "TRANSACTION_DESCRIPTION: String format invalid!";
 
     Class<?>[] groups() default {};

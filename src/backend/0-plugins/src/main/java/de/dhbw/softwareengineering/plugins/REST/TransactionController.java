@@ -4,15 +4,12 @@ import de.dhbw.softwareengineering.adapters.transaction.mapper.TransactionToRetu
 import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionReturnDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;
-import de.dhbw.softwareengineering.annotations.ValidAccountName;
-import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
 import de.dhbw.softwareengineering.application.TransactionApplicationService;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.exceptions.ObjectNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -4,8 +4,8 @@ import de.dhbw.softwareengineering.adapters.transaction.mapper.CreateDTOToTransa
 import de.dhbw.softwareengineering.adapters.transaction.TransactionBaseDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;
-import de.dhbw.softwareengineering.annotations.ValidAccountName;
-import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
+import de.dhbw.softwareengineering.validation.annotations.ValidAccountName;
+import de.dhbw.softwareengineering.validation.annotations.ValidInstitutionName;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.institution.Institution;

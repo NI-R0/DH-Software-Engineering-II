@@ -1,7 +1,7 @@
 package de.dhbw.softwareengineering.adapters.transaction;
 
-import de.dhbw.softwareengineering.annotations.ValidAccountName;
-import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
+import de.dhbw.softwareengineering.validation.annotations.ValidAccountName;
+import de.dhbw.softwareengineering.validation.annotations.ValidInstitutionName;
 import jakarta.validation.Valid;
 
 public class TransactionCreateDTO {

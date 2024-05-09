@@ -1,8 +1,9 @@
 package de.dhbw.softwareengineering.adapters.transaction;
 
-import de.dhbw.softwareengineering.annotations.ValidTransactionDescription;
-import de.dhbw.softwareengineering.annotations.ValidTransactionType;
-import de.dhbw.softwareengineering.annotations.ValidTransactionUnit;
+import de.dhbw.softwareengineering.validation.annotations.ValidTransactionDescription;
+import de.dhbw.softwareengineering.validation.annotations.ValidTransactionTimestamp;
+import de.dhbw.softwareengineering.validation.annotations.ValidTransactionType;
+import de.dhbw.softwareengineering.validation.annotations.ValidTransactionUnit;
 import de.dhbw.softwareengineering.enums.TransactionType;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,7 +17,7 @@ public class TransactionBaseDTO {
     private final Double amount;
     @ValidTransactionUnit
     private final String unit;
-    @NotNull
+    @ValidTransactionTimestamp
     private final Timestamp timestamp;
     @ValidTransactionType
     private final TransactionType transactionType;

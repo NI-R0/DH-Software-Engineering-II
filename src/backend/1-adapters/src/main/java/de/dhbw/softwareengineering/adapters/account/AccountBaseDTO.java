@@ -1,20 +1,21 @@
 package de.dhbw.softwareengineering.adapters.account;
 
 import de.dhbw.softwareengineering.adapters.values.AccountOwnerNameDTO;
-import de.dhbw.softwareengineering.annotations.ValidAccountName;
+import de.dhbw.softwareengineering.validation.annotations.ValidAccountName;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 public class AccountBaseDTO {
 
     @ValidAccountName
     private final String accountName;
+
     @Valid
     private final AccountOwnerNameDTO owner;
-    @NotNull
+
+    @PositiveOrZero
     private final Double Balance;
 
-    @SuppressWarnings("unused")
     public AccountBaseDTO(String accountName, AccountOwnerNameDTO owner, Double balance) {
         this.accountName = accountName;
         this.owner = owner;

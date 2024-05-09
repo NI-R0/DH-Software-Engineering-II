@@ -1,9 +1,8 @@
 package de.dhbw.softwareengineering.adapters.transaction;
 
-import de.dhbw.softwareengineering.annotations.ValidAccountName;
-import de.dhbw.softwareengineering.annotations.ValidId;
-import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
-import jakarta.validation.constraints.NotNull;
+import de.dhbw.softwareengineering.validation.annotations.ValidAccountName;
+import de.dhbw.softwareengineering.validation.annotations.ValidId;
+import de.dhbw.softwareengineering.validation.annotations.ValidInstitutionName;
 
 import java.util.UUID;
 

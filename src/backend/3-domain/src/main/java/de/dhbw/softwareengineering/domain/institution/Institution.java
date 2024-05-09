@@ -1,15 +1,12 @@
 package de.dhbw.softwareengineering.domain.institution;
 
-import de.dhbw.softwareengineering.annotations.ValidInstitutionName;
-import de.dhbw.softwareengineering.annotations.ValidInstitutionType;
+import de.dhbw.softwareengineering.validation.annotations.ValidInstitutionName;
+import de.dhbw.softwareengineering.validation.annotations.ValidInstitutionType;
 import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.enums.InstitutionType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.Valid;
 import org.apache.commons.lang3.Validate;
 
 import java.util.List;
@@ -28,17 +25,15 @@ public class Institution {
     private InstitutionType institutionType;
 
     @OneToMany(mappedBy = "institution", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Account> accounts;
+    private List<@Valid Account> accounts;
 
-    @SuppressWarnings("unused")
+
     protected Institution(){}
 
-    @SuppressWarnings("unused")
     public Institution(final List<Account> accounts){
         this.accounts = accounts;
     }
 
-    @SuppressWarnings("unused")
     public Institution(final String name, final InstitutionType type, final List<Account> accounts){
         Validate.notBlank(name);
         Validate.notNull(type);
@@ -69,7 +64,8 @@ public class Institution {
         this.institutionType = institutionType;
     }
 
-    public void setAccounts(List<Account> accounts) {
+    public void setAccounts(List<@Valid Account> accounts) {
         this.accounts = accounts;
     }
+
 }

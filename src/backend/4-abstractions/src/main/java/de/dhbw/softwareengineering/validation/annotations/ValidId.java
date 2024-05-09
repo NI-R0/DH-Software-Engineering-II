@@ -1,4 +1,4 @@
-package de.dhbw.softwareengineering.annotations;
+package de.dhbw.softwareengineering.validation.annotations;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -18,13 +18,12 @@ import java.lang.annotation.Target;
         validatedBy = {}
 )
 @Valid
-@NotNull(message = "'TransactionType' must not be null.")
-@NotBlank(message = "'TransactionType' must not be blank.")
-@NotEmpty(message = "'TransactionType' must not be empty.")
-public @interface ValidTransactionType {
-    String message() default "TRANSACTION_TYPE: Format invalid!";
+@NotNull(message = "'ID' must not be null.")
+public @interface ValidId {
+    String message() default "ID: String format invalid!";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
 }
