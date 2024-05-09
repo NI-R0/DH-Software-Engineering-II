@@ -21,17 +21,17 @@ public class AccountRepositoryBridge implements AccountRepository {
 
     @Override
     public List<Account> findByInstitution(String institutionName){
-        return springDataRepository.findAccountsByInstitutionName(institutionName);
+        return this.springDataRepository.findAccountsByInstitutionName(institutionName);
     }
 
     @Override
     public Optional<Account> findByInstitutionAndId(String institutionName, UUID accountId){
-        return springDataRepository.findAccountByInstitutionAndId(institutionName, accountId);
+        return this.springDataRepository.findAccountByInstitutionAndId(institutionName, accountId);
     }
 
     @Override
     public Optional<Account> findByInstitutionAndName(String institutionName, String accountName){
-        return springDataRepository.findAccountByInstitutionAndName(institutionName, accountName);
+        return this.springDataRepository.findAccountByInstitutionAndName(institutionName, accountName);
     }
 
 }

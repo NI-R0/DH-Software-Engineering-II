@@ -88,8 +88,12 @@ public class TransactionApplicationService {
                 .orElseThrow(() -> new ObjectNotFoundException("Institution with name " + dto.getInstitutionName() + " does not exist."));
         List<Account> accounts = institution.getAccounts();
 
-        if(this.compatibilityService.isInstitutionTypeCompatibleWithTransactionType(institution.getInstitutionType(), dto.getTransaction().getTransactionType())){
+        if(!this.compatibilityService.isInstitutionTypeCompatibleWithTransactionType(institution.getInstitutionType(), dto.getTransaction().getTransactionType())){
             throw new IllegalArgumentException("Types are not compatible.");
+        }
+
+        if(dto.getTransaction().getAmount() == 0.0){
+            throw new IllegalArgumentException("Amount must not be 0.");
         }
 
         Account account = accounts.stream().filter(a -> a.getAccountName().equals(dto.getAccountName())).findFirst()
@@ -114,6 +118,10 @@ public class TransactionApplicationService {
         Institution institution = this.institutionRepository.findByName(dto.getInstitutionName())
                 .orElseThrow(() -> new ObjectNotFoundException("Institution with name " + dto.getInstitutionName() + " does not exist."));
         List<Account> accounts = institution.getAccounts();
+
+        if(dto.getTransaction().getAmount() == 0.0){
+            throw new IllegalArgumentException("Amount must not be 0.");
+        }
 
         //Check if new transaction type is compatible with institution
         if(dto.getTransaction().getTransactionType() != null){

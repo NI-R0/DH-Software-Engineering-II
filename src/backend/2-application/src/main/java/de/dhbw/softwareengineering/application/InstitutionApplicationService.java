@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -63,7 +64,7 @@ public class InstitutionApplicationService {
 
 
         //Check if institution with new name does not exist (works if newName is empty)
-        if(dto.getNewName() != null && dto.getNewName() != dto.getName()){
+        if(dto.getNewName() != null && !Objects.equals(dto.getName(), dto.getNewName())){
             this.institutionRepository.findByName(dto.getNewName()).ifPresent(i -> {
                 throw new IllegalArgumentException("Institution with name " + dto.getNewName() + " already exists!");
             });

@@ -28,16 +28,16 @@ public class UpdateDTOToTransactionMapper implements Function<TransactionUpdateD
         if(properties.getTransactionType() != null){
             transaction.updateTransactionType(properties.getTransactionType());
         }
-        else if(properties.getDescription() != null){
+        if(properties.getDescription() != null){
             transaction.updateDescription(properties.getDescription());
         }
-        else if(properties.getAmount() != null){
+        if(properties.getAmount() != null){
             transaction.updateAmount(properties.getAmount());
         }
-        else if(properties.getUnit() != null){
+        if(properties.getUnit() != null){
             transaction.updateUnit(properties.getUnit());
         }
-        else if(properties.getTimestamp() != null){
+        if(properties.getTimestamp() != null){
             transaction.updateTimestamp(properties.getTimestamp());
         }
         return transaction;

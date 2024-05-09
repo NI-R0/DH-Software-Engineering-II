@@ -27,13 +27,13 @@ public class UpdateDTOToAccountMapper implements Function<AccountUpdateDTO, Acco
         if(properties.getAccountName() != null){
             account.updateAccountName(properties.getAccountName());
         }
-        else if (properties.getOwner() != null) {
+        if (properties.getOwner() != null) {
             AccountOwnerNameValue owner = new AccountOwnerNameValue();
             owner.setFirstName(properties.getOwner().getFirstName());
             owner.setLastName(properties.getOwner().getLastName());
             account.updateAccountOwner(owner);
         }
-        else if(properties.getBalance() != null){
+        if(properties.getBalance() != null){
             account.updateBalance(properties.getBalance());
         }
         return account;

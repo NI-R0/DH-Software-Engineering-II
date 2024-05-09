@@ -24,7 +24,7 @@ public class UpdateDTOToInstitutionMapper implements Function<InstitutionUpdateD
         if(dto.getNewName() != null){
             institution.updateName(dto.getNewName());
         }
-        else if(dto.getType() != null){
+        if(dto.getType() != null){
             institution.updateInstitutionType(dto.getType());
         }
 

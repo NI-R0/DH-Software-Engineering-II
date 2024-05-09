@@ -65,7 +65,8 @@ public class AccountController {
     })
     public ResponseEntity<AccountReturnDTO> getAccountByName(@PathVariable String institutionName,
                                                              @PathVariable String accountName){
-        Account account = this.accountService.getAccountByName(institutionName, accountName).orElseThrow(() -> new ObjectNotFoundException("Account with name " + accountName + " could not be found."));
+        Account account = this.accountService.getAccountByName(institutionName, accountName)
+                .orElseThrow(() -> new ObjectNotFoundException("Account with name " + accountName + " could not be found."));
         return ResponseEntity.ok(this.accountMapper.apply(account));
     }
 
@@ -81,7 +82,8 @@ public class AccountController {
     })
     public ResponseEntity<AccountReturnDTO> getAccountById(@PathVariable String institutionName,
                                                            @PathVariable UUID accountId) throws Exception{
-        Account account = this.accountService.getAccountById(institutionName, accountId).orElseThrow(() -> new ObjectNotFoundException("Account with ID " + accountId + " could not be found."));
+        Account account = this.accountService.getAccountById(institutionName, accountId)
+                .orElseThrow(() -> new ObjectNotFoundException("Account with ID " + accountId + " could not be found."));
         return ResponseEntity.ok(this.accountMapper.apply(account));
 
     }

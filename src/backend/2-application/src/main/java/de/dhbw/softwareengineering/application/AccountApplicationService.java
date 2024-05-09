@@ -89,7 +89,7 @@ public class AccountApplicationService {
 
         //Check if account with new name already exists
         String newName = dto.getAccountInfo().getAccountName();
-        if(newName != null && newName != toUpdate.getAccountName()){
+        if(newName != null && !Objects.equals(newName, toUpdate.getAccountName())){
             if(containsName(accounts, dto.getAccountInfo().getAccountName())){
                 throw new IllegalArgumentException("Account with new name does already exist.");
             }
@@ -132,7 +132,7 @@ public class AccountApplicationService {
             throw new IllegalArgumentException("Account does not exists!");
         }
 
-        accounts.removeIf(a -> a.getId() == accountId);
+        accounts.removeIf(a -> a.getId().equals(accountId));
         institution.updateAccounts(accounts);
         this.institutionRepository.save(institution);
         return;
