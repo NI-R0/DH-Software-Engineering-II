@@ -8,7 +8,10 @@ import de.dhbw.softwareengineering.application.AccountApplicationService;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
+import de.dhbw.softwareengineering.domain.services.ValidationService;
 import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
+import de.dhbw.softwareengineering.exceptions.ObjectNotFoundException;
+import jakarta.validation.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,8 +20,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -39,6 +41,8 @@ public class ApplicationServiceTest {
     private AccountOwnerNameDTO ownerNameDTO;
     @Mock
     private AccountOwnerNameValue ownerNameValue;
+    @Mock
+    private ValidationService validationService;
 
     @Mock
     private Institution institution;
@@ -83,7 +87,7 @@ public class ApplicationServiceTest {
     public void test_CreateAccount_InstitutionNotFound() {
         when(accountCreateDTO.getInstitutionName()).thenReturn("Test Institution");
         when(institutionRepository.findByName(anyString())).thenReturn(Optional.empty());
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ObjectNotFoundException.class, () -> {
             accountService.createAccount(accountCreateDTO);
         });
     }
@@ -111,18 +115,15 @@ public class ApplicationServiceTest {
         when(institution.getAccounts()).thenReturn(accounts);
 
         when(createDTOMapper.apply(any(), any())).thenReturn(newAccount);
-
-        when(newAccount.getId()).thenReturn(null);
-        when(newAccount.getAccountName()).thenReturn("New Account");
-        when(newAccount.getBalance()).thenReturn(0.0);
-        when(newAccount.getOwner()).thenReturn(ownerNameValue);
-        when(ownerNameValue.getFirstName()).thenReturn("Vorname");
-        when(ownerNameValue.getLastName()).thenReturn("Nachname");
+        newAccount.updateAccountName("");
+        newAccount.updateId(null);
         //Should check for other input parameters as well
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            accountService.createAccount(accountCreateDTO);
-        });
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Account>> violations = validator.validate(newAccount);
+
+        assertFalse(violations.isEmpty());
     }
 
     @Test

@@ -3,9 +3,14 @@ package de.dhbw.softwareengineering;
 import de.dhbw.softwareengineering.adapters.institution.InstitutionCreateDTO;
 import de.dhbw.softwareengineering.adapters.institution.mapper.CreateDTOToInstitutionMapper;
 import de.dhbw.softwareengineering.application.InstitutionApplicationService;
+import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
 import de.dhbw.softwareengineering.enums.InstitutionType;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -13,9 +18,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
+import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -59,9 +64,15 @@ public class InstitutionServiceTest {
         when(institution.getName()).thenReturn("Test Institution");
         when(institution.getInstitutionType()).thenReturn(null);
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            institutionService.createInstitution(createDTO);
-        });
+        institution.updateName("");
+        institution.updateInstitutionType(null);
+        //Should check for other input parameters as well
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Institution>> violations = validator.validate(institution);
+
+        assertFalse(violations.isEmpty());
     }
 
     @Test
