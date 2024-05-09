@@ -64,7 +64,7 @@ public class Institution {
         this.institutionType = institutionType;
     }
 
-    public void setAccounts(List<@Valid Account> accounts) {
+    public void updateAccounts(List<@Valid Account> accounts) {
         this.accounts = accounts;
     }
 

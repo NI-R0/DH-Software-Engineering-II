@@ -18,16 +18,24 @@ public class UpdateDTOToAccountMapper implements Function<AccountUpdateDTO, Acco
         return null;
     }
 
-    public Account apply(final AccountUpdateDTO dto, Institution institution){
-        return map(dto, institution);
+    public Account apply(Account account, AccountUpdateDTO dto){
+        return mapToExisting(account, dto);
     }
 
-    private Account map(final AccountUpdateDTO dto, final Institution institution){
-        AccountBaseDTO account = dto.getAccountInfo();
-        AccountOwnerNameValue owner = new AccountOwnerNameValue();
-        owner.setFirstName(account.getOwner().getFirstName());
-        owner.setLastName(account.getOwner().getLastName());
-        String accountName = account.getAccountName();
-        return new Account(dto.getAccountId(), institution, accountName, owner, account.getBalance(), new ArrayList<>());
+    private Account mapToExisting(Account account, AccountUpdateDTO dto){
+        AccountBaseDTO properties = dto.getAccountInfo();
+        if(properties.getAccountName() != null){
+            account.updateAccountName(properties.getAccountName());
+        }
+        else if (properties.getOwner() != null) {
+            AccountOwnerNameValue owner = new AccountOwnerNameValue();
+            owner.setFirstName(properties.getOwner().getFirstName());
+            owner.setLastName(properties.getOwner().getLastName());
+            account.updateAccountOwner(owner);
+        }
+        else if(properties.getBalance() != null){
+            account.updateBalance(properties.getBalance());
+        }
+        return account;
     }
 }

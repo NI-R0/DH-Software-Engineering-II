@@ -63,7 +63,7 @@ public class InstitutionApplicationService {
 
 
         //Check if institution with new name does not exist (works if newName is empty)
-        if(dto.getNewName() != null){
+        if(dto.getNewName() != null && dto.getNewName() != dto.getName()){
             this.institutionRepository.findByName(dto.getNewName()).ifPresent(i -> {
                 throw new IllegalArgumentException("Institution with name " + dto.getNewName() + " already exists!");
             });

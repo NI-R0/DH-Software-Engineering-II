@@ -68,9 +68,9 @@ public class TransactionApplicationService {
         if(containsId(transactions, transactionId)){
             accounts.removeIf(a -> Objects.equals(a.getAccountName(), accountName));
             transactions.removeIf(t -> t.getId().equals(transactionId));
-            account.setTransactions(transactions);
+            account.updateTransactions(transactions);
             accounts.add(account);
-            institution.setAccounts(accounts);
+            institution.updateAccounts(accounts);
 
             this.institutionRepository.save(institution);
             return;
@@ -94,9 +94,9 @@ public class TransactionApplicationService {
 
         institutionAccounts.removeIf(a -> Objects.equals(a.getAccountName(), transaction.getAccountName()));
         accountTransactions.add(toCreate);
-        account.setTransactions(accountTransactions);
+        account.updateTransactions(accountTransactions);
         institutionAccounts.add(account);
-        institution.setAccounts(institutionAccounts);
+        institution.updateAccounts(institutionAccounts);
         this.institutionRepository.save(institution);
         return toCreate;
     }
@@ -130,9 +130,9 @@ public class TransactionApplicationService {
             Transaction newTransaction = updateTransactionProperties(toUpdate, transaction);
             //add account to institution
             accountTransactions.add(newTransaction);
-            account.setTransactions(accountTransactions);
+            account.updateTransactions(accountTransactions);
             institutionAccounts.add(account);
-            institution.setAccounts(institutionAccounts);
+            institution.updateAccounts(institutionAccounts);
             //save institution
             this.institutionRepository.save(institution);
 

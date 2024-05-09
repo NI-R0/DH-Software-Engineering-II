@@ -8,12 +8,10 @@ import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.domain.values.AccountOwnerNameValue;
 import jakarta.persistence.*;
 import jakarta.validation.*;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import org.apache.commons.lang3.Validate;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -102,27 +100,27 @@ public class Account {
         return transactions;
     }
 
-    public void setId(@ValidId UUID id) {
+    public void updateId(@ValidId UUID id) {
         this.id = id;
     }
 
-    public void setInstitution(Institution institution) {
+    public void updateInstitution(Institution institution) {
         this.institution = institution;
     }
 
-    public void setAccountName(@ValidAccountName String accountName) {
+    public void updateAccountName(@ValidAccountName String accountName) {
         this.accountName = accountName;
     }
 
-    public void setAccountOwner(@Valid AccountOwnerNameValue accountOwner) {
+    public void updateAccountOwner(@Valid AccountOwnerNameValue accountOwner) {
         this.accountOwner = accountOwner;
     }
 
-    public void setBalance(@PositiveOrZero Double balance) {
+    public void updateBalance(@PositiveOrZero Double balance) {
         this.balance = balance;
     }
 
-    public void setTransactions(List<@Valid Transaction> transactions) {
+    public void updateTransactions(List<@Valid Transaction> transactions) {
         this.transactions = transactions;
     }
 
