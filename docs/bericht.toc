@@ -1,23 +1,23 @@
 \babel@toc {ngerman}{}\relax 
-\contentsline {chapter}{Inhaltsverzeichnis}{I}{section*.1}%
-\contentsline {chapter}{\numberline {1}Domain Driven Design}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Analyse der Ubiquitous Language}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Analyse und Begründung der verwendeten Muster}{3}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Clean Architecture}{5}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Abstractions}{5}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Domain}{5}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Application}{6}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Adapters}{6}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Plugins}{6}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Programming Principles}{8}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Dependency Inversion Principle}{8}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Low Coupling}{8}{section.3.2}%
-\contentsline {section}{\numberline {3.3}High Cohesion}{9}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Indirection}{9}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Controller}{9}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Refactoring}{11}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Code-Smells}{11}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Refactoring}{12}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Magic-Numbers}{12}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}\href {https://refactoring.guru/remove-setting-method}{Setter-Methoden}}{12}{subsection.4.2.2}%
-\contentsline {chapter}{\numberline {5}Entwurfsmuster}{13}{chapter.5}%
+\contentsline {section}{Inhaltsverzeichnis}{I}{section*.1}%
+\contentsline {section}{\numberline {1}Domain Driven Design}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Analyse der Ubiquitous Language}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Analyse und Begründung der verwendeten Muster}{2}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Clean Architecture}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Abstractions}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Domain}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Application}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Adapters}{6}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Plugins}{6}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Programming Principles}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Dependency Inversion Principle}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Low Coupling}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}High Cohesion}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Indirection}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Controller}{8}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Refactoring}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Code-Smells}{10}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Refactoring}{11}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Magic-Numbers}{11}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}\href {https://refactoring.guru/remove-setting-method}{Setter-Methoden}}{11}{subsubsection.4.2.2}%
+\contentsline {section}{\numberline {5}\href {https://sourcemaking.com/design_patterns/chain_of_responsibility}{Entwurfsmuster}}{12}{section.5}%

@@ -1,31 +1,8 @@
-\chapter{Entwurfsmuster}
-https://refactoring.guru/design-patterns/catalog
-Aufgabe: Einsatz von Entwurfsmustern ausführlich begründen.\\
-
-https://refactoring.guru/design-patterns/iterator\\
-https://refactoring.guru/design-patterns/chain-of-responsibility\\
-https://refactoring.guru/design-patterns/adapter\\
-https://refactoring.guru/design-patterns/bridge
+\section{\href{https://sourcemaking.com/design_patterns/chain_of_responsibility}{Entwurfsmuster}}
+Das Entwurfsmuster \q{Chain-of-Responsibility} (kurz: CoR) dient dazu, die Bearbeitung von Anfragen der Reihe nach auf mehrere Objekte zu verteilen. Dabei wird eine Kette von Objekten gebildet, wobei jedes Objekt die Möglichkeit hat, die Anfrage zu bearbeiten und/oder sie an das nächste Objekt weiterzugeben. 
 
 
-% Das Chain of Responsibility (CoR) Entwurfsmuster bietet eine geeignete Lösung für die
-% Strukturierung und Verarbeitung von Anfragen in einem hierarchischen Kontext, wie er in
-% einem Writing Organizer vorliegt. Die Anpassungsfähigkeit des CoR-Musters ermöglicht
-% die flexible Verarbeitung von Anfragen durch eine Reihe von Handler-Objekten, wodurch
-% eine klare Trennung der Verantwortlichkeiten für verschiedene Aufgabenbereiche erreicht
-% wird. Jeder Handler ist dabei auf die Verarbeitung bestimmter Arten von Anfragen und
-% verschiedener Teilaspekte der Anfragen verantwortlich, was eine klar definierte Strukturierung
-% der Verarbeitungslogik ermöglicht. Die Entkopplung von Sender und Empfänger in
-% einem CoR-System gewährleistet eine hohe Modularität und Erweiterbarkeit. Neue Handler
-% können problemlos hinzugefügt oder bestehende geändert werden, ohne die Gesamtfunktionalität
-% des Systems zu beeinträchtigen. Diese Flexibilität ist besonders wichtig für Systeme
-% wie den Writing Organizer, in denen sich Anforderungen und Anfragen im Laufe der
-% Zeit ändern können. Die Möglichkeit zur dynamischen Kettenbildung ermöglicht es, die
-% Reihenfolge der Anfrageverarbeitung an die spezifischen Bedürfnisse und Konfigurationen
-% anzupassen. Ein Beispiel dafür ist der Weg vom Rest-Controller, über den Application Service
-% und die Domain Entities und zur Persistence-Repository-Implementierung und zurück.
-% Dies ist von Vorteil, wenn unterschiedliche Abläufe oder Prozesse je nach Kontext oder
-% Benutzereingabe erforderlich sind. Durch die klare Definition der Verantwortlichkeiten in
-% einzelnen Handler-Klassen wird die Wartbarkeit und Lesbarkeit des Codes verbessert. Dies
-% fördert eine saubere und strukturierte Implementierung, was wiederum die Skalierbarkeit
-% und Wiederverwendbarkeit des Systems erhöht.
+Der Einsatz von CoR ermöglicht es, Anfragen zu verarbeiten, ohne dass Sender und Empfänger der Nachricht fest verknüpft sind. Durch diese Art von Entkopplung können neue Handler-Objekte ohne weiteres zur Kette hinzugefügt, geändert oder ganz entfernt werden, ohne dabei das gesamte System anpassen zu müssen. Dies fördert in der Regel sowohl die Wartbarkeit, als auch die Übersichtlichkeit des Codes der gesamten Kette. Durch klar definierte Verantwortlichkeiten der einzelnen Handler-Objekte wird außerdem die Implementierung der Anfragebearbeitung vereinfacht und besser strukturiert. Bei komplexen Ketten mit vielen verschiedenen Handlern kann es allerding dazu kommen, dass die Wartbarkeit der wieder Kette abnimmt. Des weiteren besteht die Gefahr, dass Anfragen die gesamte Kette durchlaufen, bevor sie bearbeitet werden, was zu einer ineffizienten Verarbeitung führen kann.\\
+
+
+\noindent{}In der Anwendung wird das Entwurfsmuster beispielsweise bei der Verarbeitung von REST-Anfragen verwendet: Vom REST-Controller wird eine Anfrage über den ApplicationService an das DomainRepository weitergeleitet, welches die Anfrage an das SpringDataRepository weitergibt. Hier wird die Anfrage abschließend bearbeitet, bevor die Response die gesamte Kette zurückgereicht wird, bis sie wieder beim REST-Controller ankommt. Insgesamt wurde das CoR-Muster drei mal in der Anwendung umgesetzt, einmal für jeden REST-Controller.

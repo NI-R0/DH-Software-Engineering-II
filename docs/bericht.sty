@@ -39,7 +39,7 @@
 			% Benutzung siehe erklaerung.tex
 
 \usepackage{wrapfig}    % Bilder von textumfliessen lassen
-
+\nocite{*}
 \usepackage[colorinlistoftodos]{todonotes}
                         % Einfache Verwaltung und Erstellung von TODO's Markierungen
 			% http://tug.ctan.org/tex-archive/macros/latex/contrib/todonotes/
@@ -60,22 +60,22 @@
 % Wer etwas mehr "Kontrolle" über das Aussehen der Referenzen haben möchte, kann
 % auch das "biblatex"-Paket benutzen.
 %\usepackage{etoolbox}  % http://dante.ctan.org/tex-archive/help/Catalogue/entries/etoolbox.html
-\usepackage[
-	hyperref=true,          % Klickbare Referenzen in der PDF-Datei
-        backref=true,           % In der Literaturref. die Seiten angeben, wo ein \cite dazu steht
-        bibencoding=inputenc,   % s. inputenc-Paket
-	style=numeric-comp,
-        backend=bibtex,
-	sorting=nty]{biblatex}  % http://dante.ctan.org/tex-archive/help/Catalogue/entries/biblatex.html
-\addbibresource{test_bib}
-\renewcommand{\mkbibnamelast}[1]{\textsc{#1}}
+%\usepackage[
+%	hyperref=true,          % Klickbare Referenzen in der PDF-Datei
+%      backref=true,           % In der Literaturref. die Seiten angeben, wo ein \cite dazu steht
+%        bibencoding=inputenc,   % s. inputenc-Paket
+%	style=numeric-comp,
+%        backend=bibtex,
+%	sorting=nty]{biblatex}  % http://dante.ctan.org/tex-archive/help/Catalogue/entries/biblatex.html
+%\addbibresource{test_bib}
+%\renewcommand{\mkbibnamelast}[1]{\textsc{#1}}
 
 % Abstand der einzelnen Einträge in der Literaturangaben
-\renewcommand{\bibitemsep}{1ex}
+%\renewcommand{\bibitemsep}{1ex}
 
 % Welche Klammern soll \parencite{..} benutzen?
-\renewcommand{\bibleftparen}{[}
-\renewcommand{\bibrightparen}{]}
+%\renewcommand{\bibleftparen}{[}
+%\renewcommand{\bibrightparen}{]}
 
 % biblatex's \cite{..} gibt "normalerweise" keine Klammern um die Referenz aus
 % \parencite{..} gibt Klammern aus (die oben definiert sind)
@@ -88,31 +88,31 @@
 
 % Meine speziellen \cite-Kommandos:
 % Ausgabe des Untertitels (SUBTITLE) Feldes einer Referenz
-\DeclareCiteCommand{\citesubtitle}
-  {\boolfalse{citetracker}%
-   \boolfalse{pagetracker}%
-   \usebibmacro{prenote}}
-  {\indexfield{indextitle}%
-   \printfield[citetitle]{subtitle}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+% \DeclareCiteCommand{\citesubtitle}
+%   {\boolfalse{citetracker}%
+%    \boolfalse{pagetracker}%
+%    \usebibmacro{prenote}}
+%   {\indexfield{indextitle}%
+%    \printfield[citetitle]{subtitle}}
+%   {\multicitedelim}
+%   {\usebibmacro{postnote}}
 
-% Ausgabe des Titels (TITLE) Feldes und der Referenz
-\DeclareCiteCommand{\citetitleref}
-  {\booltrue{citetracker}%
-   \booltrue{pagetracker}%
-   \usebibmacro{prenote}}
-  {\indexfield{indextitle}%
-   \printfield[citetitle]{title} \cite{\thefield{entrykey}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+% % Ausgabe des Titels (TITLE) Feldes und der Referenz
+% \DeclareCiteCommand{\citetitleref}
+%   {\booltrue{citetracker}%
+%    \booltrue{pagetracker}%
+%    \usebibmacro{prenote}}
+%   {\indexfield{indextitle}%
+%    \printfield[citetitle]{title} \cite{\thefield{entrykey}}}
+%   {\multicitedelim}
+%   {\usebibmacro{postnote}}
 
-% wie citetitleref, nur als Fussnote
-\DeclareCiteCommand{\citetitlerefFootnote}
-  {}
-  {\footnote{\citetitleref{\thefield{entrykey}}}}
-  {}
-  {}
+% % wie citetitleref, nur als Fussnote
+% \DeclareCiteCommand{\citetitlerefFootnote}
+%   {}
+%   {\footnote{\citetitleref{\thefield{entrykey}}}}
+%   {}
+%   {}
 
 
 % Ausgabe der URL im HOWPUBLISHED Feld
@@ -124,34 +124,34 @@
 %  YEAR		= YYYY,    % Jahr  der Einsichtname, YYYY = Jahreszahl 4 Stellog
 %  MONTH	= ABC      % Monat der Einsichtnahme (jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov. dec
 %}
-\DeclareCiteCommand{\citeurl}
-  {\booltrue{citetracker}%
-   \booltrue{pagetracker}%
-   \usebibmacro{prenote}}
-  {\indexfield{indextitle}%
-   \printfield[citetitle]{howpublished}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+% \DeclareCiteCommand{\citeurl}
+%   {\booltrue{citetracker}%
+%    \booltrue{pagetracker}%
+%    \usebibmacro{prenote}}
+%   {\indexfield{indextitle}%
+%    \printfield[citetitle]{howpublished}}
+%   {\multicitedelim}
+%   {\usebibmacro{postnote}}
 
-% Ausgabe der URL im HOWPUBLISHED Feld und Referenz
-\DeclareCiteCommand{\citeurlref}
-  {\booltrue{citetracker}%
-   \booltrue{pagetracker}%
-   \usebibmacro{prenote}}
-  {\indexfield{indextitle}%
-   \printfield[citetitle]{howpublished} \cite{\thefield{entrykey}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+% % Ausgabe der URL im HOWPUBLISHED Feld und Referenz
+% \DeclareCiteCommand{\citeurlref}
+%   {\booltrue{citetracker}%
+%    \booltrue{pagetracker}%
+%    \usebibmacro{prenote}}
+%   {\indexfield{indextitle}%
+%    \printfield[citetitle]{howpublished} \cite{\thefield{entrykey}}}
+%   {\multicitedelim}
+%   {\usebibmacro{postnote}}
 
-% Augabe: Vorname Nachname des Autors
-\DeclareCiteCommand{\citefullauthor}
-  {\booltrue{citetracker}%
-   \booltrue{pagetracker}%
-   \usebibmacro{prenote}}
-  {\indexfield{indextitle}%
-    \textsc{\printnames[byeditor]{author}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+% % Augabe: Vorname Nachname des Autors
+% \DeclareCiteCommand{\citefullauthor}
+%   {\booltrue{citetracker}%
+%    \booltrue{pagetracker}%
+%    \usebibmacro{prenote}}
+%   {\indexfield{indextitle}%
+%     \textsc{\printnames[byeditor]{author}}}
+%   {\multicitedelim}
+%   {\usebibmacro{postnote}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Programmlistings setzen
@@ -186,14 +186,14 @@
 % Wenn also das Formelverzeichnis nicht benötigt, dann das folgende
 % auskommentieren
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{float}
-\newfloat{eq}{H}{for}[chapter]
-\newcommand{\forname}{Formelverzeichnis}
-\newcommand{\listofequations}{\listof{eq}{\forname}}
+% \usepackage{float}
+% \newfloat{eq}{H}{for}[chapter]
+% \newcommand{\forname}{Formelverzeichnis}
+% \newcommand{\listofequations}{\listof{eq}{\forname}}
 
-\newcommand{\eqlabel}[2]{
-        \label{#1}
-        \addcontentsline{for}{eq}{(\ref{#1}) #2}}
+% \newcommand{\eqlabel}[2]{
+%         \label{#1}
+%         \addcontentsline{for}{eq}{(\ref{#1}) #2}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

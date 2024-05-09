@@ -1,6 +1,6 @@
-\chapter{Domain Driven Design}
+\section{Domain Driven Design}
 
-\section{Analyse der Ubiquitous Language}
+\subsection{Analyse der Ubiquitous Language}
 
 Die Ubiquitous Language des Projektes richtet sich nach der üblichen Sprache der Domäne \q{Finanzsektor}. Die im Folgenden erläuterten Begriffe sind speziell aus der Subdomäne \q{Finanzverwaltung} entnommen und werden im weiteren Verlauf des Projektes verwendet.
 
@@ -33,17 +33,17 @@ Die Ubiquitous Language des Projektes richtet sich nach der üblichen Sprache de
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Analyse und Begründung der verwendeten Muster}
+\subsection{Analyse und Begründung der verwendeten Muster}
 \label{chap:domainobj}
-\subsection*{Value Objects}
+\subsubsection*{Value Objects}
 Der aus Vor- und Nachnamen bestehende Name eines Kontoinhabers (Account Owner) ist als Value Object mit dem Namen \q{AccountOwnerNameValue} implementiert, da es sich hierbei um ein Objekt ohne Lebenszyklus handelt.
-\subsection*{Entities}
+\subsubsection*{Entities}
 Das Objekt \q{Transaktion} der Anwendung ist als Entity implementiert. Jede Transaktion lässt sich eindeutig durch eine ID identifizieren und eindeutig genau einem Account zuordnen. Zudem haben Transaktionen einen Lebenszyklus und können sich während iherer Lebenszeit verändern.
-\subsection*{Aggregates}
+\subsubsection*{Aggregates}
 Die Objekte \q{Institution} und \q{Account} der Anwendung sind jeweils als Aggregates implementiert. Die Institution ist hierbei das Aggregate Root. Jede Institution besitz beliebig viele Accounts und jeder dieser Accounts kann wiederum beliebig viele Transaktionen beinhalten. Transaktionen werden somit über einen Account verwaltet und Accounts über eine Institution.
-\subsection*{Repositories}
+\subsubsection*{Repositories}
 Repositories sind für alle genannten Aggregates und Entities implementiert. Da die Institution das Aggregate Root darstellt, ist das Repository dieser Klasse das einzige, welches über die Methoden \q{save} und \q{delete} verfügt. Alle Repositories verfügen über mehrere Methoden zum Finden der Objekte (Institution: findByName, Account: findByInstitutionAndId, Transaktion: findByInstitutionAndAccountAndId). 
-\subsection*{Domain Services}
+\subsubsection*{Domain Services}
 Die Anwendung besitzt im Kontext der bei der Themeneinreichung formulierten Use-Cases nur sehr wenig Geschäftslogik. Aus diesem Grund ist nur eine Regel als Domain Service implementiert: Transaktionen des Typs Kauf/Verkauf können nur zu Accounts von \q{Brokern} hinzugefügt werden und Transaktionen des Typs Einnahme/Ausgabe können nur bei \q{Banken}-Konten angelegt werden.\\
 Diese Regel ist, wie in Abbildung \ref{fig:domainservice} abgebildet, in der Klasse \q{CompatibilityService} implementiert.
 \vfill
