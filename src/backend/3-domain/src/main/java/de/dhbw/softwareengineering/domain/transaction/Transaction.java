@@ -102,31 +102,31 @@ public class Transaction {
         return transactionType;
     }
 
-    public void setId(@ValidId UUID id) {
+    public void updateId(@ValidId UUID id) {
         this.id = id;
     }
 
-    public void setAccount(Account account) {
+    public void updateAccount(Account account) {
         this.account = account;
     }
 
-    public void setDescription(@ValidTransactionDescription String description) {
+    public void updateDescription(@ValidTransactionDescription String description) {
         this.description = description;
     }
 
-    public void setAmount(@NotNull Double amount) {
+    public void updateAmount(@NotNull Double amount) {
         this.amount = amount;
     }
 
-    public void setUnit(@ValidTransactionUnit String unit) {
+    public void updateUnit(@ValidTransactionUnit String unit) {
         this.unit = unit;
     }
 
-    public void setTimestamp(@ValidTransactionTimestamp Timestamp timestamp) {
+    public void updateTimestamp(@ValidTransactionTimestamp Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 
-    public void setTransactionType(@ValidInstitutionType TransactionType transactionType) {
+    public void updateTransactionType(@ValidInstitutionType TransactionType transactionType) {
         this.transactionType = transactionType;
     }
 }
