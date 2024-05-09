@@ -1,0 +1,50 @@
+\section{Refactoring}
+\subsection{Code-Smells}
+Die Anwendung weist zum aktuellen Zeitpunkt noch die folgenden Code-Smells auf:
+\subsection*{Duplicate Code/Exception Handling}
+% Nach aktuellem Stand hat jede Methode der REST-Controller-Klasse den gleichen Aufbau
+Nach aktuellem Stand sind viele Methoden der REST-Controller-Klassen gleich aufgebaut: In einem try-Block wird die eigentliche Aufgabe an den entsprechenden ApplicationService delegiert, während in einem catch-Block mögliche dabei auftretende Exceptions abgefangen werden. Der catch-Block besitzt dabei immer den gleichen Inhalt (vlg. Abb. \ref{fig:dc}). Dieser doppelte Code könnte durch eine ExceptionHandler-Klasse umgangen werden.\\
+\textbf{Nachtrag:} Dieser Code-Smell wurde in \href{https://github.com/NI-R0/DH-Software-Engineering-II/commit/44369fb2bfe2282cfb26be4d751847d360065054#diff-89438de53bd19c43d80c2b26cdde6bd6308fa8a8aa7756060b719128f67495b9}{diesem Commit} behoben.
+
+\begin{figure}[!htb]
+    \centering{
+        \includegraphics[width=12cm]{images/duplicate.png}}
+    \caption[Duplicate Code Section]{Duplicate Code in den catch-Blöcken}
+    \label{fig:dc}
+\end{figure}
+
+
+\subsubsection*{\href{https://refactoring.guru/smells/long-method}{Long Method}}
+Bis kurz vor Abschluss der Implementierung war die Methode \q{updateAccount} der Klasse \q{AccountApplicationService} sehr lang und unübersichtlich. Erst durch die Einführung von Validierungs-Annotationen konnte die Methode in \href{"https://github.com/NI-R0/DH-Software-Engineering-II/commit/1d66a085892b8a36745535f6b7fb183f71d174cd#diff-b90e0d056d7cd0a8a87470a450267e7e4cd1adc99b768975286ad0443fe57ff8"}{diesem Commit} etwas besser gestaltet werden.
+
+\subsubsection*{Complex Method}
+Die für die \q{updateAccount} implementierte Methode \q{isInputValid} war eine weitere unschöne Methode. Nach den durch IntelliJ durchgeführten Berechnungen war sie zudem überdurchschnittlich komplex (vgl. siehe Abb. \ref{fig:hc}). Diese Methode(n) konnte(n) erst durch die Einführung der Validierungs-Annotationen in \href{"https://github.com/NI-R0/DH-Software-Engineering-II/commit/1d66a085892b8a36745535f6b7fb183f71d174cd#diff-b90e0d056d7cd0a8a87470a450267e7e4cd1adc99b768975286ad0443fe57ff8"}{diesem Commit} gänzlich entfernt werden.
+
+\begin{figure}[!htb]
+    \centering{
+        \includegraphics[width=12cm]{images/highcomplexity.png}}
+    \caption{Methode mit hoher Komplexität}
+    \label{fig:hc}
+\end{figure}
+
+
+\subsubsection*{Schlechte Fehlermeldungen}
+In der Anwendung wurde bis kurz vor Abschluss der Implementierung bei fast jedem Fehler die selbe Exception, eine IllegalArgumentException ohne genaue Fehlermeldung, geworfen. Diese Fehlermeldung hat weder den Debugging-Prozess erleichtert noch dem API-Nutzer sinnvolle rückmeldungen geliefert. Der Code-Smell wurde mit \href{https://github.com/NI-R0/DH-Software-Engineering-II/commit/44369fb2bfe2282cfb26be4d751847d360065054}{diesem Commit} durch die Implementierung einer eigenen Exception und eines eigenen ExceptionHandlers behoben.
+
+
+%4 Code-Smells nennen und begründen
+\subsection{Refactoring}
+\subsubsection{Magic-Numbers}
+Um die zahlreichen \q{Magic-Numbers} im Programmcode entfernen zu können, wurde die Klasse \q{Constants} implementiert. Diese \q{verwaltet} alle Magic-Numbers an einem Ort. Um konstante Werte zu verwenden, müssen andere Klassen diese aus der Constants-Klasse auslesen. Wenn sich in Zukunft eine der Konstanten ändern sollte, muss diese durch die Constants-Klasse nur noch an einer Stelle im Code geändert werden.\\
+\href{https://github.com/NI-R0/DH-Software-Engineering-II/commit/d79ca697187f4f855cff56c85f8742fa97d70cda#diff-14e3846dce3ed0f79fab55a1ea9cbdc1b8b56ce2a1080f76df4a5e5b3a3328a0}{Commit 1}, \href{https://github.com/NI-R0/DH-Software-Engineering-II/commit/d8304e549c5f34f15c279b92706822649fd49f1c#diff-14e3846dce3ed0f79fab55a1ea9cbdc1b8b56ce2a1080f76df4a5e5b3a3328a0}{Commit 2}
+
+\subsubsection{\href{https://refactoring.guru/remove-setting-method}{Setter-Methoden}}
+Ein potenzielles Refactoring-Thema, welches zu diesem Zeitpunkt noch nicht verbessert wurde, sind die Setter-Methoden in verschiedenen Klassen (bspw. den Domain-Objekten). Setter-Methoden verletzen das Prinzip der Datenkapselung, wodurch sie theoretisch ermöglichen, Attribute von (Domain-)Objekten auf falsche Werte zu setzen. Anstelle von Setter-Methoden können beispielsweise spezifischere Methoden verwendet werden, die die Parameter auf ihre Korrektheit prüfen, bevor sie das entsprechende Attribut ändern.
+
+
+
+% https://refactoring.guru/refactoring/techniques
+% https://refactoring.guru/replace-parameter-with-method-call
+% https://refactoring.guru/remove-setting-method -> Extra methoden/Factory
+% https://refactoring.guru/replace-constructor-with-factory-method -> Factory method
+% https://refactoring.guru/consolidate-conditional-expression
