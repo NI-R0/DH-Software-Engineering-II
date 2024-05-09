@@ -1,31 +1,26 @@
 package de.dhbw.softwareengineering.application;
 
 import de.dhbw.softwareengineering.adapters.transaction.mapper.CreateDTOToTransactionMapper;
-import de.dhbw.softwareengineering.adapters.transaction.TransactionBaseDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionCreateDTO;
 import de.dhbw.softwareengineering.adapters.transaction.TransactionUpdateDTO;
 import de.dhbw.softwareengineering.adapters.transaction.mapper.UpdateDTOToTransactionMapper;
+import de.dhbw.softwareengineering.domain.services.ValidationService;
 import de.dhbw.softwareengineering.exceptions.ObjectNotFoundException;
 import de.dhbw.softwareengineering.validation.annotations.ValidAccountName;
 import de.dhbw.softwareengineering.validation.annotations.ValidInstitutionName;
-import de.dhbw.softwareengineering.constants.Constants;
 import de.dhbw.softwareengineering.domain.account.Account;
 import de.dhbw.softwareengineering.domain.institution.Institution;
 import de.dhbw.softwareengineering.domain.institution.InstitutionRepository;
 import de.dhbw.softwareengineering.domain.services.CompatibilityService;
 import de.dhbw.softwareengineering.domain.transaction.Transaction;
 import de.dhbw.softwareengineering.domain.transaction.TransactionRepository;
-import de.dhbw.softwareengineering.enums.InstitutionType;
-import de.dhbw.softwareengineering.enums.TransactionType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.sql.Timestamp;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,15 +31,17 @@ public class TransactionApplicationService {
     private final InstitutionRepository institutionRepository;
     private final CreateDTOToTransactionMapper createMapper;
     private final UpdateDTOToTransactionMapper updateMapper;
-    private final CompatibilityService domainService;
+    private final CompatibilityService compatibilityService;
+    private final ValidationService validationService;
 
     @Autowired
-    public TransactionApplicationService(TransactionRepository transactionRepository, InstitutionRepository institutionRepository, CreateDTOToTransactionMapper createMapper, UpdateDTOToTransactionMapper updateMapper, CompatibilityService domainService) {
+    public TransactionApplicationService(TransactionRepository transactionRepository, InstitutionRepository institutionRepository, CreateDTOToTransactionMapper createMapper, UpdateDTOToTransactionMapper updateMapper, CompatibilityService compatibilityService, ValidationService validationService) {
         this.transactionRepository = transactionRepository;
         this.institutionRepository = institutionRepository;
         this.createMapper = createMapper;
         this.updateMapper = updateMapper;
-        this.domainService = domainService;
+        this.compatibilityService = compatibilityService;
+        this.validationService = validationService;
     }
 
     public List<Transaction> getAllTransactions(@ValidInstitutionName String institutionName,
@@ -91,7 +88,7 @@ public class TransactionApplicationService {
                 .orElseThrow(() -> new ObjectNotFoundException("Institution with name " + dto.getInstitutionName() + " does not exist."));
         List<Account> accounts = institution.getAccounts();
 
-        if(this.domainService.isInstitutionTypeCompatibleWithTransactionType(institution.getInstitutionType(), dto.getTransaction().getTransactionType())){
+        if(this.compatibilityService.isInstitutionTypeCompatibleWithTransactionType(institution.getInstitutionType(), dto.getTransaction().getTransactionType())){
             throw new IllegalArgumentException("Types are not compatible.");
         }
 
@@ -100,6 +97,7 @@ public class TransactionApplicationService {
         List<Transaction> transactions = account.getTransactions();
 
         Transaction toCreate = this.createMapper.apply(dto, account);
+        this.validationService.validate(toCreate);
 
         accounts.remove(account);
         transactions.add(toCreate);
@@ -119,7 +117,7 @@ public class TransactionApplicationService {
 
         //Check if new transaction type is compatible with institution
         if(dto.getTransaction().getTransactionType() != null){
-            if(!domainService.isInstitutionTypeCompatibleWithTransactionType(institution.getInstitutionType(), dto.getTransaction().getTransactionType())){
+            if(!compatibilityService.isInstitutionTypeCompatibleWithTransactionType(institution.getInstitutionType(), dto.getTransaction().getTransactionType())){
                 throw new IllegalArgumentException("Types not compatible!");
             }
         }
@@ -139,6 +137,7 @@ public class TransactionApplicationService {
         accounts.remove(account);
         transactions.remove(toUpdate);
         Transaction newTransaction = this.updateMapper.apply(toUpdate, dto);
+        this.validationService.validate(newTransaction);
         transactions.add(newTransaction);
         account.updateTransactions(transactions);
         accounts.add(account);

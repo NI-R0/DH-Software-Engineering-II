@@ -25,15 +25,10 @@ import java.util.*;
 @Service
 @Validated
 public class AccountApplicationService {
-
     private final AccountRepository accountRepository;
-
     private final InstitutionRepository institutionRepository;
-
     private final CreateDTOToAccountMapper createMapper;
-
     private final UpdateDTOToAccountMapper updateMapper;
-
     private final ValidationService validationService;
 
     @Autowired
@@ -70,6 +65,7 @@ public class AccountApplicationService {
         }
 
         Account toCreate = this.createMapper.apply(dto, institution);
+        this.validationService.validate(toCreate);
         accounts.add(toCreate);
         institution.updateAccounts(accounts);
 
@@ -102,6 +98,7 @@ public class AccountApplicationService {
         //accounts.removeIf(a -> a.getId() == toUpdate.getId());
         accounts.remove(toUpdate);
         Account newAccount = this.updateMapper.apply(toUpdate, dto);
+        this.validationService.validate(newAccount);
         accounts.add(newAccount);
         institution.updateAccounts(accounts);
         this.institutionRepository.save(institution);
